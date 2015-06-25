@@ -9,7 +9,7 @@ using System.Xml;
 
 namespace XMLEditor
 {
-    public class HelpViewSelector: DataTemplateSelector
+    public class HelpViewSelector : DataTemplateSelector
     {
         public DataTemplate EnumTemplate { get; set; }
         public DataTemplate TagTemplate { get; set; }
@@ -17,14 +17,15 @@ namespace XMLEditor
         public DataTemplate CopyTemplate { get; set; }
         public DataTemplate TableTemplate { get; set; }
         public DataTemplate ModTemplate { get; set; }
+        public DataTemplate AlarmTemplate { get; set; }
         public DataTemplate DefaultTemplate { get; set; }
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
             if (item == null) return DefaultTemplate;
 
-            XmlNode node = (XmlNode)item;
-            switch (node.Name.ToLower())
+            string selection = (string)item;
+            switch (selection)
             {
                 case "enum":
                 case "bits":
@@ -40,12 +41,12 @@ namespace XMLEditor
                     return TableTemplate;
                 case "mod":
                     return ModTemplate;
+                case "AddAlarm":
+                    return AlarmTemplate;
                 default:
                     return DefaultTemplate;
             }
 
         }
-
-
     }
 }

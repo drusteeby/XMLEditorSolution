@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Documents;
 using System.Xml;
 
 namespace XMLEditor.XMLDocumentView
@@ -26,11 +27,11 @@ namespace XMLEditor.XMLDocumentView
         {
             _model = new Model();
             XMLDocumentViewContainers = new ObservableCollection<ViewContainer>();
+            TreeTemplatesList = new ObservableCollection<string>();
+            TreeTemplatesList.Add("Metal");
+            TreeTemplatesList.Add("Blue");
 
-            _model.LoadXmlDataProviders();
-
-            SelectedIndex = 1;
-            
+            _model.LoadXmlDataProviders();            
             
             foreach(XmlDataProvider provider in _model.XMLDataProviderList)
             {
@@ -43,20 +44,31 @@ namespace XMLEditor.XMLDocumentView
 
 
 
-
-        public int SelectedIndex
+        public ObservableCollection<string> TreeTemplatesList
         {
-            get { return (int)GetValue(SelectedIndexProperty); }
-            set { SetValue(SelectedIndexProperty, value); }
+            get { return (ObservableCollection<string>)GetValue(TreeTemplatesListProperty); }
+            set { SetValue(TreeTemplatesListProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for SelectedIndex.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty SelectedIndexProperty =
-            DependencyProperty.Register("SelectedIndex", typeof(int), typeof(ViewModel), new UIPropertyMetadata(null));
+        // Using a DependencyProperty as the backing store for TreeTemplatesList.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TreeTemplatesListProperty =
+            DependencyProperty.Register("TreeTemplatesList", typeof(ObservableCollection<string>), typeof(ViewModel), new UIPropertyMetadata(null));
 
         
 
-       
+
+
+        public string TreeViewItemTemplate
+        {
+            get { return (string)GetValue(TreeViewItemTemplateProperty); }
+            set { SetValue(TreeViewItemTemplateProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for TreeViewItemTemplate.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TreeViewItemTemplateProperty =
+            DependencyProperty.Register("TreeViewItemTemplate", typeof(string), typeof(ViewModel), new UIPropertyMetadata(null));
+
+               
 
         public XmlNode SelectedNode
         {
@@ -93,8 +105,34 @@ namespace XMLEditor.XMLDocumentView
         public static readonly DependencyProperty XMLDocumentViewContainersProperty =
             DependencyProperty.Register("XMLDocumentViewContainers", typeof(ObservableCollection<ViewContainer>), typeof(ViewModel), new UIPropertyMetadata(null));
 
-        
 
+
+
+        public string selectHelpView
+        {
+            get { return (string)GetValue(selectHelpViewProperty); }
+            set { SetValue(selectHelpViewProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for selectHelpView.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty selectHelpViewProperty =
+            DependencyProperty.Register("selectHelpView", typeof(string), typeof(ViewModel), new UIPropertyMetadata(null));
+
+
+
+
+
+        public FlowDocument EditableFlowDocument
+        {
+            get { return (FlowDocument)GetValue(EditableFlowDocumentProperty); }
+            set { SetValue(EditableFlowDocumentProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for EditableFlowDocument.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty EditableFlowDocumentProperty =
+            DependencyProperty.Register("EditableFlowDocument", typeof(FlowDocument), typeof(ViewModel), new UIPropertyMetadata(null));
+
+        
         
     }
 }

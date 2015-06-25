@@ -54,6 +54,8 @@ namespace XMLEditor.XMLDocumentView
 
                     break;
             }
+
+            
         }
 
         public void RemoveFile(string filePath)
@@ -61,6 +63,8 @@ namespace XMLEditor.XMLDocumentView
             XmlDataProvider toRemove = XMLDataProviderList.Single(x => x.Source.LocalPath == filePath);
 
             if (toRemove != null) XMLDataProviderList.Remove(toRemove);
+
+            ReloadTags();
             
         }
 
@@ -73,13 +77,25 @@ namespace XMLEditor.XMLDocumentView
             if (!XMLDataProviderList.Contains(provider))
                 XMLDataProviderList.Add(provider);
 
-            
+            ReloadTags();
         }
+
+        public void ReloadTags()
+        {
+            TagCollection.ClearTags();
+
+            foreach (string fn in Properties.Settings.Default.filePaths)
+                try { TagCollection.LoadTags(fn); }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
+                
+        }
+
 
         public void LoadXmlDataProviders()
         {
             XMLDataProviderList.Clear();
-                
+            TagCollection.ClearTags();
+            
 
             //required to flag the removal of the file from the list after the foreach block has finished enumerating.
             List<int> indexFlags = new List<int>();
@@ -98,8 +114,9 @@ namespace XMLEditor.XMLDocumentView
 
                     TagCollection.LoadTags(fn);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    MessageBox.Show(ex.Message);
                     if (MessageBox.Show("File failed to load:  " + fn + System.Environment.NewLine + " Remove from file List?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                         indexFlags.Add(XMLDataProviderList.IndexOf(XMLDataProviderList.Single(x => x.Source.LocalPath == fn)));
                      

@@ -4,8 +4,9 @@
 
 
     <local:AttributesToVisibilityConverter x:Key="AttributesToVisibilityConverter"/>
+    <local:XmlAttributesToLableConverter x:Key="XmlAttributesToLableConverter"/>
     
-    <HierarchicalDataTemplate x:Key="NodeTemplate" >
+    <HierarchicalDataTemplate x:Key="NodeMetalTemplate" >
 
         <Border Background="LightBlue" BorderBrush="LightGray" 
       BorderThickness="3" ClipToBounds="True" CornerRadius="8,8,8,8">
@@ -69,7 +70,7 @@
     </HierarchicalDataTemplate>
     
     
-    <HierarchicalDataTemplate x:Key="NodeTemplateOne">
+    <HierarchicalDataTemplate x:Key="NodeBlueTemplate">
         <HierarchicalDataTemplate.ItemsSource>
             <Binding XPath="child::node()" />
         </HierarchicalDataTemplate.ItemsSource>
@@ -129,6 +130,31 @@
             </DataTrigger>
             <DataTrigger Binding="{Binding Path=NodeType}" Value="Comment">
 
+                <Setter TargetName="text" Property="Text" Value="Comments"></Setter>
+            </DataTrigger>
+        </HierarchicalDataTemplate.Triggers>
+    </HierarchicalDataTemplate>
+
+    <HierarchicalDataTemplate x:Key="NodeTextTemplate">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock x:Name="text" Text="{Binding Path=Value}">
+            </TextBlock>
+            <TextBlock Margin="5,0,0,0"  Foreground="Red" Text="{Binding Attributes, Converter={StaticResource XmlAttributesToLableConverter}}">
+            </TextBlock>
+        </StackPanel>
+        <HierarchicalDataTemplate.ItemsSource>
+            <Binding XPath="child::node()" />
+        </HierarchicalDataTemplate.ItemsSource>
+
+        <HierarchicalDataTemplate.Triggers>
+            <DataTrigger Binding="{Binding Path=NodeType}" Value="Text">
+                <Setter TargetName="text" Property="Text" Value="{Binding Path=Value}"></Setter>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=NodeType}" Value="Element">
+                <Setter TargetName="text" Property="Text" Value="{Binding Path=Name}"></Setter>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=NodeType}" Value="Comment">
+                <!--<Setter TargetName="text" Property="Visibility" Value="Collapsed"></Setter>-->
                 <Setter TargetName="text" Property="Text" Value="Comments"></Setter>
             </DataTrigger>
         </HierarchicalDataTemplate.Triggers>

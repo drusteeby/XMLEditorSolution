@@ -105,11 +105,19 @@
     <Compile Include="AddAlarmView\ViewModelCommands.cs" />
     <Compile Include="AddAlarmView\ViewModelProperties.cs" />
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Commands\GlobalCommands.cs" />
     <Compile Include="Converters.cs" />
     <Compile Include="CurrentAlarmsView\View.xaml.cs">
       <DependentUpon>View.xaml</DependentUpon>
     </Compile>
     <Compile Include="CurrentAlarmsView\ViewModel.cs" />
+    <Compile Include="DataTagsView\DataTagPropertyContainer.cs" />
+    <Compile Include="DataTagsView\View.xaml.cs">
+      <DependentUpon>View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DataTagsView\ViewModelCommands.cs" />
+    <Compile Include="DataTagsView\ViewModelProperties.cs" />
+    <Compile Include="DataTagsView\ViewModel.cs" />
     <Compile Include="EnumerationContainer.cs" />
     <Compile Include="NodeView.xaml.cs">
       <DependentUpon>NodeView.xaml</DependentUpon>
@@ -117,11 +125,13 @@
     <Compile Include="SampleData\SampleNode\SampleNode.xaml.cs">
       <DependentUpon>SampleNode.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Settings.cs" />
     <Compile Include="Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
     </Compile>
     <Compile Include="TagHelper.cs" />
-    <Compile Include="TemplateSelectors\NodeViewSelector.cs" />
+    <Compile Include="TemplateSelectors\HelpViewSelector.cs" />
+    <Compile Include="TemplateSelectors\XMLNodeViewSelector.cs" />
     <Compile Include="TemplateViews\DefaultView.xaml.cs">
       <DependentUpon>DefaultView.xaml</DependentUpon>
     </Compile>
@@ -142,6 +152,10 @@
     <Page Include="CurrentAlarmsView\View.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DataTagsView\View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -225,6 +239,17 @@
       <Project>{2b43ca60-b363-44af-b242-605a7ebd73b2}</Project>
       <Name>MCM</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="SampleData\XML Files\Alarms.xml" />
+    <Resource Include="SampleData\XML Files\Locations.xml" />
+    <Resource Include="SampleData\XML Files\Manual.xml" />
+    <Resource Include="SampleData\XML Files\Part.xml" />
+    <Resource Include="SampleData\XML Files\Polls.xml" />
+    <Resource Include="SampleData\XML Files\Results.xml" />
+    <Resource Include="SampleData\XML Files\Robots.xml" />
+    <Resource Include="SampleData\XML Files\System.xml" />
+    <Resource Include="SampleData\XML Files\UomDefs.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

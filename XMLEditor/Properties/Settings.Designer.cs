@@ -33,5 +33,17 @@ namespace XMLEditor.Properties {
                 this["filePaths"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string lastDirectory {
+            get {
+                return ((string)(this["lastDirectory"]));
+            }
+            set {
+                this["lastDirectory"] = value;
+            }
+        }
     }
 }

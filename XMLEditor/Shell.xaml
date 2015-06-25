@@ -14,7 +14,13 @@
 
     </Window.Resources>
     <Grid>
-        <ContentControl prism:RegionManager.RegionName="MainRegion"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+
+        <ContentControl Grid.Row="1" prism:RegionManager.RegionName="MainRegion"/>
     </Grid>
 
 

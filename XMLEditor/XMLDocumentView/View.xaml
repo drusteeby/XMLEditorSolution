@@ -9,6 +9,7 @@
              xmlns:AlarmView="clr-namespace:XMLEditor.CurrentAlarmsView"
              xmlns:this="clr-namespace:XMLEditor.XMLDocumentView"
              xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 
@@ -38,16 +39,17 @@
                 <MenuItem Header="Save As" Command="{Binding saveAs}"/>
             </MenuItem>
             <MenuItem Header="Edit">
+                <MenuItem Header="Reload Tags" Command="{Binding ReloadTags}"/>
                 <MenuItem Header="Add Alarm" Command="{Binding AddAlarm}"/>
                 <MenuItem Header="Delete Node" Command="{Binding DeleteNode}"/>
                 <MenuItem Header="Clear Settings" Command="{Binding ClearSettings}"/>
             </MenuItem>
             <MenuItem Header="View">
+                <MenuItem Header="Data Tags" Command="{Binding ViewDataTags}"/>
                 <MenuItem Header="Alarm Popup" Command="{Binding AlarmView}"/>
             </MenuItem>
+
         </Menu>
-
-
         <TabControl Grid.Row="1" ItemsSource="{Binding XMLDocumentViewContainers,UpdateSourceTrigger=PropertyChanged}" SelectedIndex="0">
 
             <ia:Interaction.Triggers>
@@ -65,25 +67,60 @@
             <!--Content of the tab control-->
             <TabControl.ContentTemplate>
                 <DataTemplate>
-                    <TreeView Name="xmlTreeView" Background="LightYellow"
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+
+                        <ComboBox SelectedItem="{Binding DataContext.TreeViewItemTemplate, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type this:View}}}" SelectedIndex="0">
+                            <sys:String>Metal</sys:String>
+                            <sys:String>Blue</sys:String>
+                            <sys:String>Text</sys:String>
+                        </ComboBox>
+                        <ComboBox Grid.Row="0" Grid.Column="1" />
+                        
+                        <TreeView Grid.Row="2" Grid.ColumnSpan="2" Name="xmlTreeView" Background="LightYellow"
                           DataContext="{Binding Path=XMLDataProvider,UpdateSourceTrigger=PropertyChanged}"
-                          ItemsSource="{Binding}"
-                          ItemTemplate= "{StaticResource NodeTemplate}" 
-                                  
+                          ItemsSource="{Binding}"                          
                           >
+                            <TreeView.Style>
+                                <Style TargetType="{x:Type TreeView}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding DataContext.TreeViewItemTemplate, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type this:View}}}" Value="Metal">
+                                            <Setter Property="ItemTemplate" Value="{StaticResource NodeMetalTemplate}"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding DataContext.TreeViewItemTemplate, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type this:View}}}" Value="Blue">
+                                            <Setter Property="ItemTemplate" Value="{StaticResource NodeBlueTemplate}"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding DataContext.TreeViewItemTemplate, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type this:View}}}" Value="Text">
+                                            <Setter Property="ItemTemplate" Value="{StaticResource NodeTextTemplate}"/>
+                                        </DataTrigger>
+                                        
+                                    </Style.Triggers>
+                                </Style>
+                            </TreeView.Style>
                         <ia:Interaction.Triggers>
                             <ia:EventTrigger EventName="SelectedItemChanged">
                                 <cmd:EventToCommand Command="{Binding DataContext.SelectedItemChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type this:View}}}" PassEventArgsToCommand="True"/>
                             </ia:EventTrigger>
                         </ia:Interaction.Triggers>
                     </TreeView>
+                    </Grid>
                 </DataTemplate>
             </TabControl.ContentTemplate>
         </TabControl>
 
         <ContentControl Grid.Column="2" Grid.Row="1"
-                        Content="{Binding SelectedNode}"
-                        ContentTemplateSelector="{StaticResource helpViewSelector}" Grid.ColumnSpan="2">
+                        Content="{Binding selectHelpView}"
+                        ContentTemplateSelector="{StaticResource helpViewSelector}"
+                        
+                        Grid.ColumnSpan="2">
         </ContentControl>
 
     </Grid>

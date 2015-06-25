@@ -18,17 +18,19 @@ namespace XMLEditor.XMLDocumentView
 {
     public partial class ViewModel
     {
+
+        public DelegateCommand<RoutedPropertyChangedEventArgs<Object>> SelectedItemChanged { get; set; }
+        public DelegateCommand<SelectionChangedEventArgs> SelectionChanged { get; set; }
         public DelegateCommand saveAs { get; set; }
         public DelegateCommand save { get; set; }
-        public DelegateCommand<RoutedPropertyChangedEventArgs<Object>> SelectedItemChanged { get; set; }
-        public DelegateCommand updateView { get; set; }
         public DelegateCommand AddXMLFile { get; set; }
         public DelegateCommand DeleteNode { get; set; }
-        public DelegateCommand<SelectionChangedEventArgs> SelectionChanged { get; set; }
         public DelegateCommand RemoveXMLFile { get; set; }
         public DelegateCommand ClearSettings { get; set; }
         public DelegateCommand AlarmView { get; set; }
         public DelegateCommand AddAlarm { get; set; }
+        public DelegateCommand ViewDataTags { get; set; }
+        public DelegateCommand ReloadTags { get; set; }
 
         public void initCommands()
         {
@@ -42,6 +44,19 @@ namespace XMLEditor.XMLDocumentView
             ClearSettings = new DelegateCommand(OnClearSettings);
             AlarmView = new DelegateCommand(OnAlarmView);
             AddAlarm = new DelegateCommand(OnAddAlarm);
+            ViewDataTags = new DelegateCommand(OnViewDataTags);
+            ReloadTags = new DelegateCommand(OnReloadTags);
+        }
+
+        public void OnReloadTags()
+        {
+            _model.ReloadTags();
+        }
+
+        public void OnViewDataTags()
+        {
+            RemoveAllPopups();
+            regionManager.RegisterViewWithRegion("WindowRegion", () => this.container.Resolve<DataTagsView.View>());
         }
 
         public void RemoveAllPopups()
@@ -53,6 +68,7 @@ namespace XMLEditor.XMLDocumentView
         public void OnAddAlarm()
         {
             RemoveAllPopups();
+            selectHelpView = "AddAlarm";
             regionManager.RegisterViewWithRegion("WindowRegion", () => this.container.Resolve<AddAlarmView.View>());
             regionManager.Regions["WindowRegion"].Context = SelectedDocument.XMLDataProvider;
             
@@ -60,7 +76,7 @@ namespace XMLEditor.XMLDocumentView
 
         public void OnAlarmView()
         {
-            RemoveAllPopups();
+            RemoveAllPopups();          
             regionManager.RegisterViewWithRegion("WindowRegion", () => this.container.Resolve<CurrentAlarmsView.View>());
         }
 
@@ -86,6 +102,7 @@ namespace XMLEditor.XMLDocumentView
         public void OnSelectedItemChanged(RoutedPropertyChangedEventArgs<Object> e)
         {
             SelectedNode = (XmlNode)(e.NewValue);
+            selectHelpView = SelectedNode.Name.ToLower();
             DeleteNode.RaiseCanExecuteChanged();
 
             
@@ -107,12 +124,19 @@ namespace XMLEditor.XMLDocumentView
         {
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = "XML files (*.xml)|*.xml";
-            dialog.InitialDirectory = @"C:\";
+
+            if (String.IsNullOrEmpty(Properties.Settings.Default.lastDirectory))
+                dialog.InitialDirectory = @"C:\";
+            else
+                dialog.InitialDirectory = Properties.Settings.Default.lastDirectory;
+
             dialog.Title = "Please select an XML file to load.";
 
             if (dialog.ShowDialog() == true)
             {
                 _model.AddFile(dialog.FileName);
+                Properties.Settings.Default.lastDirectory = dialog.FileName.Substring(0,dialog.FileName.LastIndexOf('\\'));
+                Properties.Settings.Default.Save();
             }
         }
 

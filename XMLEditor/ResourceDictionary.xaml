@@ -1,0 +1,105 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:XMLEditor">
+	
+	<ImageBrush x:Key="metalBG" ImageSource="C:\Users\dsteeby\Documents\Visual Studio 2012\Projects\XMLEditor\Resources\metal-background11.jpg" />
+
+    <Style x:Key="baseStyle" TargetType="Control">
+        <Setter Property="Margin" Value="3"/>
+    </Style>
+
+    <DataTemplate x:Key="defaultTemplate">
+        <TextBlock Text="Select a node to view information"/>
+    </DataTemplate>
+    <DataTemplate x:Key="enumTemplate">
+        <FlowDocumentPageViewer>
+            <FlowDocument>
+                <BlockUIContainer>
+                    <TextBlock Text="Enums"/>
+                </BlockUIContainer>
+                <Paragraph>
+
+                    "Enum" is short for "Enumeration". It is a user-defined type that consists of a set of named integral constants that are known as enumerators.
+                    <LineBreak/>
+                    In the MCM .xml files, an enumeration can be defined by creating either a "bits" or an "enum" node, which is given a unique name. Each one of these nodes will consist of "children nodes" that describe a text name and a unique integer value.
+                    <LineBreak/>
+                    The Node you have selected is named:
+                </Paragraph>
+                <BlockUIContainer>
+                    <TextBlock Text="{Binding Path=DataContext.SelectedNode.Attributes.Item(0).Value,
+                            RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Shell}},
+                            UpdateSourceTrigger=PropertyChanged}" />
+                </BlockUIContainer>
+                <Paragraph>
+                    Expand the node to see it's values
+                </Paragraph>
+            </FlowDocument>
+        </FlowDocumentPageViewer>
+    </DataTemplate>
+    <DataTemplate x:Key="arrayTemplate">
+        <TextBlock Text="Array"/>
+    </DataTemplate>
+    <DataTemplate x:Key="copyTemplate">
+        <TextBlock Text="Copy"/>
+    </DataTemplate>
+    <DataTemplate x:Key="modTemplate">
+        <TextBlock Text="Mod"/>
+    </DataTemplate>
+    <DataTemplate x:Key="tableTemplate">
+        <TextBlock Text="Table"/>
+    </DataTemplate>
+    <DataTemplate x:Key="tagTemplate">
+        <FlowDocumentPageViewer>
+            <FlowDocument>
+                <Paragraph>
+                    <Bold>readFrom=”PLC”</Bold> is an XML attribute that indicates where the data is being read from. “PLC” and “HMI” are the possible values.
+                    <LineBreak/>
+                    <LineBreak/>
+                    <Bold>readName=”PcAlarms[0]”
+                    </Bold>
+                    Indictes which integer from the PcAlarms array has the value to indicate which bits are set on or off and, therefore, which alarms/warnings are being sent.
+                    <LineBreak/>
+                    <LineBreak/>
+                    <Bold>name=”Alarms.System”
+                    </Bold>
+                    This matches to the
+                        bits name=" Alarms.System" / from above. It indicates which list of alarms/warnings this tag will be displaying.
+                    <LineBreak/>
+                    <LineBreak/>
+                    <Bold>text=" Alarms System A”
+                    </Bold>
+                    Defines the text that will appear in the Alarms tab of the Simulator window below.
+                    <LineBreak/>
+                    <LineBreak/>
+                    <Bold>" textEs=” Sistema de Alarmas A”
+                    </Bold>
+                    Defines what text will appear if the language has been set to Spanish. There are others such as textCh for Mandarin and textDe for German.
+                    <LineBreak/>
+                    <LineBreak/>
+                    <Bold>group="Alarms"
+                    </Bold>
+                    Defines the group name to which this belongs. In this case, while it is set to “Alarms”, this needs to be set to “Alarms” or “Warnings” in order for the messages to appear in the Alarm/Warning list.
+                    <LineBreak/>
+                    <LineBreak/>
+                    <Bold>page="Alarms"
+                    </Bold>
+                    Defines which tab this entry will appear on in the Simulator window. In the example below, changing the value of the Warnings entry page to page=”Not Alarmed” creates a new tab with just this one entry.
+
+                </Paragraph>
+            </FlowDocument>
+        </FlowDocumentPageViewer>
+    </DataTemplate>
+    <local:HelpViewSelector x:Key="helpViewSelector" 
+                                DefaultTemplate="{StaticResource defaultTemplate}"
+                                EnumTemplate="{StaticResource enumTemplate}"
+                                ArrayTemplate="{StaticResource arrayTemplate}"
+                                CopyTemplate="{StaticResource copyTemplate}"
+                                ModTemplate="{StaticResource modTemplate}"
+                                TableTemplate="{StaticResource tableTemplate}"
+                                TagTemplate="{StaticResource tagTemplate}"
+                                />
+
+
+
+
+</ResourceDictionary>

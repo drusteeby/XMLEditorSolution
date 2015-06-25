@@ -1,0 +1,95 @@
+﻿<UserControl x:Class="XMLEditor.AddAlarmView.View"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ia="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
+             mc:Ignorable="d" 
+             Height="Auto"
+             Width="Auto"
+             Background="{x:Static SystemColors.WindowBrush}">
+    <UserControl.Resources>
+
+        <Style BasedOn="{StaticResource baseStyle}" TargetType="Label"/>
+        <Style BasedOn="{StaticResource baseStyle}" TargetType="ComboBox"/>
+        <Style BasedOn="{StaticResource baseStyle}" TargetType="TextBox"/>
+        <Style BasedOn="{StaticResource baseStyle}" TargetType="Button"/>
+        <Style BasedOn="{StaticResource baseStyle}" TargetType="GroupBox">
+            
+            <Setter Property="DockPanel.Dock" Value="Top"/>
+            <Setter Property="Background" Value="{x:Static SystemColors.ControlBrush}"/>
+        </Style>
+       
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.ColumnSpan="2" Background="{x:Static SystemColors.GradientActiveCaptionBrush}" BorderBrush="{x:Static SystemColors.ActiveBorderBrush}" BorderThickness="2">
+            <Label Content="Add Alarm" 
+                   FontSize="24"
+                   Foreground="White" 
+                   HorizontalAlignment="Left" />
+        </Border>
+        <GroupBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"  Grid.Row="1" Grid.Column="0"  Header="Name and Text Options">
+            <StackPanel>
+                <Label Content="Name:" ToolTip="Descriptive name for the alarm"/>
+                <TextBox Text="{Binding AlarmName}"/>
+                <Label Content="Text:" ToolTip="Text that will appear in the alarms tab of the simulator window"/>
+                <TextBox Text="{Binding AlarmText}" ToolTip="Text that will appear in the alarms tab of the simulator window"/>
+                <Label Content="Prefix:" ToolTip="Will be appended to the alarm text. eg: When the prefix is 'Sta 1 -', the alarm 'Air Pressure Low' will become 'Sta 1 - Air Pressure Low'"/>
+                <TextBox Text="{Binding AlarmPrepend}" ToolTip="Will be appended to the alarm text. eg: When the prefix is 'Sta 1 -', the alarm 'Air Pressure Low' will become 'Sta 1 - Air Pressure Low'" />
+            </StackPanel>
+        </GroupBox>
+        <GroupBox  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"  Grid.Row="1" Grid.Column="1" Header="Location Settings">
+            <StackPanel>
+                <Label Content="Read From:" ToolTip="Where the tag is located, either a PLC tag or an internal HMI tag"/>
+                <ComboBox Text="{Binding AlarmReadFrom}" ToolTip="Where the tag is located, either a PLC tag or an internal HMI tag" SelectedIndex="0">
+                    <ComboBoxItem Content="PLC"/>
+                    <ComboBoxItem Content="HMI"/>
+                </ComboBox>
+                <Label Content="Read Name:" ToolTip="The name of the tag as defined in the PLC or the HMI"/>
+                <TextBox Text="{Binding AlarmReadName}" ToolTip="The name of the tag as defined in the PLC or the HMI"/>
+                <Label Content="Page:" ToolTip="The page that this alarm will appear at in the simulator window"/>
+                <TextBox Text="{Binding AlarmPage}" ToolTip="The page that this alarm will appear at in the simulator window"/>
+            </StackPanel>
+        </GroupBox>
+            <GroupBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Header="Message Settings" Width="500">
+                <StackPanel>
+                <ComboBox ItemsSource="{Binding enumNames}" SelectedItem="{Binding SelectedEnumName}" SelectedIndex="0">
+                        <ia:Interaction.Triggers>
+                            <ia:EventTrigger EventName="SelectionChanged">
+                                <cmd:EventToCommand Command="{Binding SelectionChanged}"/>
+                            </ia:EventTrigger>
+                        </ia:Interaction.Triggers>
+                    </ComboBox>
+                    <Label Content="Name:" Visibility="{Binding newVisibility}"/>
+                    <TextBox Text="{Binding newEnumName}" Visibility="{Binding newVisibility}"/>
+                    <ListBox ItemsSource="{Binding EnumerationValues}" Background="Transparent" BorderBrush="Transparent" ScrollViewer.CanContentScroll="True" MaxHeight="200">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                                    <Label DockPanel.Dock="Left" Content="{Binding Value}"/>
+                                    <TextBox DockPanel.Dock="Right"  HorizontalAlignment="Stretch" Width="250" Text="{Binding Text}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+            </GroupBox>
+        <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
+                Content="Add" 
+                Command="{Binding AddAlarm}"
+                />
+
+    </Grid>
+</UserControl>

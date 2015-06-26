@@ -8,6 +8,7 @@
              xmlns:prism="http://www.codeplex.com/prism"
              xmlns:AlarmView="clr-namespace:XMLEditor.CurrentAlarmsView"
              xmlns:this="clr-namespace:XMLEditor.XMLDocumentView"
+             xmlns:Controls="clr-namespace:XMLEditor.Controls"
              xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
@@ -50,7 +51,7 @@
             </MenuItem>
 
         </Menu>
-        <TabControl Grid.Row="1" ItemsSource="{Binding XMLDocumentViewContainers,UpdateSourceTrigger=PropertyChanged}" SelectedIndex="0">
+        <Controls:AnimatedTabControl Grid.Row="1" ItemsSource="{Binding XMLDocumentViewContainers,UpdateSourceTrigger=PropertyChanged}" SelectedIndex="0">
 
             <ia:Interaction.Triggers>
                 <ia:EventTrigger EventName="SelectionChanged">
@@ -58,13 +59,14 @@
                 </ia:EventTrigger>
             </ia:Interaction.Triggers>
 
-            <!--Header of the tab control-->
+            <!--Header of the tab control
             <TabControl.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Header,UpdateSourceTrigger=PropertyChanged}"/>
                 </DataTemplate>
             </TabControl.ItemTemplate>
-            <!--Content of the tab control-->
+            -->
+            <!--Content of the tab control
             <TabControl.ContentTemplate>
                 <DataTemplate>
                     <Grid>
@@ -114,7 +116,8 @@
                     </Grid>
                 </DataTemplate>
             </TabControl.ContentTemplate>
-        </TabControl>
+            -->
+        </Controls:AnimatedTabControl>
 
         <ContentControl Grid.Column="2" Grid.Row="1"
                         Content="{Binding selectHelpView}"

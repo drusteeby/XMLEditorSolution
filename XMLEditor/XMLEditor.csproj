@@ -98,14 +98,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AddAlarmView\View.xaml.cs">
-      <DependentUpon>View.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="AddAlarmView\ViewModel.cs" />
-    <Compile Include="AddAlarmView\ViewModelCommands.cs" />
-    <Compile Include="AddAlarmView\ViewModelProperties.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Commands\GlobalCommands.cs" />
+    <Compile Include="Controls\AnimatedTabControl.cs" />
+    <Compile Include="Controls\RoundedBox.xaml.cs">
+      <DependentUpon>RoundedBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters.cs" />
     <Compile Include="CurrentAlarmsView\View.xaml.cs">
       <DependentUpon>View.xaml</DependentUpon>
@@ -118,7 +116,6 @@
     <Compile Include="DataTagsView\ViewModelCommands.cs" />
     <Compile Include="DataTagsView\ViewModelProperties.cs" />
     <Compile Include="DataTagsView\ViewModel.cs" />
-    <Compile Include="EnumerationContainer.cs" />
     <Compile Include="NodeView.xaml.cs">
       <DependentUpon>NodeView.xaml</DependentUpon>
     </Compile>
@@ -126,10 +123,10 @@
       <DependentUpon>SampleNode.xaml</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
-    <Compile Include="Shell.xaml.cs">
+    <Compile Include="Shell\Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TagHelper.cs" />
+    <Compile Include="Shell\ShellViewModel.cs" />
     <Compile Include="TemplateSelectors\HelpViewSelector.cs" />
     <Compile Include="TemplateSelectors\XMLNodeViewSelector.cs" />
     <Compile Include="TemplateViews\DefaultView.xaml.cs">
@@ -145,9 +142,9 @@
     <Compile Include="XMLDocumentView\ViewModelCommands.cs" />
     <Compile Include="XMLDocumentView\ViewModelEvents.cs" />
     <Compile Include="XMLDocumentView\ViewModelProperties.cs" />
-    <Page Include="AddAlarmView\View.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Controls\RoundedBox.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CurrentAlarmsView\View.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -181,7 +178,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Shell.xaml">
+    <Page Include="Shell\Shell.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -239,6 +236,18 @@
       <Project>{2b43ca60-b363-44af-b242-605a7ebd73b2}</Project>
       <Name>MCM</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{01ae0dbd-7740-415f-8efd-f4a2a688879f}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MachineTagEditor.Infrastructure\MachineTagEditor.Infrastructure.csproj">
+      <Project>{1dd5af35-b564-426e-a2d1-74168a40700f}</Project>
+      <Name>MachineTagEditor.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MachineTagEditor.Modules.Alarms\MachineTagEditor.Modules.Alarms.csproj">
+      <Project>{d348e636-4db6-4be3-8639-38d2271ee0b2}</Project>
+      <Name>MachineTagEditor.Modules.Alarms</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="SampleData\XML Files\Alarms.xml" />
@@ -250,6 +259,16 @@
     <Resource Include="SampleData\XML Files\Robots.xml" />
     <Resource Include="SampleData\XML Files\System.xml" />
     <Resource Include="SampleData\XML Files\UomDefs.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\shadow_b.png" />
+    <Resource Include="Resources\shadow_bl.png" />
+    <Resource Include="Resources\shadow_br.png" />
+    <Resource Include="Resources\shadow_l.png" />
+    <Resource Include="Resources\shadow_r.png" />
+    <Resource Include="Resources\shadow_t.png" />
+    <Resource Include="Resources\shadow_tl.png" />
+    <Resource Include="Resources\shadow_tr.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

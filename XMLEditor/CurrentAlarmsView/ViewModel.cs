@@ -18,6 +18,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using MCM.Core.Objects;
 using System.Reflection;
+using MachineTagEditor.Infrastructure;
 
 namespace XMLEditor.CurrentAlarmsView
 {

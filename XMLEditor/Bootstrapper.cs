@@ -25,6 +25,8 @@ namespace XMLEditor
     using Microsoft.Practices.Unity;
     using Microsoft.Practices.Prism.Regions;
     using WRAExample.Utility;
+    using System.Reflection;
+    using MachineTagEditor.Modules.Alarms;
 
     /// <summary>
     /// Initializes Prism to start this quickstart Prism application to use Unity.
@@ -82,7 +84,19 @@ namespace XMLEditor
         /// </remarks>
         protected override IModuleCatalog CreateModuleCatalog()
         {
-            return base.CreateModuleCatalog();
+            base.CreateModuleCatalog();
+            base.ModuleCatalog = new ModuleCatalog();
+
+            Type AlarmsModuleType = typeof(AlarmsModule);
+
+            ModuleCatalog.AddModule(
+                new ModuleInfo()
+                {
+                    ModuleName = AlarmsModuleType.Name,
+                    ModuleType = AlarmsModuleType.AssemblyQualifiedName,
+                });
+
+            return base.ModuleCatalog;
         }
 
         protected override void ConfigureModuleCatalog()

@@ -12,7 +12,6 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Xml;
 using XMLEditor.CurrentAlarmsView;
-using XMLEditor.AddAlarmView;
 
 namespace XMLEditor.XMLDocumentView
 {
@@ -69,7 +68,7 @@ namespace XMLEditor.XMLDocumentView
         {
             RemoveAllPopups();
             selectHelpView = "AddAlarm";
-            regionManager.RegisterViewWithRegion("WindowRegion", () => this.container.Resolve<AddAlarmView.View>());
+            regionManager.RegisterViewWithRegion("WindowRegion", () => this.container.Resolve<MachineTagEditor.Modules.Alarms.AddAlarm.View>());
             regionManager.Regions["WindowRegion"].Context = SelectedDocument.XMLDataProvider;
             
         }

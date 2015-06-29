@@ -3,7 +3,6 @@
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="ResourceDictionary.xaml" />
-        <ResourceDictionary Source="XMLDocumentView/NodeViewsDictionary.xaml" />
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Application.Resources>

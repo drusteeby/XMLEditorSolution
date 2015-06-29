@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="MachineTagEditor.Modules.Alarms.AddAlarm.Help"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <FlowDocumentPageViewer>
+            <FlowDocument>
+                <Paragraph>
+                    <Bold>Adding An Alarm</Bold>
+                </Paragraph>
+                <Paragraph>
+                    <Bold>Name:</Bold> Give the alarm a unique name. This is the name used if this alarm is going to be a parent tag. It is a good idea to name this alarm
+                    similiarily to the message tags name. For example, if the messages name is "AlarmStation", a good name for this alarm would be "Alarm.Station1".
+                    <LineBreak/>
+                    <Bold>Text:</Bold> This defines the name that will be displayed in the simulator section of the HMI for this alarm.
+                    <LineBreak/>
+                    <Bold>Prefix:</Bold> This prefix will be added to each of the message strings for the alarm.
+                    <LineBreak/>
+                    <Bold>ReadFrom:</Bold> This setting defines where the bit values will be read from, either the PLC or the HMI.
+                    <LineBreak/>
+                    <Bold>ReadName:</Bold> The name of the tag that holds the bit values for the alarm.
+                    <LineBreak/>
+                    <Bold>Page:</Bold> Defines what tab of the simulator window this alarm will appear on. Typically this is set to "Alarms", but can be defined as any value.
+                    <LineBreak/>
+                    <Bold>Message Settings:</Bold> List of messages defined by bit that will be displayed when that bit goes active. You can choose a set of already defined messages or create a new set.
+                    <LineBreak/>
+                    <Bold>Name (Message Settings):</Bold> Name of a new set of messages.
+                </Paragraph>
+            </FlowDocument>
+        </FlowDocumentPageViewer>
+    </Grid>
+</UserControl>

@@ -27,6 +27,9 @@ namespace XMLEditor
     using WRAExample.Utility;
     using System.Reflection;
     using MachineTagEditor.Modules.Alarms;
+    using MachineTagEditor.Modules.XMLDocument;
+    using MachineTagEditor.Modules.Toolbar;
+    using MachineTagEditor.Modules.Navigation;
 
     /// <summary>
     /// Initializes Prism to start this quickstart Prism application to use Unity.
@@ -94,6 +97,34 @@ namespace XMLEditor
                 {
                     ModuleName = AlarmsModuleType.Name,
                     ModuleType = AlarmsModuleType.AssemblyQualifiedName,
+                });
+
+            Type XMLDocumentModuleType = typeof(XMLDocumentModule);
+
+            ModuleCatalog.AddModule(
+                new ModuleInfo()
+                {
+                    ModuleName = XMLDocumentModuleType.Name,
+                    ModuleType = XMLDocumentModuleType.AssemblyQualifiedName,
+                });
+
+
+            Type ToolbarModuleType = typeof(ToolbarModule);
+
+            ModuleCatalog.AddModule(
+                new ModuleInfo()
+                {
+                    ModuleName = ToolbarModuleType.Name,
+                    ModuleType = ToolbarModuleType.AssemblyQualifiedName,
+                });
+
+            Type NavigationModuleType = typeof(NavigationModule);
+
+            ModuleCatalog.AddModule(
+                new ModuleInfo()
+                {
+                    ModuleName = NavigationModuleType.Name,
+                    ModuleType = NavigationModuleType.AssemblyQualifiedName,
                 });
 
             return base.ModuleCatalog;

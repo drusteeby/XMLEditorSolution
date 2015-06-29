@@ -13,7 +13,7 @@ using System.Windows;
 using System.Windows.Data;
 using System.Xml;
 
-namespace XMLEditor.AddAlarmView
+namespace MachineTagEditor.Modules.Alarms.AddAlarm
 {
     public partial class ViewModel : DependencyObject
     {

@@ -1,4 +1,6 @@
-﻿using Microsoft.Practices.Prism.Regions;
+﻿using MachineTagEditor.Infrastructure;
+using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
@@ -17,11 +19,16 @@ namespace XMLEditor
         [Dependency]
         public IUnityContainer container { get; set; }
 
+        public DelegateCommand goBack { get; set; }
+        public DelegateCommand goForward { get; set; }
+
         public ShellViewModel()
         {
-            regionManager.RegisterViewWithRegion("MainRegion", () => this.container.Resolve<XMLDocumentView.View>());
             ErrorRegionVisibility = Visibility.Collapsed;
             ErrorRegionGridHeight = new GridLength(0, GridUnitType.Star);
+
+            goBack = new DelegateCommand(OnGoBack);
+            goForward = new DelegateCommand(OnGoForward);
         }
 
         public Visibility ErrorRegionVisibility
@@ -49,6 +56,16 @@ namespace XMLEditor
 
         
 
+        public void OnGoBack()
+        {
+            regionManager.RequestNavigate(RegionNames.DataRegion, regionManager.Regions[RegionNames.DataRegion].Views.Single(x => x.ToString().Contains("XMLDocument")).ToString());
+
+        }
+
+        public void OnGoForward()
+        {
+            regionManager.RequestNavigate(RegionNames.DataRegion, regionManager.Regions[RegionNames.DataRegion].Views.Single(x => x.ToString().Contains("CurrentAlarms")).ToString());
+        }
         
     }
 }

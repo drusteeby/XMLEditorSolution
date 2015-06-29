@@ -1,6 +1,8 @@
 ﻿using MachineTagEditor.Infrastructure;
+using MachineTagEditor.Infrastructure.Events;
 using MCM.Core.Objects;
 using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
 using System;
@@ -11,27 +13,35 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace XMLEditor.AddAlarmView
+namespace MachineTagEditor.Modules.Alarms.AddAlarm
 {
     public partial class ViewModel: DependencyObject
     {
         [Dependency]
         public IRegionManager regionManager { get; set; }
 
-        void initProperties()
-        {
+        IEventAggregator _eventAggregator;
 
+        void initProperties(IEventAggregator eventAggregator)
+        {
+            _eventAggregator = eventAggregator;
             EnumerationValues = new ObservableCollection<EnumerationContainer>();
             enumNames = new ObservableCollection<string>();
 
+
+            _eventAggregator.GetEvent<TagsUpdated>().Subscribe(OnTagsUpdated);
+        }
+
+        public void OnTagsUpdated(bool obj)
+        {
+            enumNames.Clear();
             var dataTags = TagCollection.VirtualTags.Where(dt => (dt.DataType == MCM.Core.Enum.DataType.Bits || dt.DataType == MCM.Core.Enum.DataType.Enum));
-         
+
             enumNames.Add("New Item...");
-            foreach(DataTag dt in dataTags)
+            foreach (DataTag dt in dataTags)
             {
                 enumNames.Add(dt.Name);
             }
-
         }
 
       

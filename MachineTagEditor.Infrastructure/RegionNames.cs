@@ -13,5 +13,6 @@ namespace MachineTagEditor.Infrastructure
         public const string ActionRegion = "ActionRegion";
         public const string HelpRegion = "HelpRegion";
         public const string ErrorRegion = "ErrorRegion";
+        public const string NavigationRegion = "NavigationRegion";
     }
 }

@@ -13,6 +13,7 @@
 
             // The boostrapper will create the Shell instance, so the App.xaml does not have a StartupUri.
             Bootstrapper bootstrapper = new Bootstrapper();
+            
             bootstrapper.Run();
         }
     }

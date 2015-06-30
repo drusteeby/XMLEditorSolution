@@ -120,6 +120,7 @@
     <Compile Include="XMLDocument\ViewModelCommands.cs" />
     <Compile Include="XMLDocument\ViewModelEvents.cs" />
     <Compile Include="XMLDocument\ViewModelProperties.cs" />
+    <Compile Include="XMLService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

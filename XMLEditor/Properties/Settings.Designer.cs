@@ -45,5 +45,16 @@ namespace XMLEditor.Properties {
                 this["lastDirectory"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::MachineTagEditor.Modules.XMLDocument.Model XMLModel {
+            get {
+                return ((global::MachineTagEditor.Modules.XMLDocument.Model)(this["XMLModel"]));
+            }
+            set {
+                this["XMLModel"] = value;
+            }
+        }
     }
 }

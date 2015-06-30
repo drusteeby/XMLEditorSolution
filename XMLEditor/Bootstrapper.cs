@@ -90,6 +90,16 @@ namespace XMLEditor
             base.CreateModuleCatalog();
             base.ModuleCatalog = new ModuleCatalog();
 
+            Type XMLDocumentModuleType = typeof(XMLDocumentModule);
+
+            ModuleCatalog.AddModule(
+                new ModuleInfo()
+                {
+                    ModuleName = XMLDocumentModuleType.Name,
+                    ModuleType = XMLDocumentModuleType.AssemblyQualifiedName,
+                });
+
+
             Type AlarmsModuleType = typeof(AlarmsModule);
 
             ModuleCatalog.AddModule(
@@ -99,14 +109,7 @@ namespace XMLEditor
                     ModuleType = AlarmsModuleType.AssemblyQualifiedName,
                 });
 
-            Type XMLDocumentModuleType = typeof(XMLDocumentModule);
 
-            ModuleCatalog.AddModule(
-                new ModuleInfo()
-                {
-                    ModuleName = XMLDocumentModuleType.Name,
-                    ModuleType = XMLDocumentModuleType.AssemblyQualifiedName,
-                });
 
 
             Type ToolbarModuleType = typeof(ToolbarModule);

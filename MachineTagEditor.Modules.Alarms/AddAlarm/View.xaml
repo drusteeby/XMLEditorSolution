@@ -28,7 +28,7 @@
 
         <Grid Margin="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <Grid.RowDefinitions>
-                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*" MinHeight="50"/>
                 <RowDefinition Height="10*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
@@ -36,11 +36,13 @@
                 <VisualBrush Visual="{Binding ElementName=mask}"/>
             </Grid.OpacityMask>
 
-            <Border Background="#014B68" BorderBrush="{x:Static SystemColors.ActiveBorderBrush}" BorderThickness="2">
-                <Label Content="Add Alarm" 
+            <Border Height="Auto" Background="#014B68" BorderBrush="{x:Static SystemColors.ActiveBorderBrush}" BorderThickness="2">
+                <Grid>
+                <Label MinHeight="50" Content="Add Alarm" 
                    FontSize="24"
                    Foreground="White" 
                    HorizontalAlignment="Left" />
+                </Grid>
             </Border>
             <ScrollViewer Grid.Row="1">
                 <Grid >

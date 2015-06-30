@@ -21,16 +21,16 @@ using System.Reflection;
 using MachineTagEditor.Infrastructure;
 using Microsoft.Practices.Prism.PubSubEvents;
 using MachineTagEditor.Infrastructure.Events;
+using MachineTagEditor.Infrastructure.Interfaces;
 
 namespace MachineTagEditor.Modules.Alarms.CurrentAlarms
 {
     public class ViewModel: DependencyObject
     {
-        public DelegateCommand goBack { get; set; }
         public DelegateCommand SelectionChanged { get; set; }
 
-        [Dependency]
-        public IUnityContainer container { get; set; }
+        IUnityContainer _container;
+        IXMLService _service;
 
         [Dependency]
         public IRegionManager regionManager { get; set; }
@@ -38,27 +38,27 @@ namespace MachineTagEditor.Modules.Alarms.CurrentAlarms
 
 
 
-        public ViewModel(IEventAggregator eventAggregator)
+        public ViewModel(IUnityContainer container, IEventAggregator eventAggregator)
         {
-            goBack = new DelegateCommand(OnGoBack);
+            _container = container;
             SelectionChanged = new DelegateCommand(OnSelectionChanged);
 
-            AlarmEnumerations = new ObservableCollection<DataTag>(TagCollection.DataTags.Where(dt => (dt.DataType == MCM.Core.Enum.DataType.Bits || dt.DataType == MCM.Core.Enum.DataType.Enum)));
+            _service = _container.Resolve<IXMLService>("AlarmsXMLService");
+            _service.DataTags.CollectionChanged+=alarmDataTags_CollectionChanged;
+            _service.reloadTags();
+            
             EnumerationValues = new ObservableCollection<EnumerationContainer>();
 
-            eventAggregator.GetEvent<TagsUpdated>().Subscribe(OnTagsUpdated);
+            
         }
 
-        private void OnTagsUpdated(bool obj)
+        void alarmDataTags_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            AlarmEnumerations = new ObservableCollection<DataTag>(TagCollection.DataTags.Where(dt => (dt.DataType == MCM.Core.Enum.DataType.Bits || dt.DataType == MCM.Core.Enum.DataType.Enum)));
-            EnumerationValues = new ObservableCollection<EnumerationContainer>();
+            if (sender.GetType() == typeof(ObservableCollection<DataTag>))
+                AlarmCollection = new ObservableCollection<DataTag>((sender as ObservableCollection<DataTag>).Where(dt => dt.Group.Contains("Alarms")));
+            
         }
 
-        public void OnGoBack()
-        {
-
-        }
 
         public void OnSelectionChanged()
         {
@@ -69,9 +69,6 @@ namespace MachineTagEditor.Modules.Alarms.CurrentAlarms
                 EnumerationValues = new ObservableCollection<EnumerationContainer>(TagHelper.getContainersfromEnum(te));
            
         }
-
-
-
 
         public DataTag SelectedAlarm
         {
@@ -84,9 +81,6 @@ namespace MachineTagEditor.Modules.Alarms.CurrentAlarms
             DependencyProperty.Register("SelectedAlarm", typeof(DataTag), typeof(ViewModel), new UIPropertyMetadata(null));
 
 
-
-
-
         public ObservableCollection<EnumerationContainer> EnumerationValues
         {
             get { return (ObservableCollection<EnumerationContainer>)GetValue(EnumerationValuesProperty); }
@@ -97,19 +91,18 @@ namespace MachineTagEditor.Modules.Alarms.CurrentAlarms
         public static readonly DependencyProperty EnumerationValuesProperty =
             DependencyProperty.Register("EnumerationValues", typeof(ObservableCollection<EnumerationContainer>), typeof(ViewModel), new UIPropertyMetadata(null));
 
-        
-        
+       
         
 
-        public ObservableCollection<DataTag> AlarmEnumerations
+        public ObservableCollection<DataTag> AlarmCollection
         {
             get { return (ObservableCollection<DataTag>)GetValue(AlarmEnumerationsProperty); }
             set { SetValue(AlarmEnumerationsProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for AlarmEnumerations.  This enables animation, styling, binding, etc...
+        // Using a DependencyProperty as the backing store for AlarmCollection.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty AlarmEnumerationsProperty =
-            DependencyProperty.Register("AlarmEnumerations", typeof(ObservableCollection<DataTag>), typeof(ViewModel), new UIPropertyMetadata(null));
+            DependencyProperty.Register("AlarmCollection", typeof(ObservableCollection<DataTag>), typeof(ViewModel), new UIPropertyMetadata(null));
 
         
         

@@ -1,5 +1,8 @@
 ﻿using MachineTagEditor.Infrastructure;
+using MachineTagEditor.Infrastructure.Containers;
+using MachineTagEditor.Infrastructure.Events;
 using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
 using System;
@@ -22,13 +25,20 @@ namespace XMLEditor
         public DelegateCommand goBack { get; set; }
         public DelegateCommand goForward { get; set; }
 
-        public ShellViewModel()
+        public ShellViewModel(IEventAggregator eventAggregator)
         {
             ErrorRegionVisibility = Visibility.Collapsed;
             ErrorRegionGridHeight = new GridLength(0, GridUnitType.Star);
 
             goBack = new DelegateCommand(OnGoBack);
             goForward = new DelegateCommand(OnGoForward);
+
+            eventAggregator.GetEvent<SaveSetting>().Subscribe(OnSaveSetting);
+        }
+
+        public void OnSaveSetting(SaveSettingContainer container)
+        {
+           
         }
 
         public Visibility ErrorRegionVisibility

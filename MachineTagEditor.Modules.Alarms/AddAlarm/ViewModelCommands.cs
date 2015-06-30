@@ -31,76 +31,34 @@ namespace MachineTagEditor.Modules.Alarms.AddAlarm
 
         public void OnAddAlarm()
         {
-            //<tag readFrom="PLC" readName="PcAlarms[0]" name="Alarms.System" parent="AlarmSystem" text="Alarms System A" group="Alarms" page="Alarms" />
-             // <bits name="WarningsMasters">
-             //   <val value="00" text="Masters Spare0" />
-
-            XmlDataProvider dataProvider = (regionManager.Regions["WindowRegion"].Context as XmlDataProvider);
-            XmlDocument document = dataProvider.Document;
-            XmlNode root = document.SelectSingleNode("tags");
-
-            XmlNode alarmToAdd = document.CreateElement("tag");
-
-            XmlAttribute alarmReadFromAttr = document.CreateAttribute("readFrom");           
-            XmlAttribute alarmReadNameAttr = document.CreateAttribute("readName");
-            XmlAttribute alarmNameAttr = document.CreateAttribute("name");
-            XmlAttribute alarmTextAttr = document.CreateAttribute("text");
-            XmlAttribute alarmGroupAttr = document.CreateAttribute("group");
-            XmlAttribute alarmPageAttr = document.CreateAttribute("page");
-            XmlAttribute alarmParentAttr = document.CreateAttribute("parent");
-
-            alarmReadFromAttr.Value = AlarmReadFrom;
-            alarmReadNameAttr.Value = AlarmReadName;
-            alarmNameAttr.Value = AlarmName;
-            alarmTextAttr.Value = AlarmText;
-            alarmGroupAttr.Value = "Alarms";
-            alarmPageAttr.Value = AlarmPage;
-
-            alarmToAdd.Attributes.Append(alarmReadFromAttr);
-            alarmToAdd.Attributes.Append(alarmReadNameAttr);
-            alarmToAdd.Attributes.Append(alarmNameAttr);
-            alarmToAdd.Attributes.Append(alarmTextAttr);
-            alarmToAdd.Attributes.Append(alarmGroupAttr);
-            alarmToAdd.Attributes.Append(alarmPageAttr);
+            List<XmlAttribute> attributes = new List<XmlAttribute>();
+            attributes.Add(_service.createAttribute("readFrom", AlarmReadFrom));
+            attributes.Add(_service.createAttribute("readName", AlarmReadName));
+            attributes.Add(_service.createAttribute("name", AlarmName));
+            attributes.Add(_service.createAttribute("text", AlarmText));
+            attributes.Add(_service.createAttribute("page", AlarmPage));
+            attributes.Add(_service.createAttribute("group", "Alarms"));
             
 
             if(SelectedEnumName.Contains("New Item"))
             {
-                XmlNode parentToAdd = document.CreateElement("bits");
+                List<XmlAttribute> messageAttributes = new List<XmlAttribute>();
+                foreach (EnumerationContainer message in EnumerationValues)
+                {                 
+                    messageAttributes.Add(_service.createAttribute("value", message.Value));
+                    messageAttributes.Add(_service.createAttribute("value", message.Text));
+                }
 
-                XmlAttribute parentName = document.CreateAttribute("name");
-                parentName.Value = newEnumName;
-                alarmParentAttr.Value = newEnumName;
+                _service.AddElement("val", messageAttributes);
 
-                parentToAdd.Attributes.Append(parentName);
-
-                foreach(EnumerationContainer container in EnumerationValues)
-                {
-                    XmlElement val = document.CreateElement("val");
-                    XmlAttribute value = document.CreateAttribute("value");
-                    XmlAttribute text = document.CreateAttribute("text");
-
-                    value.Value = container.Value;
-                    text.Value = container.Text;
-
-                    val.Attributes.Append(value);
-                    val.Attributes.Append(text);
-
-                    parentToAdd.AppendChild(val);                    
-                }               
-
-                root.AppendChild(parentToAdd);
+                attributes.Add(_service.createAttribute("parent", newEnumName));
+                
             }
-
             else
-              alarmParentAttr.Value = SelectedEnumName;
+                attributes.Add(_service.createAttribute("parent", SelectedEnumName));
 
-            alarmToAdd.Attributes.Append(alarmParentAttr);
-            root.AppendChild(alarmToAdd);
-
-            document.Save(dataProvider.Source.LocalPath);
-
-
+            _service.AddElement("tag", attributes);
+            
         }
 
         public bool CanAddAlarm()
@@ -129,7 +87,7 @@ namespace MachineTagEditor.Modules.Alarms.AddAlarm
             else
             {
                 newVisibility = Visibility.Collapsed;
-                DataTag tag = TagCollection.VirtualTags.Single(dt => ((dt.DataType == MCM.Core.Enum.DataType.Bits || dt.DataType == MCM.Core.Enum.DataType.Enum) && dt.Name == SelectedEnumName));
+                DataTag tag = _service.VirtualTags.Single(dt => (dt.Name == SelectedEnumName));
 
                 EnumerationValues = new ObservableCollection<EnumerationContainer>(TagHelper.getContainersfromEnum(TagHelper.getEnumfromTag(tag)));
             }

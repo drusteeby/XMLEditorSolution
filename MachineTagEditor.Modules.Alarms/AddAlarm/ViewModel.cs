@@ -15,10 +15,12 @@ namespace MachineTagEditor.Modules.Alarms.AddAlarm
 {
     public partial class ViewModel : DependencyObject
     {
-        public ViewModel(IEventAggregator eventAggregator)
+        
+
+        public ViewModel(IUnityContainer container, IEventAggregator eventAggregator)
         {
             initCommands();
-            initProperties(eventAggregator);
+            initProperties(container,eventAggregator);
         }       
         
     }

@@ -9,11 +9,14 @@ using System.Windows;
 using System.Windows.Data;
 using System.Xml;
 using MCM.Core.Objects;
+using System.Configuration;
 
 namespace MachineTagEditor.Modules.XMLDocument
 {
+
     public class Model
     {
+
         public ObservableCollection<XmlDataProvider> XMLDataProviderList { get; private set; }
 
         public Model()
@@ -54,6 +57,8 @@ namespace MachineTagEditor.Modules.XMLDocument
 
                     break;
             }
+
+            
 
             
         }

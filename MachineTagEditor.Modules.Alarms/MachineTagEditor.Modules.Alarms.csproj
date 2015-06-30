@@ -113,6 +113,7 @@
     <Compile Include="AddAlarm\ViewModel.cs" />
     <Compile Include="AddAlarm\ViewModelCommands.cs" />
     <Compile Include="AddAlarm\ViewModelProperties.cs" />
+    <Compile Include="AlarmService.cs" />
     <Compile Include="AlarmsModule.cs" />
     <Compile Include="CurrentAlarms\View.xaml.cs">
       <DependentUpon>View.xaml</DependentUpon>

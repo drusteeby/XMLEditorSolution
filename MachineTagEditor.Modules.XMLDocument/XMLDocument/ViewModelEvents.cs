@@ -17,6 +17,8 @@ using System.Windows.Data;
 using System.Xml;
 using System.Xml.Linq;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
+using MachineTagEditor.Infrastructure.Events;
+using MachineTagEditor.Infrastructure.Containers;
 
 namespace MachineTagEditor.Modules.XMLDocument
 {
@@ -47,6 +49,7 @@ namespace MachineTagEditor.Modules.XMLDocument
                     XMLDocumentViewContainers.Remove(XMLDocumentViewContainers.Single(x => x.XMLDataProvider == provider));
                 }
             }
+
         }
 
 

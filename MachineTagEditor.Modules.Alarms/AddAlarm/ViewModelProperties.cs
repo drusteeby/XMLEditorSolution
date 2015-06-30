@@ -1,5 +1,7 @@
 ﻿using MachineTagEditor.Infrastructure;
 using MachineTagEditor.Infrastructure.Events;
+using MachineTagEditor.Infrastructure.Interfaces;
+using MCM.Core.Enum;
 using MCM.Core.Objects;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.PubSubEvents;
@@ -8,6 +10,7 @@ using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,28 +24,43 @@ namespace MachineTagEditor.Modules.Alarms.AddAlarm
         public IRegionManager regionManager { get; set; }
 
         IEventAggregator _eventAggregator;
+        IUnityContainer _container;
+        IXMLService _service;
 
-        void initProperties(IEventAggregator eventAggregator)
+        void initProperties(IUnityContainer container, IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
+            _container = container;
+            _service = _container.Resolve<IXMLService>("AlarmsXMLService");
+
             EnumerationValues = new ObservableCollection<EnumerationContainer>();
             enumNames = new ObservableCollection<string>();
-
-
-            _eventAggregator.GetEvent<TagsUpdated>().Subscribe(OnTagsUpdated);
+            enumNames.Add("New Item...");
+            _service.VirtualTags.CollectionChanged += alarmVirtualTags_CollectionChanged;
+            _service.reloadTags();
         }
 
-        public void OnTagsUpdated(bool obj)
+        void alarmVirtualTags_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            enumNames.Clear();
-            var dataTags = TagCollection.VirtualTags.Where(dt => (dt.DataType == MCM.Core.Enum.DataType.Bits || dt.DataType == MCM.Core.Enum.DataType.Enum));
-
-            enumNames.Add("New Item...");
-            foreach (DataTag dt in dataTags)
+            switch(e.Action)
             {
-                enumNames.Add(dt.Name);
+                case NotifyCollectionChangedAction.Add:
+                    foreach (DataTag dt in e.NewItems)
+                        if(((dt.DataType == DataType.Bits) || (dt.DataType == DataType.Enum)) && !enumNames.Contains(dt.Name))
+                        {
+                            enumNames.Add(dt.Name);
+                        }
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    foreach (DataTag dt in e.OldItems)
+                        if (((dt.DataType == DataType.Bits) || (dt.DataType == DataType.Enum)) && enumNames.Contains(dt.Name))
+                        {
+                            enumNames.Remove(dt.Name);
+                        }
+                    break;
             }
         }
+
 
       
         public Visibility newVisibility

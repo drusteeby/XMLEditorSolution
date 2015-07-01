@@ -104,12 +104,36 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Module.cs" />
+    <Compile Include="AddUnit\View.xaml.cs">
+      <DependentUpon>View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddUnit\ViewModel.cs" />
+    <Compile Include="UnitsModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Visual Studio 2012\Projects\MCM\MCM.csproj">
+      <Project>{2b43ca60-b363-44af-b242-605a7ebd73b2}</Project>
+      <Name>MCM</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{01ae0dbd-7740-415f-8efd-f4a2a688879f}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MachineTagEditor.Infrastructure\MachineTagEditor.Infrastructure.csproj">
+      <Project>{1dd5af35-b564-426e-a2d1-74168a40700f}</Project>
+      <Name>MachineTagEditor.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="AddUnit\View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

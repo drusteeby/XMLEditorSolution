@@ -219,6 +219,10 @@
       <Project>{aa3dd680-c540-4a49-a96e-a676bc62c958}</Project>
       <Name>MachineTagEditor.Modules.Toolbar</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MachineTagEditor.Modules.Units\MachineTagEditor.Modules.Units.csproj">
+      <Project>{b779628b-eb87-4c46-923d-f9c1e6d3491c}</Project>
+      <Name>MachineTagEditor.Modules.Units</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MachineTagEditor.Modules.XMLDocument\MachineTagEditor.Modules.XMLDocument.csproj">
       <Project>{ecebbc93-dc65-4461-98af-c68beb1f7f48}</Project>
       <Name>MachineTagEditor.Modules.XMLDocument</Name>

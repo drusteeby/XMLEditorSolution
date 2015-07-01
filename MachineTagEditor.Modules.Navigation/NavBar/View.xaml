@@ -31,10 +31,11 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-        <Border Grid.ColumnSpan="2" CornerRadius="8,8,8,8" BorderBrush="Black" BorderThickness="2" Background="DarkBlue"/>
+        <Border Grid.ColumnSpan="3" CornerRadius="8,8,8,8" BorderBrush="Black" BorderThickness="2" Background="DarkBlue"/>
             <Label Grid.Column="0" Content="Alarms">
                 <ia:Interaction.Triggers>
                     <ia:EventTrigger EventName="MouseUp">
@@ -42,8 +43,14 @@
                     </ia:EventTrigger>
                 </ia:Interaction.Triggers>
             </Label>
-
-            <Label Grid.Column="1" Content="XML">
+        <Label Grid.Column="1" Content="Units">
+            <ia:Interaction.Triggers>
+                <ia:EventTrigger EventName="MouseUp">
+                    <cmd:EventToCommand Command="{Binding NavigateToUnits}"/>
+                </ia:EventTrigger>
+            </ia:Interaction.Triggers>
+        </Label>
+            <Label Grid.Column="2" Content="XML">
                 <ia:Interaction.Triggers>
                     <ia:EventTrigger EventName="MouseUp">
                         <cmd:EventToCommand Command="{Binding NavigateToXML}"/>
@@ -51,6 +58,7 @@
                 </ia:Interaction.Triggers>
             </Label>
 
-         </Grid>
+
+    </Grid>
 
 </UserControl>

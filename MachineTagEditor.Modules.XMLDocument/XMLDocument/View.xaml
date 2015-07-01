@@ -7,7 +7,7 @@
              xmlns:local="clr-namespace:MachineTagEditor.Modules.XMLDocument"
              xmlns:prism="http://www.codeplex.com/prism"
              xmlns:this="clr-namespace:MachineTagEditor.Modules.XMLDocument"
-             xmlns:inf ="clr-namespace:MachineTagEditor.Infrastructure"
+             xmlns:inf ="clr-namespace:MachineTagEditor.Infrastructure;assembly=MachineTagEditor.Infrastructure"
              xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 

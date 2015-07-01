@@ -10,6 +10,7 @@ using MCM.Core.Objects;
 using System.Windows.Data;
 using System.IO;
 using System.Xml.Schema;
+using MachineTagEditor.Infrastructure;
 
 namespace MachineTagEditor.Modules.XMLDocument
 {
@@ -52,9 +53,10 @@ namespace MachineTagEditor.Modules.XMLDocument
             else
             {
                 Document.AppendChild(Document.CreateXmlDeclaration("1.0", "utf-16", "yes"));
-                Document.AppendChild(Document.CreateElement("tags"));          
+                Document.AppendChild(Document.CreateElement("tags"));
                 DataProvider.Document.Save(FullFilePath);
             }
+
 
 
             DataProvider.Source = new Uri(FullFilePath);

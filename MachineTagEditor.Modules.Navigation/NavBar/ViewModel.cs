@@ -18,11 +18,13 @@ namespace MachineTagEditor.Modules.Navigation.NavBar
 
         public DelegateCommand NavigateToAlarms { get; set; }
         public DelegateCommand NavigateToXML { get; set; }
+        public DelegateCommand NavigateToUnits { get; set; }
 
         public ViewModel()
         {
             NavigateToAlarms = new DelegateCommand(OnNavigateToAlarms);
             NavigateToXML = new DelegateCommand(OnNavigateToXML);
+            NavigateToUnits = new DelegateCommand(OnNavigateToUnits);
         }
 
         public void OnNavigateToAlarms()
@@ -39,6 +41,12 @@ namespace MachineTagEditor.Modules.Navigation.NavBar
             regionManager.RequestNavigate(RegionNames.DataRegion, regionManager.Regions[RegionNames.DataRegion].Views.Single(x => x.ToString().Contains("XMLDocument")).ToString());
             regionManager.RequestNavigate(RegionNames.ActionRegion, regionManager.Regions[RegionNames.ActionRegion].Views.Single(x => x.ToString().Contains("Blank")).ToString());
             regionManager.RequestNavigate(RegionNames.HelpRegion, regionManager.Regions[RegionNames.HelpRegion].Views.Single(x => x.ToString().Contains("Blank")).ToString());
+        }
+
+        public void OnNavigateToUnits()
+        {
+            regionManager.RequestNavigate(RegionNames.DataRegion, regionManager.Regions[RegionNames.DataRegion].Views.Single(x => x.ToString().Contains("Blank")).ToString());
+            regionManager.RequestNavigate(RegionNames.ActionRegion, regionManager.Regions[RegionNames.ActionRegion].Views.Single(x => x.ToString().Contains("Unit")).ToString());
         }
     }
 }

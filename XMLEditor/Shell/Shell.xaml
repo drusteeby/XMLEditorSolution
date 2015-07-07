@@ -40,7 +40,8 @@
                 <ColumnDefinition Width="25*"/>
 
             </Grid.ColumnDefinitions>
-
+        
+                
         <DockPanel Margin="0" Grid.Row="0" Grid.ColumnSpan="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <ContentControl Margin="0" DockPanel.Dock="Top" prism:RegionManager.RegionName="ToolbarRegion"/>
         </DockPanel>
@@ -62,7 +63,8 @@
                 <ContentControl Visibility="{Binding ErrorRegionVisibility}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"  prism:RegionManager.RegionName="ErrorRegion"/>
             </Border>
 
-        </Grid>
+        <ContentControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0" Grid.ColumnSpan="10" Grid.RowSpan="10" prism:RegionManager.RegionName="OverlayRegion"/>
+    </Grid>
 
 
 

@@ -95,6 +95,7 @@
     <Compile Include="TemplateSelectors\GridPanelTemplateSelector.cs" />
     <Compile Include="TemplateSelectors\HelpViewSelector.cs" />
     <Compile Include="TemplateSelectors\XMLNodeViewSelector.cs" />
+    <Compile Include="ViewNames.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

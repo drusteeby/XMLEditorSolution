@@ -14,6 +14,9 @@ namespace MachineTagEditor.Infrastructure
         public const string HelpRegion = "HelpRegion";
         public const string ErrorRegion = "ErrorRegion";
         public const string NavigationRegion = "NavigationRegion";
-        public const string OverlayRegion = "OverlayRegion";
+        public const string PageOverlayRegion = "PageOverlayRegion";
+
+        public const string PageRegion = "PageRegion";
+        public const string AddConfigPageRegion = "AddConfigPageRegion";
     }
 }

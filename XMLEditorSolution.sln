@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MachineTagEditor.Modules.Na
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MachineTagEditor.Modules.Units", "MachineTagEditor.Modules.Units\MachineTagEditor.Modules.Units.csproj", "{B779628B-EB87-4C46-923D-F9C1E6D3491C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MachineTagEditor.Modules.MachineConfig", "MachineTagEditor.Modules.MachineConfiguration\MachineTagEditor.Modules.MachineConfig.csproj", "{C46B585A-3F5A-4FF3-9BD7-87DA292CE6C0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -125,6 +127,16 @@ Global
 		{B779628B-EB87-4C46-923D-F9C1E6D3491C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{B779628B-EB87-4C46-923D-F9C1E6D3491C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{B779628B-EB87-4C46-923D-F9C1E6D3491C}.Release|x86.ActiveCfg = Release|Any CPU
+		{C46B585A-3F5A-4FF3-9BD7-87DA292CE6C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C46B585A-3F5A-4FF3-9BD7-87DA292CE6C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C46B585A-3F5A-4FF3-9BD7-87DA292CE6C0}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C46B585A-3F5A-4FF3-9BD7-87DA292CE6C0}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{C46B585A-3F5A-4FF3-9BD7-87DA292CE6C0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C46B585A-3F5A-4FF3-9BD7-87DA292CE6C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C46B585A-3F5A-4FF3-9BD7-87DA292CE6C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C46B585A-3F5A-4FF3-9BD7-87DA292CE6C0}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C46B585A-3F5A-4FF3-9BD7-87DA292CE6C0}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{C46B585A-3F5A-4FF3-9BD7-87DA292CE6C0}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -138,5 +150,6 @@ Global
 		{AA3DD680-C540-4A49-A96E-A676BC62C958} = {DF310156-7B40-484F-B378-ACAAB645E0C3}
 		{0A0CF57A-C948-422A-88A9-B86D7D12A0F3} = {DF310156-7B40-484F-B378-ACAAB645E0C3}
 		{B779628B-EB87-4C46-923D-F9C1E6D3491C} = {DF310156-7B40-484F-B378-ACAAB645E0C3}
+		{C46B585A-3F5A-4FF3-9BD7-87DA292CE6C0} = {DF310156-7B40-484F-B378-ACAAB645E0C3}
 	EndGlobalSection
 EndGlobal

@@ -43,8 +43,16 @@ namespace MachineTagEditor.Modules.XMLDocument
 
         }
 
-        public void init()
+        public void init(string dir = null, string fileName = null)
         {
+            if (dir != null) setDirectory(dir);
+            if (fileName != null) setFileName(fileName);
+
+            if (String.IsNullOrEmpty(_fileDirectory) || String.IsNullOrEmpty(_fileName))
+            {
+                throw new Exception("File name or directory not set when writing XML");
+            }
+
             DataProvider = new XmlDataProvider();
             DataProvider.Document = new XmlDocument();
 

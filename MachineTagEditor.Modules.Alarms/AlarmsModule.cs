@@ -35,6 +35,13 @@ namespace MachineTagEditor.Modules.Alarms
             regionMananger.RegisterViewWithRegion(RegionNames.DataRegion, typeof(CurrentAlarms.View));
             regionMananger.RegisterViewWithRegion(RegionNames.HelpRegion, typeof(AddAlarm.Help));
 
+            //regionMananger.RegisterViewWithRegion(RegionNames.OverlayRegion, typeof(AddAlarmAssisted.View));
+            regionMananger.RegisterViewWithRegion(RegionNames.PageRegion, typeof(AddAlarmAssisted.Pages.AlarmAssisted1));
+            regionMananger.RegisterViewWithRegion(RegionNames.PageRegion, typeof(AddAlarmAssisted.Pages.AlarmAssisted2));
+            regionMananger.RegisterViewWithRegion(RegionNames.PageRegion, typeof(AddAlarmAssisted.Pages.AlarmAssisted3));
+            regionMananger.RegisterViewWithRegion(RegionNames.PageRegion, typeof(AddAlarmAssisted.Pages.AlarmAssisted4));
+            regionMananger.RegisterViewWithRegion(RegionNames.PageRegion, typeof(AddAlarmAssisted.Pages.AlarmAssisted5));
+
 
         }
     }

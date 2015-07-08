@@ -90,6 +90,10 @@
     <Compile Include="Controls\ScalableView.xaml.cs">
       <DependentUpon>ScalableView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Wizard\View.xaml.cs">
+      <DependentUpon>View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Wizard\ViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -98,6 +102,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\ScalableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Wizard\View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

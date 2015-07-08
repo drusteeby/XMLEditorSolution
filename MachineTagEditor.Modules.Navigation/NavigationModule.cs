@@ -19,12 +19,13 @@ namespace MachineTagEditor.Modules.Navigation
         public void Initialize()
         {
             regionManager.RegisterViewWithRegion(RegionNames.NavigationRegion, typeof(NavBar.View));
-            regionManager.RegisterViewWithRegion(RegionNames.OverlayRegion, typeof(Splash.View));
-            regionManager.RegisterViewWithRegion(RegionNames.OverlayRegion, typeof(Blank));
+            regionManager.RegisterViewWithRegion(RegionNames.PageOverlayRegion, typeof(Blank));           
 
             regionManager.RegisterViewWithRegion(RegionNames.ActionRegion, typeof(Blank));
             regionManager.RegisterViewWithRegion(RegionNames.HelpRegion, typeof(Blank));
             regionManager.RegisterViewWithRegion(RegionNames.DataRegion, typeof(Blank));
+
+            regionManager.RequestNavigate(RegionNames.PageOverlayRegion, ViewNames.BlankView);
         }
     }
 }

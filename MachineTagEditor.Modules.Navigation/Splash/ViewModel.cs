@@ -22,11 +22,17 @@ namespace MachineTagEditor.Modules.Navigation.Splash
             Options = new ObservableCollection<CommandContainer>();
 
             Options.Add(new CommandContainer("Exit",new DelegateCommand(OnExitCommand)));
+            Options.Add(new CommandContainer("AddAlarm", new DelegateCommand(OnAddAlarm)));
         }
 
         public void OnExitCommand()
         {
-            regionManager.RequestNavigate(RegionNames.OverlayRegion, "test");
+            regionManager.RequestNavigate(RegionNames.PageOverlayRegion, ViewNames.BlankView);
+        }
+
+        public void OnAddAlarm()
+        {
+            regionManager.RequestNavigate(RegionNames.PageOverlayRegion, ViewNames.AddAlarmAssistedView);
         }
 
         public ObservableCollection<CommandContainer> Options

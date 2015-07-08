@@ -1,4 +1,10 @@
-﻿using System;
+﻿using MachineTagEditor.Infrastructure;
+using MachineTagEditor.Infrastructure.Events;
+using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.PubSubEvents;
+using Microsoft.Practices.Prism.Regions;
+using Microsoft.Practices.Unity;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -11,12 +17,31 @@ namespace MachineTagEditor.Modules.Toolbar.Menu
 {
     public class ViewModel: DependencyObject
     {
+        [Dependency]
+        public IRegionManager regionManager { get; set; }
+
+        [Dependency]
+        public IEventAggregator eventAggregator { get; set; }
 
         public ViewModel()
         {
+            MenuItem file = new MenuItem();
+            MenuItem test = new MenuItem();
+
+            file.Header = "_File";
+            test.Header = "_Add Template";
+            test.Command = new DelegateCommand(OnAddConfig);
+            file.Items.Add(test);
+
             MenuItems = new ObservableCollection<MenuItem>();
-            MenuItems.Add(new MenuItem());
-            MenuItems.First().Header = "_File";
+            MenuItems.Add(file);
+
+        }
+
+        public void OnAddConfig()
+        {
+            eventAggregator.GetEvent<ChangeWizardVisibility>().Publish(Visibility.Visible);
+            regionManager.RequestNavigate(RegionNames.PageOverlayRegion, ViewNames.AddConfig);
         }
 
 

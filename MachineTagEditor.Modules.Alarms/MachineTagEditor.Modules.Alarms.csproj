@@ -104,6 +104,25 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddAlarmAssisted\Pages\AlarmAssisted1.xaml.cs">
+      <DependentUpon>AlarmAssisted1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddAlarmAssisted\Pages\AlarmAssisted2.xaml.cs">
+      <DependentUpon>AlarmAssisted2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddAlarmAssisted\Pages\AlarmAssisted3.xaml.cs">
+      <DependentUpon>AlarmAssisted3.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddAlarmAssisted\Pages\AlarmAssisted4.xaml.cs">
+      <DependentUpon>AlarmAssisted4.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddAlarmAssisted\Pages\AlarmAssisted5.xaml.cs">
+      <DependentUpon>AlarmAssisted5.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddAlarmAssisted\View.xaml.cs">
+      <DependentUpon>View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddAlarmAssisted\ViewModel.cs" />
     <Compile Include="AddAlarm\Help.xaml.cs">
       <DependentUpon>Help.xaml</DependentUpon>
     </Compile>
@@ -126,6 +145,30 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="AddAlarmAssisted\Pages\AlarmAssisted1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddAlarmAssisted\Pages\AlarmAssisted2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddAlarmAssisted\Pages\AlarmAssisted3.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddAlarmAssisted\Pages\AlarmAssisted4.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddAlarmAssisted\Pages\AlarmAssisted5.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddAlarmAssisted\View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AddAlarm\Help.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

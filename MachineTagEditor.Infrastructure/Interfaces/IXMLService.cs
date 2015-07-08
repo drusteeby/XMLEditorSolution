@@ -23,7 +23,7 @@ namespace MachineTagEditor.Infrastructure.Interfaces
         void setFileName(string fileName);
 
         void reloadTags();
-        void init();
+        void init(string dir = null, string fileName = null);
         
     }
 }

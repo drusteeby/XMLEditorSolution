@@ -26,9 +26,11 @@
             <Setter Property="Margin" Value="5"/>
         </Style>
     </Window.Resources>
+    <Grid>
+        
             <Grid  MaxHeight="{x:Static SystemParameters.PrimaryScreenHeight}" MaxWidth="{x:Static SystemParameters.PrimaryScreenWidth}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="0"/>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="4*"/>
                 <RowDefinition Height="20*"/>
                 <RowDefinition Height="16*"/>
@@ -63,9 +65,30 @@
                 <ContentControl Visibility="{Binding ErrorRegionVisibility}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"  prism:RegionManager.RegionName="ErrorRegion"/>
             </Border>
 
-        <ContentControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0" Grid.ColumnSpan="10" Grid.RowSpan="10" prism:RegionManager.RegionName="OverlayRegion"/>
-    </Grid>
+        
+        </Grid>
 
+        <ContentControl Visibility="{Binding WizardVisibility}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid>
+                <Grid.Background>
+                    <SolidColorBrush Opacity="0.5" Color="Black"/>
+                </Grid.Background>
+                
+                <Grid Margin="300">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="8*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="0" Content="&lt;" Command="{Binding GoBack}"/>
+                    <Button Grid.Column="2" Content="&gt;" Command="{Binding GoForward}"/>
+
+                    <ContentControl Grid.Column="1"  prism:RegionManager.RegionName="PageOverlayRegion"/>
+                </Grid>
+            </Grid>
+        </ContentControl>
+    </Grid>
 
 
 

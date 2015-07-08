@@ -211,6 +211,10 @@
       <Project>{d348e636-4db6-4be3-8639-38d2271ee0b2}</Project>
       <Name>MachineTagEditor.Modules.Alarms</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MachineTagEditor.Modules.MachineConfiguration\MachineTagEditor.Modules.MachineConfig.csproj">
+      <Project>{c46b585a-3f5a-4ff3-9bd7-87da292ce6c0}</Project>
+      <Name>MachineTagEditor.Modules.MachineConfig</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MachineTagEditor.Modules.Navigation\MachineTagEditor.Modules.Navigation.csproj">
       <Project>{0a0cf57a-c948-422a-88a9-b86d7d12a0f3}</Project>
       <Name>MachineTagEditor.Modules.Navigation</Name>

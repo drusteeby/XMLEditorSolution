@@ -1,5 +1,8 @@
 ﻿using MachineTagEditor.Infrastructure;
+using MachineTagEditor.Infrastructure.Containers;
 using MachineTagEditor.Infrastructure.Events;
+using MachineTagEditor.Infrastructure.Interfaces;
+using MachineTagEditor.Infrastructure.WizardWindow;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.Regions;
@@ -25,23 +28,33 @@ namespace MachineTagEditor.Modules.Toolbar.Menu
 
         public ViewModel()
         {
-            MenuItem file = new MenuItem();
-            MenuItem test = new MenuItem();
-
+            MenuItem file = new MenuItem(); 
             file.Header = "_File";
-            test.Header = "_Add Template";
-            test.Command = new DelegateCommand(OnAddConfig);
-            file.Items.Add(test);
+            
+            MenuItem AddTemplate = new MenuItem();
+            AddTemplate.Header = "Add _Template";
+            AddTemplate.Command = new DelegateCommand(OnAddConfig);
+
+            MenuItem AddAlarm = new MenuItem();
+            AddAlarm.Header = "Add _Alarm";
+            AddAlarm.Command = new DelegateCommand(OnAddAlarm);
+
+            file.Items.Add(AddTemplate);
+            file.Items.Add(AddAlarm);
 
             MenuItems = new ObservableCollection<MenuItem>();
             MenuItems.Add(file);
 
         }
 
+        public void OnAddAlarm()
+        {
+            eventAggregator.GetEvent<AddAlarmConfigWizard>().Publish(true);
+        }
+
         public void OnAddConfig()
         {
-            eventAggregator.GetEvent<ChangeWizardVisibility>().Publish(Visibility.Visible);
-            regionManager.RequestNavigate(RegionNames.PageOverlayRegion, ViewNames.AddConfig);
+            eventAggregator.GetEvent<MachineConfigWizard>().Publish(true);
         }
 
 

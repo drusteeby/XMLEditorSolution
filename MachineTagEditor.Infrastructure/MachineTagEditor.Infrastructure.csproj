@@ -82,12 +82,14 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Containers\NameTypeContainer.cs" />
     <Compile Include="Containers\SaveSettingContainer.cs" />
     <Compile Include="Containers\UnitAttributeContainer.cs" />
     <Compile Include="Converters.cs" />
     <Compile Include="EnumerationContainer.cs" />
     <Compile Include="Events\Events.cs" />
     <Compile Include="GridHelpers.cs" />
+    <Compile Include="Interfaces\INamedView.cs" />
     <Compile Include="Interfaces\IXMLService.cs" />
     <Compile Include="RegionNames.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -96,6 +98,10 @@
     <Compile Include="TemplateSelectors\HelpViewSelector.cs" />
     <Compile Include="TemplateSelectors\XMLNodeViewSelector.cs" />
     <Compile Include="ViewNames.cs" />
+    <Compile Include="WizardWindow\Wizard.xaml.cs">
+      <DependentUpon>Wizard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WizardWindow\WizardViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -106,6 +112,12 @@
       <Project>{2b43ca60-b363-44af-b242-605a7ebd73b2}</Project>
       <Name>MCM</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="WizardWindow\Wizard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

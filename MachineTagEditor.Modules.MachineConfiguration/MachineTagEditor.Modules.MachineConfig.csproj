@@ -104,6 +104,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddConfig\Pages\NamePage.xaml.cs">
+      <DependentUpon>NamePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MachineConfigModule.cs" />
     <Compile Include="MachineConfigService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -131,8 +134,12 @@
       <Name>MachineTagEditor.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="AddConfig\Pages\" />
+    <Page Include="AddConfig\Pages\NamePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -12,11 +12,11 @@ namespace MachineTagEditor.Infrastructure.Containers
         public string settingName { get; set; }
         public Type settingType { get; set; }
 
-        public SaveSettingContainer(string Name, object Setting, Type type)
+        public SaveSettingContainer(string Name = null, object Setting = null, Type type = null)
         {
-            setting = Setting;
-            settingName = Name;
-            settingType = type;
+            if(setting != null) setting = Setting;
+            if(settingName != null) settingName = Name;
+            if(type != null) settingType = type;
         }    
         
         

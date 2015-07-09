@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MachineTagEditor.Infrastructure.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,11 @@ namespace MachineTagEditor.Modules.Alarms.AddAlarmAssisted.Pages
     /// </summary>
     public partial class AlarmAssisted1 : UserControl
     {
-        public AlarmAssisted1()
+        public AlarmAssisted1(ViewModel vm)
         {
             InitializeComponent();
+            this.DataContext = vm;
         }
+
     }
 }

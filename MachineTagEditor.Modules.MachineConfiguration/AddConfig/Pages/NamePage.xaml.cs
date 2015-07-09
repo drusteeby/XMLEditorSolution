@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.Prism.Regions;
+﻿using MachineTagEditor.Infrastructure.Interfaces;
+using Microsoft.Practices.Prism.Regions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,17 +15,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MachineTagEditor.Modules.Alarms.AddAlarmAssisted
+namespace MachineTagEditor.Modules.MachineConfiguration.AddConfig.Pages
 {
     /// <summary>
-    /// Interaction logic for View.xaml
+    /// Interaction logic for NamePage.xaml
     /// </summary>
-    public partial class View : UserControl
+    public partial class NamePage : UserControl
     {
-        public View(ViewModel vm)
+        public NamePage()
         {
             InitializeComponent();
-            this.DataContext = vm;
         }
 
 

@@ -1,7 +1,10 @@
 ﻿using MachineTagEditor.Infrastructure;
 using MachineTagEditor.Infrastructure.Containers;
 using MachineTagEditor.Infrastructure.Events;
+using MachineTagEditor.Infrastructure.Interfaces;
+using MachineTagEditor.Infrastructure.WizardWindow;
 using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
@@ -25,6 +28,7 @@ namespace XMLEditor
 
         public DelegateCommand GoBack { get; set; }
         public DelegateCommand GoForward { get; set; }
+        public DelegateCommand Exit { get; set; }
 
         public ShellViewModel(IEventAggregator eventAggregator)
         {
@@ -32,78 +36,28 @@ namespace XMLEditor
             ErrorRegionGridHeight = new GridLength(0, GridUnitType.Star);
 
             eventAggregator.GetEvent<SaveSetting>().Subscribe(OnSaveSetting);
-            eventAggregator.GetEvent<ChangeWizardVisibility>().Subscribe(OnChangeWizardVisibility);
-
-            GoBack = new DelegateCommand(OnGoBack, CanGoBack);
-            GoForward = new DelegateCommand(OnGoForward, CanGoForward);
-            pageListing = new ObservableCollection<string>();
+            eventAggregator.GetEvent<OpenWizard>().Subscribe(OnOpenWizard);
 
         }
 
-        int pageIndex = 0;
-
-        void Navigate()
+        private void OnOpenWizard(List<NameTypeContainer> ViewList)
         {
-            regionManager.RequestNavigate("PageOverlayRegion", pageListing.ElementAt(pageIndex));
-            GoBack.RaiseCanExecuteChanged();
-            GoForward.RaiseCanExecuteChanged();
+            NavigationParameters navParam = new NavigationParameters();
+            navParam.Add("ViewList", ViewList);
+
+            WizardViewModel vm = (WizardViewModel)container.Resolve(typeof(WizardViewModel));
+
+            regionManager.Regions[RegionNames.WindowRegion].Context = vm;
+            regionManager.RegisterViewWithRegion(RegionNames.WindowRegion, typeof(MachineTagEditor.Infrastructure.WizardWindow.View));
+            regionManager.RequestNavigate(RegionNames.WindowRegion, typeof(MachineTagEditor.Infrastructure.WizardWindow.View).FullName,navParam);
+            
         }
-
-        public void OnGoBack()
-        {
-            pageIndex--;
-            Navigate();
-        }
-
-        public bool CanGoBack()
-        {
-            return (pageIndex > 0);
-        }
-
-        public void OnGoForward()
-        {
-            pageIndex++;
-            Navigate();
-        }
-
-        public bool CanGoForward()
-        {
-            return (pageIndex < pageListing.Count - 1);
-        }
-
-
-        public ObservableCollection<string> pageListing
-        {
-            get { return (ObservableCollection<string>)GetValue(pageListingProperty); }
-            set { SetValue(pageListingProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for pageListing.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty pageListingProperty =
-            DependencyProperty.Register("pageListing", typeof(ObservableCollection<string>), typeof(ShellViewModel), new UIPropertyMetadata(null));
-
+     
         public void OnSaveSetting(SaveSettingContainer container)
         {
            
         }
 
-        public void OnChangeWizardVisibility(Visibility vis)
-        {
-            WizardVisibility = vis;
-        }
-
-
-        public Visibility WizardVisibility
-        {
-            get { return (Visibility)GetValue(WizardVisibilityProperty); }
-            set { SetValue(WizardVisibilityProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for WizardVisibility.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty WizardVisibilityProperty =
-            DependencyProperty.Register("WizardVisibility", typeof(Visibility), typeof(ShellViewModel), new UIPropertyMetadata(Visibility.Collapsed));
-
-        
 
         public Visibility ErrorRegionVisibility
         {

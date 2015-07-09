@@ -27,12 +27,12 @@ namespace MachineTagEditor.Modules.Navigation.Splash
 
         public void OnExitCommand()
         {
-            regionManager.RequestNavigate(RegionNames.PageOverlayRegion, ViewNames.BlankView);
+            regionManager.RequestNavigate(RegionNames.PageRegion, ViewNames.BlankView);
         }
 
         public void OnAddAlarm()
         {
-            regionManager.RequestNavigate(RegionNames.PageOverlayRegion, ViewNames.AddAlarmAssistedView);
+            regionManager.RequestNavigate(RegionNames.PageRegion, ViewNames.AddAlarmAssistedView);
         }
 
         public ObservableCollection<CommandContainer> Options

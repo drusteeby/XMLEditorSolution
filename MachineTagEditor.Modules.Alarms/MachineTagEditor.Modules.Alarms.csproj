@@ -119,9 +119,6 @@
     <Compile Include="AddAlarmAssisted\Pages\AlarmAssisted5.xaml.cs">
       <DependentUpon>AlarmAssisted5.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AddAlarmAssisted\View.xaml.cs">
-      <DependentUpon>View.xaml</DependentUpon>
-    </Compile>
     <Compile Include="AddAlarmAssisted\ViewModel.cs" />
     <Compile Include="AddAlarm\Help.xaml.cs">
       <DependentUpon>Help.xaml</DependentUpon>
@@ -162,10 +159,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddAlarmAssisted\Pages\AlarmAssisted5.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AddAlarmAssisted\View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

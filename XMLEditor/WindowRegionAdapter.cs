@@ -5,12 +5,13 @@ using System.Text;
 using System.Windows;
 using System.Collections.Specialized;
 using Microsoft.Practices.Prism.Regions;
+using Microsoft.Practices.Unity;
 
 namespace WRAExample.Utility
 {
     public class WindowRegionAdapter : RegionAdapterBase<Window>
     {
-        
+
 
         public WindowRegionAdapter(IRegionBehaviorFactory behaviorFactory):base(behaviorFactory){}
 
@@ -36,6 +37,7 @@ namespace WRAExample.Utility
 
         private class WindowRegionBehavior
         {
+
             private readonly WeakReference _ownerWeakReference;
             private readonly WeakReference _regionWeakReference;
             private readonly Style _windowStyle;
@@ -73,7 +75,9 @@ namespace WRAExample.Utility
             {
                 IRegion region = _regionWeakReference.Target as IRegion;
                 Window window = sender as Window;
-                window.SizeToContent = SizeToContent.WidthAndHeight;
+                window.SizeToContent = SizeToContent.Manual;
+                window.Width = SystemParameters.PrimaryScreenWidth / 3;
+                window.Height = SystemParameters.PrimaryScreenHeight / 3;
                 window.ResizeMode = ResizeMode.NoResize;
                 window.WindowStyle = System.Windows.WindowStyle.ToolWindow;
                 window.WindowStartupLocation = WindowStartupLocation.CenterScreen;

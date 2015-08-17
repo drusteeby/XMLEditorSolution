@@ -56,10 +56,16 @@
                   Background="Transparent">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="{Binding Value}"/>
-                            <TextBox Text="{Binding Text}"/>
-                        </StackPanel>
+                        <Grid Grid.IsSharedSizeScope="True">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                               
+                            <Label Grid.Column="0" Content="{Binding Value}"/>
+                            <TextBox Grid.Column="1" Text="{Binding Text}"/>
+                            
+                        </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>

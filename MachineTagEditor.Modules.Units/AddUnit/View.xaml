@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="MachineTagEditor.Modules.Units.AddUnit.View"
+﻿<UserControl xmlns:my="http://schemas.microsoft.com/winfx/2006/xaml/presentation/ribbon"  x:Class="MachineTagEditor.Modules.Units.AddUnit.View"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,8 +6,9 @@
              xmlns:inf="clr-namespace:MachineTagEditor.Infrastructure;assembly=MachineTagEditor.Infrastructure"
              xmlns:select="clr-namespace:MachineTagEditor.Infrastructure.TemplateSelectors;assembly=MachineTagEditor.Infrastructure"
              xmlns:this="clr-namespace:MachineTagEditor.Modules.Units.AddUnit"
+             xmlns:CC="clr-namespace:Common.Controls;assembly=Common"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="400">
+             d:DesignHeight="365.217" d:DesignWidth="400">
     <UserControl.Resources>
         <DataTemplate x:Key="ComboBoxRow">
             <Grid>
@@ -37,41 +38,134 @@
                         CommandParameter="{Binding AttributeName}"/>
             </Grid>
         </DataTemplate>
+        
+        <Style TargetType="Label" BasedOn="{StaticResource baseStyle}">
+            <Style.Setters>
+                <Setter Property="HorizontalAlignment" Value="Right"/>
+            </Style.Setters>
+        </Style>
+        
+        <Style x:Key="fromParentStyle" TargetType="Label" BasedOn="{StaticResource baseStyle}">
+            <Style.Setters>
+                <Setter Property="Foreground" Value="Blue"/>
+                <Setter Property="FontStyle" Value="Italic"/>
+            </Style.Setters>
+        </Style>
+        <Style x:Key="NullStyle" TargetType="Label" BasedOn="{StaticResource baseStyle}">
+            <Style.Setters>
+                <Setter Property="Foreground" Value="LightGray"/>
+            </Style.Setters>
+        </Style>
+
+        <Style TargetType="TextBox" BasedOn="{StaticResource baseStyle}">
+            <Style.Setters>
+            </Style.Setters>
+        </Style>
+
+        <Style TargetType="ComboBox" BasedOn="{StaticResource baseStyle}">
+            <Style.Setters>
+            </Style.Setters>
+        </Style>
+
+        <Style TargetType="Button" BasedOn="{StaticResource baseStyle}">
+            <Style.Setters>
+            </Style.Setters>
+        </Style>
+
+
+
+
 
     </UserControl.Resources>
-    <Grid Margin="5">
+    <Grid Margin="5,5,5,50">
         <Border Margin="0" Name="mask" Background="White" CornerRadius="8,8,8,8"/>
 
 
         <Grid Margin="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <Grid.RowDefinitions>
-                <RowDefinition Height="2*" MinHeight="50"/>
-                <RowDefinition Height="10*"/>
-                <RowDefinition Height="1*"/>
+                <RowDefinition Height="Auto" MinHeight="50"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.OpacityMask>
                 <VisualBrush Visual="{Binding ElementName=mask}"/>
             </Grid.OpacityMask>
 
             <Border Height="Auto" Background="#014B68" BorderBrush="{x:Static SystemColors.ActiveBorderBrush}" BorderThickness="2">
-                <Grid>
-                    <Label MinHeight="50" Content="Add Unit of Measurement" 
-                   FontSize="24"
-                   Foreground="White" 
-                   HorizontalAlignment="Left" />
-                </Grid>
+                <Label MinHeight="50" Content="Add Data Type" 
+                       FontSize="24"
+                       Foreground="White" 
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"/>
             </Border>
-            <ItemsControl Grid.Row="1" Grid.IsSharedSizeScope="true"
-                          ItemsSource="{Binding DataContext.UnitAttributes, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type this:View}}}">
-                <ItemsControl.ItemTemplateSelector>
-                    <select:GridPanelTemplateSelector 
-                        ComboBoxRowTemplate="{StaticResource ComboBoxRow}"
-                        TextRowTempalte="{StaticResource TextBoxRow}"
-                         />
-                </ItemsControl.ItemTemplateSelector>
-            </ItemsControl>
+            
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition  Height="Auto"/>
+                    <RowDefinition  Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition  Height="Auto"/>
+                    <RowDefinition  Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition  Height="Auto"/>
+                    <RowDefinition  Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <Label Grid.Row="0" Grid.Column="0" 
+                       Content="Name:"/>             
+                <CC:EnhancedTextBox Grid.Row="0" Grid.Column="1"
+                                    NullText="Test"
+                                    NullTextStyle ="{StaticResource NullStyle}"
+                                    />
+
+                <Label Grid.Row="0" Grid.Column="2" 
+                       Content="Parent:"/>
+                <ComboBox Grid.Row="0" Grid.Column="3" 
+                          IsEditable="True"/>
+                
+                <Label Grid.Row="1" Grid.Column="0"
+                       Content="Data Type:"/>
+                
+                <ComboBox Grid.Row="1" Grid.Column="1" />
+                <StackPanel Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal">
+                    <Button Content="Single" MinWidth="75" Command="{Binding SingleCommand}"/>
+                    <Button Content="U.S./Metric" MinWidth="75" Command="{Binding USMetricCommand}"/>
+                </StackPanel>
+
+                    <Label Grid.Row="5" Grid.Column="0" 
+                           Content="{Binding firstLabelContent}"/>
+                    <CC:EnhancedTextBox 
+                           Grid.Row="5" Grid.Column="1" 
+                           NullText="{Binding firstETBNullText}"
+                           Text="{Binding firstETBText}"
+                           />
+                    <Label Grid.Row="6" Grid.Column="0" 
+                           Content="{Binding secondLabelContent}" 
+                           Visibility="{Binding USMetricVisibility}"/>
+                    <CC:EnhancedTextBox 
+                           Grid.Row="6" Grid.Column="1"
+                           Visibility="{Binding USMetricVisibility}"
+                           Text="{Binding secondETBText}"/>
+
+                    <Label Grid.Row="5" Grid.Column="2" Content="{Binding thirdLabelContent}"/>
+                    <CC:EnhancedTextBox Grid.Row="5" Grid.Column="3" Text="{Binding thirdETBText}" Visibility="{Binding USMetricVisibility}"/>
+                    <Label Grid.Row="6" Grid.Column="2" Content="{Binding fourthLabelContent}" Visibility="{Binding USMetricVisibility}"/>
+                    <CC:EnhancedTextBox Grid.Row="6" Grid.Column="3" Text="{Binding fourthETBText}" Visibility="{Binding USMetricVisibility}"/>
+
+                    <Label Grid.Row="9" Grid.Column="0" Content="Rounding:"/>
+                    <CC:EnhancedTextBox Grid.Row="9" Grid.Column="1"/>
+                </Grid>
+
             <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
-                    Content="Add" 
+                    Content="Add"
+                    Margin="15,0,15,30"
                     Command="{Binding AddUnit}"
                     />
         </Grid>

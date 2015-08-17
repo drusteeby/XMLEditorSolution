@@ -1,7 +1,9 @@
 ﻿using MachineTagEditor.Infrastructure.Containers;
+using MachineTagEditor.Infrastructure.Events;
 using MachineTagEditor.Infrastructure.Interfaces;
 using Microsoft.Practices.Prism;
 using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
 using System;
@@ -19,17 +21,28 @@ namespace MachineTagEditor.Infrastructure.WizardWindow
         [Dependency]
         public IRegionManager regionManager { get; set; }
 
+        [Dependency]
+        public IEventAggregator eventAggregator { get; set; }
+
         public DelegateCommand GoBack { get; set; }
         public DelegateCommand GoForward { get; set; }
 
         int _pageIndex = 0;
         bool _active = false;
 
-        public WizardViewModel()
+        public WizardViewModel(IEventAggregator _eventAggregator)
         {
+            eventAggregator = _eventAggregator;
+            eventAggregator.GetEvent<NavigateToPage>().Subscribe(OnNavigateToPage);
             pageListing = new ObservableCollection<string>();
             GoBack = new DelegateCommand(OnGoBack,CanGoBack);
             GoForward = new DelegateCommand(OnGoForward,CanGoForward);
+        }
+
+        private void OnNavigateToPage(string obj)
+        {
+            if (pageListing.Contains(obj))
+                regionManager.RequestNavigate(RegionNames.PageRegion, obj);
         }
 
 

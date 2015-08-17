@@ -16,4 +16,5 @@ namespace MachineTagEditor.Infrastructure.Events
     public class OpenWizard : PubSubEvent<List<NameTypeContainer>> { }
     public class MachineConfigWizard : PubSubEvent<bool> { }
     public class AddAlarmConfigWizard : PubSubEvent<bool> { }
+    public class NavigateToPage : PubSubEvent<string> { };
 }

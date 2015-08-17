@@ -87,6 +87,10 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attached Properties\Class1.cs" />
+    <Compile Include="Controls\EnhancedTextBox.xaml.cs">
+      <DependentUpon>EnhancedTextBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ScalableView.xaml.cs">
       <DependentUpon>ScalableView.xaml</DependentUpon>
     </Compile>
@@ -101,6 +105,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\EnhancedTextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\ScalableView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -7,7 +7,7 @@
     <ImageBrush x:Key="blueTechBG" ImageSource="Resources/blueTech.jpg" />
 
     <Style x:Key="baseStyle" TargetType="Control">
-        <Setter Property="Margin" Value="3"/>
+        <Setter Property="Margin" Value="5"/>
     </Style>
 
     <DataTemplate x:Key="defaultTemplate">

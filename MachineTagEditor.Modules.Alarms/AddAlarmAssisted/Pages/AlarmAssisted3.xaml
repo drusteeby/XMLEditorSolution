@@ -3,37 +3,51 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:converters="clr-namespace:MachineTagEditor.Infrastructure.Converters;assembly=MachineTagEditor.Infrastructure"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <StackPanel HorizontalAlignment="Center">
-            <Label Content="Add New Alarm Set:"/>
-            <TextBox/>
-            <TextBox/>
-            <TextBox/>
-            <TextBox/>
-            <TextBox/>
-            <TextBox/>
-            <TextBox/>
-            <TextBox/>
-            <TextBox/>
-            <TextBox/>
-            <TextBox/>
-            <TextBox/>
-            <TextBox/>
-            <TextBox/>
-            <TextBox/>
-            <TextBox/>
-            <TextBox/>
-            <TextBox/>
-            <TextBox/>
-            <TextBox/>
-            <TextBox/>
-            <TextBox/>
-            <TextBox/>        
-            <TextBox/>
-            <TextBox/>
-            <TextBox/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0" Content="Add New Alarm Set:"/>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Stretch">
+            <Label  Content="Name:"/>
+            <TextBox Text="{Binding AlarmName}" HorizontalAlignment="Stretch"/>
         </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Stretch">
+            <Label  Content="PLC Tag:"/>
+            <TextBox Text="{Binding PLCTag}" HorizontalAlignment="Stretch"/>
+        </StackPanel>
+        <ScrollViewer Grid.Row="2" Grid.ColumnSpan="10">
+            <ItemsControl  ItemsSource="{Binding messageList}" 
+                         ScrollViewer.CanContentScroll="True"
+                         ScrollViewer.VerticalScrollBarVisibility="Visible">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Grid.IsSharedSizeScope="True" HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="10*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Column="0" Content="{Binding Value}" 
+                                   HorizontalAlignment="Right"
+                                   Margin="5"/>
+                            <TextBox Grid.Column="1" Text="{Binding Text}" 
+                                     HorizontalAlignment="Stretch"
+                                     Margin="5"/>
+
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
     </Grid>
 </UserControl>

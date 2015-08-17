@@ -43,7 +43,7 @@
                     </ia:EventTrigger>
                 </ia:Interaction.Triggers>
             </Label>
-        <Label Grid.Column="1" Content="Units">
+        <Label Grid.Column="1" Content="Data Types">
             <ia:Interaction.Triggers>
                 <ia:EventTrigger EventName="MouseUp">
                     <cmd:EventToCommand Command="{Binding NavigateToUnits}"/>

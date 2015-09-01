@@ -1,5 +1,5 @@
 ﻿using MachineTagEditor.Infrastructure;
-using MCM.Core.Objects;
+using MCM.Core.Tags;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;

@@ -32,9 +32,6 @@ namespace XMLEditor
 
         public ShellViewModel(IEventAggregator eventAggregator)
         {
-            ErrorRegionVisibility = Visibility.Collapsed;
-            ErrorRegionGridHeight = new GridLength(0, GridUnitType.Star);
-
             eventAggregator.GetEvent<SaveSetting>().Subscribe(OnSaveSetting);
             eventAggregator.GetEvent<OpenWizard>().Subscribe(OnOpenWizard);
 
@@ -71,16 +68,6 @@ namespace XMLEditor
 
 
 
-
-        public GridLength ErrorRegionGridHeight
-        {
-            get { return (GridLength)GetValue(ErrorRegionGridHeightProperty); }
-            set { SetValue(ErrorRegionGridHeightProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for ErrorRegionGridHeight.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ErrorRegionGridHeightProperty =
-            DependencyProperty.Register("ErrorRegionGridHeight", typeof(GridLength), typeof(ShellViewModel), new UIPropertyMetadata(null));
 
 
     }

@@ -17,4 +17,7 @@ namespace MachineTagEditor.Infrastructure.Events
     public class MachineConfigWizard : PubSubEvent<bool> { }
     public class AddAlarmConfigWizard : PubSubEvent<bool> { }
     public class NavigateToPage : PubSubEvent<string> { };
+    public class DisplayMessage : PubSubEvent<string> { };
+    public class LoadXMLFile : PubSubEvent<bool> { };
+    public class SaveXMLFile : PubSubEvent<bool> { };
 }

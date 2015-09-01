@@ -1,5 +1,7 @@
 ﻿using MachineTagEditor.Infrastructure;
+using MachineTagEditor.Infrastructure.Events;
 using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
 using System;
@@ -15,6 +17,9 @@ namespace MachineTagEditor.Modules.Navigation.NavBar
     {
         [Dependency]
         public IRegionManager regionManager { get; set; }
+
+        [Dependency]
+        public IEventAggregator eventAggregator { get; set; }
 
         public DelegateCommand NavigateToAlarms { get; set; }
         public DelegateCommand NavigateToXML { get; set; }
@@ -33,20 +38,26 @@ namespace MachineTagEditor.Modules.Navigation.NavBar
             regionManager.RequestNavigate(RegionNames.ActionRegion, regionManager.Regions[RegionNames.ActionRegion].Views.Single(x => x.ToString().Contains("AddAlarm")).ToString());
             regionManager.RequestNavigate(RegionNames.HelpRegion, regionManager.Regions[RegionNames.HelpRegion].Views.Single(x => x.ToString().Contains("AddAlarm")).ToString());
 
+            eventAggregator.GetEvent<DisplayMessage>().Publish("Navigating to Alarms");
+
             
         }
 
         public void OnNavigateToXML()
         {
-            regionManager.RequestNavigate(RegionNames.DataRegion, regionManager.Regions[RegionNames.DataRegion].Views.Single(x => x.ToString().Contains("XMLDocument")).ToString());
+            regionManager.RequestNavigate(RegionNames.DataRegion, regionManager.Regions[RegionNames.DataRegion].Views.Single(x => x.ToString().Contains("TagManager")).ToString());
             regionManager.RequestNavigate(RegionNames.ActionRegion, regionManager.Regions[RegionNames.ActionRegion].Views.Single(x => x.ToString().Contains("Blank")).ToString());
             regionManager.RequestNavigate(RegionNames.HelpRegion, regionManager.Regions[RegionNames.HelpRegion].Views.Single(x => x.ToString().Contains("Blank")).ToString());
+
+            eventAggregator.GetEvent<DisplayMessage>().Publish("Navigating to XML");
         }
 
         public void OnNavigateToUnits()
         {
-            regionManager.RequestNavigate(RegionNames.DataRegion, regionManager.Regions[RegionNames.DataRegion].Views.Single(x => x.ToString().Contains("Blank")).ToString());
+            regionManager.RequestNavigate(RegionNames.DataRegion, regionManager.Regions[RegionNames.DataRegion].Views.Single(x => x.ToString().Contains("Data")).ToString());
             regionManager.RequestNavigate(RegionNames.ActionRegion, regionManager.Regions[RegionNames.ActionRegion].Views.Single(x => x.ToString().Contains("Unit")).ToString());
+
+            eventAggregator.GetEvent<DisplayMessage>().Publish("Navigating to Units");
         }
     }
 }

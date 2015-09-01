@@ -12,7 +12,7 @@ namespace MachineTagEditor.Infrastructure
         public const string DataRegion = "DataRegion";
         public const string ActionRegion = "ActionRegion";
         public const string HelpRegion = "HelpRegion";
-        public const string ErrorRegion = "ErrorRegion";
+        public const string MessagesRegion = "MessagesRegion";
         public const string NavigationRegion = "NavigationRegion";
         public const string PageRegion = "PageRegion";
         public const string WindowRegion = "WindowRegion";

@@ -43,8 +43,8 @@
     <Reference Include="GalaSoft.MvvmLight.Platform">
       <HintPath>..\packages\MvvmLightLibs.5.1.1.0\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
     </Reference>
-    <Reference Include="MahApps.Metro, Version=1.1.3.122, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MahApps.Metro.1.1.3-ALPHA122\lib\net45\MahApps.Metro.dll</HintPath>
+    <Reference Include="MahApps.Metro, Version=1.1.2.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.1.2.0\lib\net45\MahApps.Metro.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Practices.Prism.Composition">
@@ -84,8 +84,10 @@
     <Reference Include="RibbonControlsLibrary, Version=3.5.41019.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\MahApps.Metro.1.1.3-ALPHA122\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\packages\MahApps.Metro.1.1.2.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml" />
@@ -101,6 +103,30 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=2.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.5\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=2.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.5\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=2.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.5\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=2.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.5\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid, Version=2.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.5\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=2.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.5\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -113,13 +139,6 @@
     <Compile Include="Controls\RoundedBox.xaml.cs">
       <DependentUpon>RoundedBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DataTagsView\DataTagPropertyContainer.cs" />
-    <Compile Include="DataTagsView\View.xaml.cs">
-      <DependentUpon>View.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="DataTagsView\ViewModelCommands.cs" />
-    <Compile Include="DataTagsView\ViewModelProperties.cs" />
-    <Compile Include="DataTagsView\ViewModel.cs" />
     <Compile Include="NodeView.xaml.cs">
       <DependentUpon>NodeView.xaml</DependentUpon>
     </Compile>
@@ -135,10 +154,6 @@
     </Compile>
     <Compile Include="WindowRegionAdapter.cs" />
     <Page Include="Controls\RoundedBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DataTagsView\View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -206,13 +221,9 @@
     <Folder Include="Themes\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Visual Studio 2012\Projects\MCM\MCM.csproj">
+    <ProjectReference Include="..\..\..\HMI\MCM\MCM.csproj">
       <Project>{2b43ca60-b363-44af-b242-605a7ebd73b2}</Project>
       <Name>MCM</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Common\Common.csproj">
-      <Project>{01ae0dbd-7740-415f-8efd-f4a2a688879f}</Project>
-      <Name>Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\MachineTagEditor.Infrastructure\MachineTagEditor.Infrastructure.csproj">
       <Project>{1dd5af35-b564-426e-a2d1-74168a40700f}</Project>
@@ -226,9 +237,17 @@
       <Project>{c46b585a-3f5a-4ff3-9bd7-87da292ce6c0}</Project>
       <Name>MachineTagEditor.Modules.MachineConfig</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MachineTagEditor.Modules.Messages\MachineTagEditor.Modules.Messages.csproj">
+      <Project>{e9f0fc0c-7f20-45d8-94ea-dda9d6315504}</Project>
+      <Name>MachineTagEditor.Modules.Messages</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MachineTagEditor.Modules.Navigation\MachineTagEditor.Modules.Navigation.csproj">
       <Project>{0a0cf57a-c948-422a-88a9-b86d7d12a0f3}</Project>
       <Name>MachineTagEditor.Modules.Navigation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MachineTagEditor.Modules.TagManager\MachineTagEditor.Modules.TagManager.csproj">
+      <Project>{08032bc0-5995-4991-abcd-f42be0530981}</Project>
+      <Name>MachineTagEditor.Modules.TagManager</Name>
     </ProjectReference>
     <ProjectReference Include="..\MachineTagEditor.Modules.Toolbar\MachineTagEditor.Modules.Toolbar.csproj">
       <Project>{aa3dd680-c540-4a49-a96e-a676bc62c958}</Project>

@@ -16,12 +16,13 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using MCM.Core.Objects;
+
 using System.Reflection;
 using MachineTagEditor.Infrastructure;
 using Microsoft.Practices.Prism.PubSubEvents;
 using MachineTagEditor.Infrastructure.Events;
 using MachineTagEditor.Infrastructure.Interfaces;
+using MCM.Core.Tags;
 
 namespace MachineTagEditor.Modules.Alarms.CurrentAlarms
 {

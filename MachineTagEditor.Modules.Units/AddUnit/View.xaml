@@ -6,39 +6,10 @@
              xmlns:inf="clr-namespace:MachineTagEditor.Infrastructure;assembly=MachineTagEditor.Infrastructure"
              xmlns:select="clr-namespace:MachineTagEditor.Infrastructure.TemplateSelectors;assembly=MachineTagEditor.Infrastructure"
              xmlns:this="clr-namespace:MachineTagEditor.Modules.Units.AddUnit"
-             xmlns:CC="clr-namespace:Common.Controls;assembly=Common"
+
              mc:Ignorable="d" 
              d:DesignHeight="365.217" d:DesignWidth="400">
     <UserControl.Resources>
-        <DataTemplate x:Key="ComboBoxRow">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="3*"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <ComboBox Grid.Column="0" 
-                          ItemsSource="{Binding DataContext.RemainingAttributes, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type this:View}}}"
-                          SelectedItem="{Binding DataContext.SelectedAttribute, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type this:View}}}"/>
-                <TextBox Grid.Column="1"  Text ="{Binding DataContext.AttributeTextEntry, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type this:View}}}"/>
-                <Button Grid.Column="2" Content="+" Command="{Binding DataContext.AddAttributeRow, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type this:View}}}"/>
-            </Grid>
-        </DataTemplate>
-        <DataTemplate x:Key="TextBoxRow">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="3*"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="{Binding AttributeName}"/>
-                <TextBlock Grid.Column="1"  Text ="{Binding AttributeText}"/>
-                <Button Grid.Column="2" Content="X" 
-                        Command="{Binding DataContext.DeleteAttributeRow, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type this:View}}}" 
-                        CommandParameter="{Binding AttributeName}"/>
-            </Grid>
-        </DataTemplate>
-        
         <Style TargetType="Label" BasedOn="{StaticResource baseStyle}">
             <Style.Setters>
                 <Setter Property="HorizontalAlignment" Value="Right"/>
@@ -120,10 +91,12 @@
                 
                 <Label Grid.Row="0" Grid.Column="0" 
                        Content="Name:"/>             
+                <!--
                 <CC:EnhancedTextBox Grid.Row="0" Grid.Column="1"
                                     NullText="Test"
                                     NullTextStyle ="{StaticResource NullStyle}"
                                     />
+                -->
 
                 <Label Grid.Row="0" Grid.Column="2" 
                        Content="Parent:"/>
@@ -140,27 +113,42 @@
                 </StackPanel>
 
                     <Label Grid.Row="5" Grid.Column="0" 
-                           Content="{Binding firstLabelContent}"/>
+                           Content="{Binding firstLabelContent, UpdateSourceTrigger=PropertyChanged}"
+                           Visibility="{Binding USMetricVisibility, UpdateSourceTrigger=PropertyChanged}"/>
+                
+                <!--
                     <CC:EnhancedTextBox 
                            Grid.Row="5" Grid.Column="1" 
-                           NullText="{Binding firstETBNullText}"
-                           Text="{Binding firstETBText}"
+                           NullText="{Binding firstETBNullText, UpdateSourceTrigger=PropertyChanged}"
+                        NullTextStyle ="{StaticResource NullStyle}"
+                           Text="{Binding firstETBText, UpdateSourceTrigger=PropertyChanged}"
                            />
                     <Label Grid.Row="6" Grid.Column="0" 
-                           Content="{Binding secondLabelContent}" 
+                           Content="{Binding secondLabelContent, UpdateSourceTrigger=PropertyChanged}" 
                            Visibility="{Binding USMetricVisibility}"/>
                     <CC:EnhancedTextBox 
                            Grid.Row="6" Grid.Column="1"
-                           Visibility="{Binding USMetricVisibility}"
-                           Text="{Binding secondETBText}"/>
+                           Visibility="{Binding USMetricVisibility, UpdateSourceTrigger=PropertyChanged}"
+                           Text="{Binding secondETBText, UpdateSourceTrigger=PropertyChanged}"
+                            NullText="{Binding secondETBNullText, UpdateSourceTrigger=PropertyChanged}"
+                        NullTextStyle ="{StaticResource NullStyle}"/>
 
-                    <Label Grid.Row="5" Grid.Column="2" Content="{Binding thirdLabelContent}"/>
-                    <CC:EnhancedTextBox Grid.Row="5" Grid.Column="3" Text="{Binding thirdETBText}" Visibility="{Binding USMetricVisibility}"/>
-                    <Label Grid.Row="6" Grid.Column="2" Content="{Binding fourthLabelContent}" Visibility="{Binding USMetricVisibility}"/>
-                    <CC:EnhancedTextBox Grid.Row="6" Grid.Column="3" Text="{Binding fourthETBText}" Visibility="{Binding USMetricVisibility}"/>
+                    <Label Grid.Row="5" Grid.Column="2" Content="Metric To U.S.:"/>
+                    <CC:EnhancedTextBox Grid.Row="5" Grid.Column="3" 
+                                        Text="{Binding thirdETBText, UpdateSourceTrigger=PropertyChanged}" 
+                                        NullText="{Binding thirdETBNullText, UpdateSourceTrigger=PropertyChanged}" 
+                                        NullTextStyle ="{StaticResource NullStyle}"
+                                        Visibility="{Binding USMetricVisibility, UpdateSourceTrigger=PropertyChanged}"/>
+                <Label Grid.Row="6" Grid.Column="2" Content="U.S. to Metric:" Visibility="{Binding USMetricVisibility, UpdateSourceTrigger=PropertyChanged}"/>
+                    <CC:EnhancedTextBox Grid.Row="6" Grid.Column="3" 
+                                        Text="{Binding fourthETBText, UpdateSourceTrigger=PropertyChanged}" 
+                                        NullText="{Binding fourthETBNullText, UpdateSourceTrigger=PropertyChanged}"
+                                        NullTextStyle ="{StaticResource NullStyle}"
+                                        Visibility="{Binding USMetricVisibility, UpdateSourceTrigger=PropertyChanged}"/>
 
                     <Label Grid.Row="9" Grid.Column="0" Content="Rounding:"/>
                     <CC:EnhancedTextBox Grid.Row="9" Grid.Column="1"/>
+                -->
                 </Grid>
 
             <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 

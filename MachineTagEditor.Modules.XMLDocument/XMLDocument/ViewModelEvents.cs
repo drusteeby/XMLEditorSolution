@@ -27,8 +27,14 @@ namespace MachineTagEditor.Modules.XMLDocument
        
         public void initEvents()
         {
+            //_eventAggregator.GetEvent<LoadXMLFile>().Subscribe(OnLoadXMLFile);
             _model.XMLDataProviderList.CollectionChanged += XMLDataProviderList_CollectionChanged;
             
+        }
+
+        private void OnLoadXMLFile(bool execute)
+        {
+            if(execute) AddXMLFile.Execute();
         }
 
         void XMLDataProviderList_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

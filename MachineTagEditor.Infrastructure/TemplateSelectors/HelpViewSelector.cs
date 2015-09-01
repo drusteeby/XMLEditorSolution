@@ -20,6 +20,8 @@ namespace MachineTagEditor.Infrastructure
         public DataTemplate AlarmTemplate { get; set; }
         public DataTemplate DefaultTemplate { get; set; }
 
+        
+
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
             if (item == null) return DefaultTemplate;

@@ -125,10 +125,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj">
-      <Project>{01ae0dbd-7740-415f-8efd-f4a2a688879f}</Project>
-      <Name>Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MachineTagEditor.Infrastructure\MachineTagEditor.Infrastructure.csproj">
       <Project>{1dd5af35-b564-426e-a2d1-74168a40700f}</Project>
       <Name>MachineTagEditor.Infrastructure</Name>

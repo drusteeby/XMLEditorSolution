@@ -6,7 +6,6 @@
              xmlns:ia="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"             
              mc:Ignorable="d" 
-             xmlns:CommonControls="clr-namespace:Common.Controls;assembly=Common"
              Height="Auto"
              Width="Auto" Background="Transparent">
     <UserControl.Resources>

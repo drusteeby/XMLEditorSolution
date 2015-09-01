@@ -51,6 +51,7 @@ namespace MachineTagEditor.Modules.XMLDocument
         {
             _model.ReloadTags();
             _eventAggregator.GetEvent<TagsUpdated>().Publish(true);
+            _eventAggregator.GetEvent<DisplayMessage>().Publish("Tags Reloaded");
         }
 
         public void OnViewDataTags()
@@ -76,6 +77,7 @@ namespace MachineTagEditor.Modules.XMLDocument
         public void OnClearSettings()
         {
             _model.ClearSettings();
+            _eventAggregator.GetEvent<DisplayMessage>().Publish("Settings Cleared");
         }
 
         public void OnRemoveXMLFile()
@@ -83,6 +85,8 @@ namespace MachineTagEditor.Modules.XMLDocument
             _model.RemoveFile(SelectedDocument.FullFilePath);
             _model.ReloadTags();
             _eventAggregator.GetEvent<TagsUpdated>().Publish(true);
+
+            _eventAggregator.GetEvent<DisplayMessage>().Publish("File: " + SelectedDocument.FullFilePath + " Removed");
         }
 
         public void OnSelectionChanged(SelectionChangedEventArgs e)
@@ -105,6 +109,7 @@ namespace MachineTagEditor.Modules.XMLDocument
 
         public void OnDeleteNode()
         {
+            _eventAggregator.GetEvent<DisplayMessage>().Publish("Node: " + SelectedNode.Name + " Removed");
             SelectedNode.ParentNode.RemoveChild(SelectedNode);
             SelectedNode = null;
             DeleteNode.RaiseCanExecuteChanged();
@@ -130,12 +135,16 @@ namespace MachineTagEditor.Modules.XMLDocument
             if (dialog.ShowDialog() == true)
             {
                 _model.AddFile(dialog.FileName);
+                _eventAggregator.GetEvent<DisplayMessage>().Publish("File: " + dialog.FileName + " Added");
+
                 Properties.Settings.Default.lastDirectory = dialog.FileName.Substring(0,dialog.FileName.LastIndexOf('\\'));
                 Properties.Settings.Default.Save();
             }
 
             _model.ReloadTags();
             _eventAggregator.GetEvent<TagsUpdated>().Publish(true);
+
+            
         }
 
 
@@ -147,13 +156,15 @@ namespace MachineTagEditor.Modules.XMLDocument
 
             if (dialog.FileName != "")
             {
-                SelectedDocument.XMLDataProvider.Document.Save(dialog.FileName);                           
+                SelectedDocument.XMLDataProvider.Document.Save(dialog.FileName);
+                _eventAggregator.GetEvent<DisplayMessage>().Publish("File: " + dialog.FileName + " Saved");           
             }
         }
 
         public void OnSave()
         {
             SelectedDocument.XMLDataProvider.Document.Save(SelectedDocument.FullFilePath);
+            _eventAggregator.GetEvent<DisplayMessage>().Publish("File: " + SelectedDocument.FullFilePath + " Saved");
             SelectedDocument.unsavedChanges = false;
         }
 

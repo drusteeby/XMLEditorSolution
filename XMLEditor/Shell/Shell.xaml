@@ -5,8 +5,8 @@
         xmlns:prism="http://www.codeplex.com/prism"
         xmlns:Controls="clr-namespace:XMLEditor.Controls"
         xmlns:inf="clr-namespace:MachineTagEditor.Infrastructure;assembly=MachineTagEditor.Infrastructure"
-        WindowStartupLocation="CenterScreen"
-        WindowState="Maximized"
+        Loaded="Window_Loaded"
+        WindowStartupLocation="Manual"
         Background="{StaticResource blueTechBG}"
         Height="{Binding MainWindowHeight,Mode=OneWayToSource}"
         Width="{Binding MainWindowWidth,Mode=OneWayToSource}"
@@ -33,7 +33,7 @@
                 <RowDefinition Height="4*"/>
                 <RowDefinition Height="20*"/>
                 <RowDefinition Height="16*"/>
-                <RowDefinition Height="{Binding ErrorRegionGridHeight}"/>
+                <RowDefinition Height="8*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
 
@@ -61,7 +61,7 @@
                 <ContentControl Grid.Row="2" Grid.Column="1"  prism:RegionManager.RegionName="HelpRegion"/>
             </Border>
         <Border Margin="0" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
-                <ContentControl Visibility="{Binding ErrorRegionVisibility}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"  prism:RegionManager.RegionName="ErrorRegion"/>
+                <ContentControl prism:RegionManager.RegionName="MessagesRegion"/>
             </Border>
 
         

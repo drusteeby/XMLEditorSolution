@@ -94,13 +94,26 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attached Properties\ListBoxBehavior.cs" />
+    <Compile Include="Containers\DataTagContainer.cs" />
+    <Compile Include="Containers\DataTagPropertyContainer.cs" />
     <Compile Include="Containers\NameTypeContainer.cs" />
     <Compile Include="Containers\SaveSettingContainer.cs" />
     <Compile Include="Containers\UnitAttributeContainer.cs" />
-    <Compile Include="Converters.cs" />
+    <Compile Include="Controls\EnhancedTextBox.xaml.cs">
+      <DependentUpon>EnhancedTextBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ScalableView.xaml.cs">
+      <DependentUpon>ScalableView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Wizard\View.xaml.cs">
+      <DependentUpon>View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Wizard\ViewModel.cs" />
     <Compile Include="Converters\AddChildVisibilityConverter.cs" />
     <Compile Include="Converters\AttributesToVisibilityConverter.cs" />
     <Compile Include="Converters\BaseURIToFileNameConverter.cs" />
+    <Compile Include="Converters\BitNumberConverter.cs" />
     <Compile Include="Converters\BoolToInvisibilityInverter.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\ListIndexToTextConverter.cs" />
@@ -118,6 +131,8 @@
     <Compile Include="TagHelper.cs" />
     <Compile Include="TemplateSelectors\GridPanelTemplateSelector.cs" />
     <Compile Include="TemplateSelectors\HelpViewSelector.cs" />
+    <Compile Include="TemplateSelectors\TagListTemplateSelector.cs" />
+    <Compile Include="TemplateSelectors\TagViewTemplateSelector.cs" />
     <Compile Include="TemplateSelectors\XMLNodeViewSelector.cs" />
     <Compile Include="ViewNames.cs" />
     <Compile Include="WizardWindow\Wizard.xaml.cs">
@@ -131,12 +146,18 @@
     <None Include="Resources\Entypo.ttf" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Visual Studio 2012\Projects\MCM\MCM.csproj">
-      <Project>{2b43ca60-b363-44af-b242-605a7ebd73b2}</Project>
-      <Name>MCM</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
+    <Page Include="Controls\EnhancedTextBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ScalableView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Wizard\View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Resources\Icons.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -149,6 +170,12 @@
   <ItemGroup>
     <Content Include="Resources\Entypo-license.txt" />
     <Content Include="Resources\WindowsIcons-license.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\HMI\MCM\MCM.csproj">
+      <Project>{2b43ca60-b363-44af-b242-605a7ebd73b2}</Project>
+      <Name>MCM</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

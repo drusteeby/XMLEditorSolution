@@ -7,6 +7,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <TextBox x:Name="textBox"/>
+        <TextBox x:Name="textBox" 
+                 HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                 />
     </Grid>
 </UserControl>

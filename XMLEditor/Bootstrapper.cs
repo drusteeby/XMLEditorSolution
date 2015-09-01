@@ -32,6 +32,8 @@ namespace XMLEditor
     using MachineTagEditor.Modules.Navigation;
     using MachineTagEditor.Modules.Units;
     using MachineTagEditor.Modules.MachineConfiguration;
+    using MachineTagEditor.Modules.Messages;
+    using MachineTagEditor.Modules.TagManager;
 
     /// <summary>
     /// Initializes Prism to start this quickstart Prism application to use Unity.
@@ -148,7 +150,27 @@ namespace XMLEditor
                 {
                     ModuleName = ConfigModuleType.Name,
                     ModuleType = ConfigModuleType.AssemblyQualifiedName,
+                    
                 });
+
+            Type MessagesModuleType = typeof(MessagesModule);
+
+            ModuleCatalog.AddModule(
+                new ModuleInfo()
+                {
+                    ModuleName = MessagesModuleType.Name,
+                    ModuleType = MessagesModuleType.AssemblyQualifiedName,
+                });
+
+            Type TagManagerType = typeof(TagManagerModule);
+
+            ModuleCatalog.AddModule(
+                new ModuleInfo()
+                {
+                    ModuleName = TagManagerType.Name,
+                    ModuleType = TagManagerType.AssemblyQualifiedName,
+                });
+            
 
             return base.ModuleCatalog;
         }

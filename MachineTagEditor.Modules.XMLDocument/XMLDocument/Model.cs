@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Xml;
-using MCM.Core.Objects;
+
 using System.Configuration;
+using MCM.Core.Tags;
 
 namespace MachineTagEditor.Modules.XMLDocument
 {
@@ -132,6 +133,8 @@ namespace MachineTagEditor.Modules.XMLDocument
             {
                 XMLDataProviderList.RemoveAt(index);
             }
+
+
 
             
             

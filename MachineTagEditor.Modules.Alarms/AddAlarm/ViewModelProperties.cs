@@ -2,7 +2,7 @@
 using MachineTagEditor.Infrastructure.Events;
 using MachineTagEditor.Infrastructure.Interfaces;
 using MCM.Core.Enum;
-using MCM.Core.Objects;
+using MCM.Core.Tags;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.Regions;

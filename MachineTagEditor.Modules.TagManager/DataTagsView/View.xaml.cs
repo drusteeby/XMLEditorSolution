@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace XMLEditor.DataTagsView
+namespace MachineTagEditor.Modules.TagManager
 {
     /// <summary>
     /// Interaction logic for View.xaml

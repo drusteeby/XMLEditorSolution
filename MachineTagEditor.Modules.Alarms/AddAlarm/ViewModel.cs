@@ -1,4 +1,4 @@
-﻿using MCM.Core.Objects;
+﻿
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.Regions;

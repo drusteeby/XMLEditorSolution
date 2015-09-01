@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="MachineTagEditor.Modules.Units.CurrentDataTypes.View"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+
+
+    <ListView Margin="5" ItemsSource="{Binding DataTypesList, UpdateSourceTrigger=PropertyChanged}">
+        <ListView.View>
+            <GridView>
+                <GridView.Columns>
+                    <GridViewColumn Width="Auto" Header="Name" DisplayMemberBinding="{Binding Path=Name}" />
+                    <GridViewColumn Width="Auto" Header="Base Type" DisplayMemberBinding="{Binding Path=DataType}" />
+                    <GridViewColumn Width="Auto" Header="Units" DisplayMemberBinding="{Binding Path=Units}" />
+                    <GridViewColumn Width="Auto" Header="Units (Metric)" DisplayMemberBinding="{Binding Path=UnitsMetric}" />
+                    <GridViewColumn Width="Auto" Header="Units (US)" DisplayMemberBinding="{Binding Path=UnitsUs}" />
+                    <GridViewColumn Width="Auto" Header="Rounding" DisplayMemberBinding="{Binding Path=Rounding}" />
+                    <GridViewColumn Width="Auto" Header="Rounding (Metric)" DisplayMemberBinding="{Binding Path=RoundMetric}" />
+                    <GridViewColumn Width="Auto" Header="Rounding (US)" DisplayMemberBinding="{Binding Path=RoundUs}" />
+                </GridView.Columns>
+            </GridView>
+        </ListView.View>
+    </ListView>
+
+</UserControl>

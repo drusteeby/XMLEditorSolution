@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XMLEditor.DataTagsView
+namespace MachineTagEditor.Infrastructure
 {
     public class DataTagPropertyContainer
     {

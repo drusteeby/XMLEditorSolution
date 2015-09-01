@@ -1,4 +1,5 @@
-﻿using MCM.Core.Objects;
+﻿
+using MCM.Core.Tags;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

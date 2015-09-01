@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 using MachineTagEditor.Infrastructure.Interfaces;
 using System.Xml;
 using System.Collections.ObjectModel;
-using MCM.Core.Objects;
+
 using System.Windows.Data;
 using System.IO;
 using System.Xml.Schema;
 using MachineTagEditor.Infrastructure;
+using MCM.Core.Tags;
 
 namespace MachineTagEditor.Modules.XMLDocument
 {

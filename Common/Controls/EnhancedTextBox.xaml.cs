@@ -50,8 +50,8 @@ namespace Common.Controls
 
         private static void OnNullTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            try { ((d as EnhancedTextBox)._vb.Visual as Label).Content = e.NewValue; }
-            catch { }
+
+            (d as EnhancedTextBox).updateBackground(newNullText: (string)e.NewValue);
         }
 
         public bool NullTextRetains
@@ -92,39 +92,84 @@ namespace Common.Controls
 
 
 
+        public VisualBrush textBoxBG
+        {
+            get { return (VisualBrush)GetValue(textBoxBGProperty); }
+            set { SetValue(textBoxBGProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for textBoxBG.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty textBoxBGProperty =
+            DependencyProperty.Register("textBoxBG", typeof(VisualBrush), typeof(EnhancedTextBox), new UIPropertyMetadata(null));
+
+
+
+
+        public Brush defaultBrush
+        {
+            get { return (Brush)GetValue(defaultBrushProperty); }
+            set { SetValue(defaultBrushProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for defaultBrush.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty defaultBrushProperty =
+            DependencyProperty.Register("defaultBrush", typeof(Brush), typeof(EnhancedTextBox), new UIPropertyMetadata(new SolidColorBrush(Colors.BlueViolet)));
+
+
+
         #endregion
 
-        #region Properties
-
-
-
-        VisualBrush _vb = new VisualBrush();
-        Brush _defaultBrush;
-  
-        #endregion
+        Label _nullTextLabel = new Label();
 
 
         public EnhancedTextBox()
         {
             InitializeComponent();
-            textBox.GotFocus += checkText;
-            textBox.MouseEnter += checkText;
-            textBox.MouseLeave += checkText;
-            textBox.LostFocus += checkText;
-            textBox.LostKeyboardFocus += checkText;
+            //textBox.GotFocus += checkText;
+            //textBox.MouseEnter += checkText;
+            //textBox.MouseLeave += checkText;
+            //textBox.LostFocus += checkText;
+            //textBox.LostKeyboardFocus += checkText;
 
-            textBox.Loaded += TextBox_Loaded;
-            textBox.TextChanged += TextBox_TextChanged;
+           // textBox.Loaded += TextBox_Loaded;
+           // textBox.TextChanged += TextBox_TextChanged;
 
-            textBox.TextAlignment = TextAlignment.Left;
-            textBox.VerticalContentAlignment = VerticalAlignment.Center;
+            //textBox.TextAlignment = TextAlignment.Left;
+            //textBox.VerticalContentAlignment = VerticalAlignment.Center;
 
-            
-
-
+           // textBoxBG = new VisualBrush();
 
 
         }
+
+        int i = 0;
+
+        public void updateBackground(string newNullText = null)
+        {
+            if( newNullText != null)
+                _nullTextLabel.Content = newNullText;
+
+            _nullTextLabel.HorizontalAlignment = HorizontalAlignment.Left;
+            _nullTextLabel.VerticalAlignment = VerticalAlignment.Center;
+
+            _nullTextLabel.Background = new SolidColorBrush(Colors.White);
+
+
+            var grid = new Grid();
+            grid.Background = new SolidColorBrush(Colors.White);
+            
+
+            var b = new VisualBrush(_nullTextLabel);
+            b.AlignmentX = AlignmentX.Left;
+            b.AlignmentY = AlignmentY.Center;
+            
+            
+
+            textBox.Background = b;
+            
+        }
+
+
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -134,30 +179,16 @@ namespace Common.Controls
         #region Event Handlers
         private void TextBox_Loaded(object sender, RoutedEventArgs e)
         {
-            var label = new Label();
-            label.Content = NullText;
-            label.Style = NullTextStyle;
-            _vb.Visual = label;
-            _vb.AlignmentX = AlignmentX.Left;
-            _vb.AlignmentY = AlignmentY.Center;
-            _vb.Stretch = Stretch.None;
-
-
-            _defaultBrush = textBox.Background;
-
-            if (String.IsNullOrEmpty(textBox.Text) && !textBox.IsKeyboardFocused && !textBox.IsFocused)
-                textBox.Background = _vb;
-            else
-                textBox.Background = _defaultBrush;
+            defaultBrush = new VisualBrush();
         }
 
         void checkText(object sender, RoutedEventArgs e)
         {
             if (String.IsNullOrEmpty(textBox.Text) && !textBox.IsKeyboardFocused && !textBox.IsFocused)
-                textBox.Background = _vb;
+                textBox.Background = textBoxBG;
             else
             {
-                textBox.Background = _defaultBrush;
+                textBox.Background = new SolidColorBrush(Colors.White);
 
                 if (e.RoutedEvent.Equals(GotFocusEvent) && String.IsNullOrEmpty(textBox.Text) && NullTextRetains)
                     textBox.Text = NullText;

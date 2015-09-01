@@ -7,6 +7,7 @@ using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -30,6 +31,10 @@ namespace MachineTagEditor.Modules.Toolbar.Menu
         {
             MenuItem file = new MenuItem(); 
             file.Header = "_File";
+
+            MenuItem AddGroup = new MenuItem();
+            AddGroup.Header = "New Group";
+            AddGroup.Command = new DelegateCommand(OnAddGroup);
             
             MenuItem AddTemplate = new MenuItem();
             AddTemplate.Header = "Add _Template";
@@ -39,12 +44,54 @@ namespace MachineTagEditor.Modules.Toolbar.Menu
             AddAlarm.Header = "Add _Alarm";
             AddAlarm.Command = new DelegateCommand(OnAddAlarm);
 
+            file.Items.Add(AddGroup);
             file.Items.Add(AddTemplate);
             file.Items.Add(AddAlarm);
 
+            MenuItem XML  = new MenuItem();
+            XML.Header = "_XML";
+
+            MenuItem AddXML = new MenuItem();
+            AddXML.Header = "_Add XML";
+            AddXML.Command = new DelegateCommand(OnAddXML);
+
+            MenuItem RemoveXML = new MenuItem();
+            RemoveXML.Header = "_Remove XML";
+            RemoveXML.Command = new DelegateCommand(OnRemoveXML);
+
+            MenuItem SaveXML = new MenuItem();
+            SaveXML.Header = "_Remove XML";
+            SaveXML.Command = new DelegateCommand(OnSaveXML);
+
+
+            XML.Items.Add(AddXML);
+            XML.Items.Add(RemoveXML);
+            XML.Items.Add(SaveXML);
+
             MenuItems = new ObservableCollection<MenuItem>();
             MenuItems.Add(file);
+            MenuItems.Add(XML);
 
+        }
+
+        private void OnSaveXML()
+        {
+            eventAggregator.GetEvent<SaveXMLFile>().Publish(true);
+        }
+
+        private void OnAddGroup()
+        {
+            var Result = Interaction.InputBox("Question?", "Title", "Default Text");
+        }
+
+        private void OnRemoveXML()
+        {
+            
+        }
+
+        private void OnAddXML()
+        {
+            eventAggregator.GetEvent<LoadXMLFile>().Publish(true);
         }
 
         public void OnAddAlarm()

@@ -28,6 +28,7 @@ namespace MachineTagEditor.Modules.Units
             container.RegisterInstance<IXMLService>("UnitsXMLService", UnitsXMLService);
 
             //Register Views
+            regionManager.RegisterViewWithRegion(RegionNames.DataRegion, typeof(CurrentDataTypes.View));
             regionManager.RegisterViewWithRegion(RegionNames.ActionRegion, typeof(AddUnit.View));
         }
     }

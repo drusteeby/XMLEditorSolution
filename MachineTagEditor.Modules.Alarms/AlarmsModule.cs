@@ -40,6 +40,7 @@ namespace MachineTagEditor.Modules.Alarms
             regionMananger.RegisterViewWithRegion(RegionNames.DataRegion, typeof(CurrentAlarms.View));
             regionMananger.RegisterViewWithRegion(RegionNames.HelpRegion, typeof(AddAlarm.Help));
 
+
             eventAggregator.GetEvent<AddAlarmConfigWizard>().Subscribe(OnAddAlarmConfigWizard, true);
         }
 

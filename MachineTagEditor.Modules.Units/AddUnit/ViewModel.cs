@@ -29,7 +29,7 @@ namespace MachineTagEditor.Modules.Units.AddUnit
 
 
 
-        public string firstETBnullText
+        public string firstETBNullText
         {
             get { return (string)GetValue(MyPropertyProperty); }
             set { SetValue(MyPropertyProperty, value); }
@@ -198,25 +198,32 @@ namespace MachineTagEditor.Modules.Units.AddUnit
             USMetricCommand = new DelegateCommand(OnUSMetricCommand);
             firstLabelContent = "Label:";
             USMetricVisibility = Visibility.Collapsed;
+            firstETBNullText = "e.g.: Degrees";
 
         }
 
         private void OnUSMetricCommand()
         {
-            USMetricVisibility = Visibility.Visible;
             firstLabelContent = "Metric Label:";
-            firstETBnullText = "mm";
+            firstETBNullText = "mm";
 
             secondLabelContent = "U.S. Label:";
             secondETBNullText = "\"";
+
+            USMetricVisibility = Visibility.Visible;
+
 
 
         }
 
         private void OnSingleCommand()
         {
+            
             firstLabelContent = "Label:";
-            firstETBnullText = default(string);
+            firstETBNullText = "Single";
+
+            secondETBNullText = "Change";
+
             USMetricVisibility = Visibility.Collapsed;
         }
     }

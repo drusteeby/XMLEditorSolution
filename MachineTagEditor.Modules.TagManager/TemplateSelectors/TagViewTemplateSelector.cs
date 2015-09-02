@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace MachineTagEditor.Infrastructure.TemplateSelectors
+namespace MachineTagEditor.Modules.TagManager.TemplateSelectors
 {
     public class TagViewTemplateSelector: DataTemplateSelector
     {

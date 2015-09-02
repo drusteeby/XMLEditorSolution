@@ -129,42 +129,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
+    <ApplicationDefinition Include="App\App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Bootstrapper.cs" />
-    <Compile Include="Commands\GlobalCommands.cs" />
-    <Compile Include="Controls\AnimatedTabControl.cs" />
-    <Compile Include="Controls\RoundedBox.xaml.cs">
-      <DependentUpon>RoundedBox.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="NodeView.xaml.cs">
-      <DependentUpon>NodeView.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="App\Bootstrapper.cs" />
     <Compile Include="SampleData\SampleNode\SampleNode.xaml.cs">
       <DependentUpon>SampleNode.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Shell\Shell.xaml.cs">
+    <Compile Include="App\Shell\Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Shell\ShellViewModel.cs" />
-    <Compile Include="TemplateViews\DefaultView.xaml.cs">
-      <DependentUpon>DefaultView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="WindowRegionAdapter.cs" />
-    <Page Include="Controls\RoundedBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Compile Include="App.xaml.cs">
+    <Compile Include="App\Shell\ShellViewModel.cs" />
+    <Compile Include="App\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="NodeView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="ResourceDictionary.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -173,11 +153,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Shell\Shell.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="TemplateViews\DefaultView.xaml">
+    <Page Include="App\Shell\Shell.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -209,7 +185,7 @@
     <None Include="SampleData\SampleNode\SampleNode.xsd" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config">
+    <None Include="App\App.config">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
@@ -218,7 +194,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="SampleData\TabControlDataSource\" />
-    <Folder Include="Themes\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\HMI\MCM\MCM.csproj">

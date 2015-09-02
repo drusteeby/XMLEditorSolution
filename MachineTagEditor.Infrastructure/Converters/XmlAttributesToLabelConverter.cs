@@ -8,7 +8,7 @@ using System.Xml;
 
 namespace MachineTagEditor.Infrastructure.Converters
 {
-    public class XmlAttributesToLableConverter : IValueConverter
+    public class XmlAttributesToLabelConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {

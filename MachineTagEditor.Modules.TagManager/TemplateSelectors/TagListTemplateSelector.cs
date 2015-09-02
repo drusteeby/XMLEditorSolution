@@ -12,7 +12,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Xml;
 
-namespace MachineTagEditor.Infrastructure.TemplateSelectors
+namespace MachineTagEditor.Modules.TagManager.TemplateSelectors
 {
     public partial class TagListTemplateSelector : DataTemplateSelector
     {

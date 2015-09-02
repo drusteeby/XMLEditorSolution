@@ -11,21 +11,12 @@
         Height="{Binding MainWindowHeight,Mode=OneWayToSource}"
         Width="{Binding MainWindowWidth,Mode=OneWayToSource}"
         prism:RegionManager.RegionName="WindowRegion"
+        xmlns:ex="clr-namespace:MachineTagEditor.Infrastructure.Extensions;assembly=MachineTagEditor.Infrastructure"
         >
 
 
     <Window.Resources>
-        <Style TargetType="Border">
-            <Setter Property="Background">
-                <Setter.Value>
-                    <SolidColorBrush Color="#E9F0F8" Opacity="0.70"/>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="BorderBrush" Value="#014B68"/>
-                <Setter Property="BorderThickness" Value="1,1,1,1"/>
-                <Setter Property="CornerRadius" Value="8,8,8,8"/>
-            <Setter Property="Margin" Value="5"/>
-        </Style>
+        <Style TargetType="Border" BasedOn="{ex:MultiStyle RoundedEdges LightBlueSemiTransparent}"/>
     </Window.Resources>       
             <Grid  MaxHeight="{x:Static SystemParameters.PrimaryScreenHeight}" MaxWidth="{x:Static SystemParameters.PrimaryScreenWidth}">
             <Grid.RowDefinitions>
@@ -46,23 +37,26 @@
         <DockPanel Margin="0" Grid.Row="0" Grid.ColumnSpan="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <ContentControl Margin="0" DockPanel.Dock="Top" prism:RegionManager.RegionName="ToolbarRegion"/>
         </DockPanel>
+
         <Border   Grid.Row="1" Grid.Column="0" Width="Auto">
             <ContentControl Grid.Row="1" Grid.ColumnSpan="2" prism:RegionManager.RegionName="{x:Static inf:RegionNames.NavigationRegion}"/>
         </Border>
 
         <Border  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" >
-                <ContentControl Grid.Row="1" Grid.ColumnSpan="2"  prism:RegionManager.RegionName="{x:Static inf:RegionNames.DataRegion}"/>
-            </Border>
+            <ContentControl Grid.Row="1" Grid.ColumnSpan="2"  prism:RegionManager.RegionName="{x:Static inf:RegionNames.DataRegion}"/>
+        </Border>
 
         <Border  Grid.Row="3" Grid.Column="0">
-                <ContentControl Grid.Row="2" Grid.Column="0"  prism:RegionManager.RegionName="ActionRegion"/>
-            </Border>
+            <ContentControl Grid.Row="2" Grid.Column="0"  prism:RegionManager.RegionName="ActionRegion"/>
+        </Border>
+                
         <Border Grid.Row="3" Grid.Column="1">
-                <ContentControl Grid.Row="2" Grid.Column="1"  prism:RegionManager.RegionName="HelpRegion"/>
-            </Border>
+            <ContentControl Grid.Row="2" Grid.Column="1"  prism:RegionManager.RegionName="HelpRegion"/>
+        </Border>
+                
         <Border Margin="0" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
-                <ContentControl prism:RegionManager.RegionName="MessagesRegion"/>
-            </Border>
+            <ContentControl prism:RegionManager.RegionName="MessagesRegion"/>
+        </Border>
 
         
         </Grid> 

@@ -4,9 +4,23 @@
                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
                     xmlns:inf="clr-namespace:MachineTagEditor.Infrastructure;assembly=MachineTagEditor.Infrastructure"
                     xmlns:conv="clr-namespace:MachineTagEditor.Infrastructure.Converters;assembly=MachineTagEditor.Infrastructure"
-                    xmlns:selectors="clr-namespace:MachineTagEditor.Infrastructure.TemplateSelectors;assembly=MachineTagEditor.Infrastructure">
-	
-	<ImageBrush x:Key="metalBG" ImageSource="Resources/metal-background11.jpg" />
+                    >
+
+    <Style x:Key="RoundedEdges" TargetType="Border">
+        <Setter Property="BorderThickness" Value="1,1,1,1"/>
+        <Setter Property="CornerRadius" Value="8,8,8,8"/>
+        <Setter Property="Margin" Value="5"/>
+    </Style>
+    <Style x:Key="LightBlueSemiTransparent" TargetType="Border">
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="#E9F0F8" Opacity="0.70"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderBrush" Value="#014B68"/>
+    </Style>
+
+    <ImageBrush x:Key="metalBG" ImageSource="Resources/metal-background11.jpg" />
     <ImageBrush x:Key="blueTechBG" ImageSource="Resources/blueTech.jpg" />
 
     <Style x:Key="baseStyle" TargetType="Control">
@@ -135,7 +149,7 @@
                                 />
 
     <conv:AttributesToVisibilityConverter x:Key="AttributesToVisibilityConverter"/>
-    <conv:XmlAttributesToLableConverter x:Key="XmlAttributesToLableConverter"/>
+    <conv:XmlAttributesToLabelConverter x:Key="XmlAttributesToLabelConverter"/>
 
 
     <inf:XMLNodeViewSelector x:Key="nodeViewSelector" NodeBlueTemplate="{StaticResource NodeBlueTemplate}"
@@ -274,7 +288,7 @@
         <StackPanel Orientation="Horizontal">
             <TextBlock x:Name="text" Text="{Binding Path=Value}">
             </TextBlock>
-            <TextBlock Margin="5,0,0,0"  Foreground="Red" Text="{Binding Attributes, Converter={StaticResource XmlAttributesToLableConverter}}">
+            <TextBlock Margin="5,0,0,0"  Foreground="Red" Text="{Binding Attributes, Converter={StaticResource XmlAttributesToLabelConverter}}">
             </TextBlock>
         </StackPanel>
         <HierarchicalDataTemplate.ItemsSource>
@@ -296,101 +310,7 @@
     </HierarchicalDataTemplate>
     
     
-    <!--  Tag Element Tempaltes  -->
-
-    <HierarchicalDataTemplate x:Key="BaseXMLTagTemplate">
-        <HierarchicalDataTemplate.ItemsSource>
-            <Binding XPath="child::node()" />
-        </HierarchicalDataTemplate.ItemsSource>
-    </HierarchicalDataTemplate>
     
-    <HierarchicalDataTemplate x:Key="TextBoxTagTemplate">
-        <ListView  ItemsSource="{Binding Attributes}">
-            <ListView.ItemTemplate>
-                <HierarchicalDataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Margin="5,0,0,0"  Foreground="Red" Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBox Margin="5,0,0,0"  Foreground="Red" Text="{Binding Value,UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBox Margin="5,0,0,0"  Foreground="Blue" Text="{Binding Value,UpdateSourceTrigger=PropertyChanged}"/>
-                    </StackPanel>
-                </HierarchicalDataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-
-        <HierarchicalDataTemplate.ItemsSource>
-            <Binding XPath="child::node()" />
-        </HierarchicalDataTemplate.ItemsSource>
-    </HierarchicalDataTemplate>
-
-    <HierarchicalDataTemplate x:Key="PlainTextTagTemplate">
-        <StackPanel Orientation="Horizontal">
-            <TextBlock x:Name="text" Text="{Binding Name}"/>
-            <TextBlock Margin="5,0,0,0"  Foreground="Red" Text="{Binding Attributes, Converter={StaticResource XmlAttributesToLableConverter},UpdateSourceTrigger=PropertyChanged}"/>
-        </StackPanel>
-
-        <HierarchicalDataTemplate.ItemsSource>
-            <Binding XPath="child::node()" />
-        </HierarchicalDataTemplate.ItemsSource>
-        
-    </HierarchicalDataTemplate>
-
-    <conv:BitNumberConverter x:Key="BitNumberConverter"/>
-
-    <HierarchicalDataTemplate x:Key="EnumTemplate">
-        <ListView  ItemsSource="{Binding}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid DataContext="{Binding Attributes}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition MinWidth="100"/>
-                            <ColumnDefinition MinWidth="300"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center">
-                            <TextBlock.Text>
-                                <MultiBinding StringFormat="{}Message for Bit #{0}:">
-                                    <Binding Path=".[value].Value" UpdateSourceTrigger="PropertyChanged" />
-                                </MultiBinding>
-                            </TextBlock.Text>
-                        </TextBlock>                        
-                        <TextBox Grid.Column="1" Margin="5,0,0,0" Text="{Binding Path=.[text].Value}" 
-                                 HorizontalAlignment="Stretch"  VerticalAlignment="Center" 
-                                 HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom"/>
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </HierarchicalDataTemplate>
-
-
-    <!--  Tag Element Tempalte Selector  -->
-    <selectors:TagListTemplateSelector x:Key="TagItemSelector" 
-                                       DefaultTagTemplate="{StaticResource PlainTextTagTemplate}"
-                                       EnumTemplate="{StaticResource EnumTemplate}"/>
-
-
-    <!--  View Element Tempaltes  -->
-    <HierarchicalDataTemplate x:Key="TreeViewTemplate">
-        <TreeView Background="LightYellow"                               
-                    ItemsSource="{Binding}"
-                    ItemTemplateSelector="{StaticResource TagItemSelector}"/>
-    </HierarchicalDataTemplate>
-
-    <HierarchicalDataTemplate x:Key="WrapViewTemplate">
-        <ListView ItemsSource="{Binding Path=.[tags]}"
-                  ItemTemplateSelector="{StaticResource TagItemSelector}"
-                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel IsItemsHost="True" Orientation="Horizontal"
-                               ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
-
-        </ListView>
-    </HierarchicalDataTemplate>
-
-    <!--  View Element Selector  -->
-    <selectors:TagViewTemplateSelector x:Key="ViewSelector" DefaultTemplate="{StaticResource WrapViewTemplate}"/>
 
 
 </ResourceDictionary>

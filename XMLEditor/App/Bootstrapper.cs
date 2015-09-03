@@ -26,12 +26,7 @@ namespace XMLEditor
     using Microsoft.Practices.Prism.Regions;
     using WRAExample.Utility;
     using System.Reflection;
-    using MachineTagEditor.Modules.Alarms;
-    using MachineTagEditor.Modules.XMLDocument;
     using MachineTagEditor.Modules.Toolbar;
-    using MachineTagEditor.Modules.Navigation;
-    using MachineTagEditor.Modules.Units;
-    using MachineTagEditor.Modules.MachineConfiguration;
     using MachineTagEditor.Modules.Messages;
     using MachineTagEditor.Modules.TagManager;
 
@@ -94,27 +89,6 @@ namespace XMLEditor
             base.CreateModuleCatalog();
             base.ModuleCatalog = new ModuleCatalog();
 
-            Type XMLDocumentModuleType = typeof(XMLDocumentModule);
-
-            ModuleCatalog.AddModule(
-                new ModuleInfo()
-                {
-                    ModuleName = XMLDocumentModuleType.Name,
-                    ModuleType = XMLDocumentModuleType.AssemblyQualifiedName,
-                });
-
-
-            Type AlarmsModuleType = typeof(AlarmsModule);
-
-            ModuleCatalog.AddModule(
-                new ModuleInfo()
-                {
-                    ModuleName = AlarmsModuleType.Name,
-                    ModuleType = AlarmsModuleType.AssemblyQualifiedName,
-                });
-
-
-
 
             Type ToolbarModuleType = typeof(ToolbarModule);
 
@@ -125,33 +99,7 @@ namespace XMLEditor
                     ModuleType = ToolbarModuleType.AssemblyQualifiedName,
                 });
 
-            Type NavigationModuleType = typeof(NavigationModule);
 
-            ModuleCatalog.AddModule(
-                new ModuleInfo()
-                {
-                    ModuleName = NavigationModuleType.Name,
-                    ModuleType = NavigationModuleType.AssemblyQualifiedName,
-                });
-
-            Type UnitsModuleType = typeof(UnitsModule);
-
-            ModuleCatalog.AddModule(
-                new ModuleInfo()
-                {
-                    ModuleName = UnitsModuleType.Name,
-                    ModuleType = UnitsModuleType.AssemblyQualifiedName,
-                });
-
-            Type ConfigModuleType = typeof(MachineConfigModule);
-
-            ModuleCatalog.AddModule(
-                new ModuleInfo()
-                {
-                    ModuleName = ConfigModuleType.Name,
-                    ModuleType = ConfigModuleType.AssemblyQualifiedName,
-                    
-                });
 
             Type MessagesModuleType = typeof(MessagesModule);
 

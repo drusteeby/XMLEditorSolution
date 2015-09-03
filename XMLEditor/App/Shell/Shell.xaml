@@ -16,45 +16,31 @@
 
 
     <Window.Resources>
-        <Style TargetType="Border" BasedOn="{ex:MultiStyle RoundedEdges LightBlueSemiTransparent}"/>
+        <Style TargetType="Border" x:Key="BlueBox" BasedOn="{ex:MultiStyle RoundedEdges LightBlueSemiTransparent}"/>
     </Window.Resources>       
             <Grid  MaxHeight="{x:Static SystemParameters.PrimaryScreenHeight}" MaxWidth="{x:Static SystemParameters.PrimaryScreenWidth}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="4*"/>
-                <RowDefinition Height="20*"/>
-                <RowDefinition Height="16*"/>
-                <RowDefinition Height="8*"/>
+                <RowDefinition Height="0"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>                
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-
-                <ColumnDefinition Width="25*"/>
-                <ColumnDefinition Width="25*"/>
-
-            </Grid.ColumnDefinitions>
-        
+       
                 
-        <DockPanel Margin="0" Grid.Row="0" Grid.ColumnSpan="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <ContentControl Margin="0" DockPanel.Dock="Top" prism:RegionManager.RegionName="ToolbarRegion"/>
-        </DockPanel>
+        <Border Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <ContentControl prism:RegionManager.RegionName="ToolbarRegion" />
+        </Border>
 
-        <Border   Grid.Row="1" Grid.Column="0" Width="Auto">
+        <Border Grid.Row="1">
             <ContentControl Grid.Row="1" Grid.ColumnSpan="2" prism:RegionManager.RegionName="{x:Static inf:RegionNames.NavigationRegion}"/>
         </Border>
 
-        <Border  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" >
+        <Border  Grid.Row="2" Grid.ColumnSpan="2" Style="{StaticResource BlueBox}">
             <ContentControl Grid.Row="1" Grid.ColumnSpan="2"  prism:RegionManager.RegionName="{x:Static inf:RegionNames.DataRegion}"/>
         </Border>
 
-        <Border  Grid.Row="3" Grid.Column="0">
-            <ContentControl Grid.Row="2" Grid.Column="0"  prism:RegionManager.RegionName="ActionRegion"/>
-        </Border>
-                
-        <Border Grid.Row="3" Grid.Column="1">
-            <ContentControl Grid.Row="2" Grid.Column="1"  prism:RegionManager.RegionName="HelpRegion"/>
-        </Border>
-                
-        <Border Margin="0" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
+
+        <Border Style="{StaticResource BlueBox}" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
             <ContentControl prism:RegionManager.RegionName="MessagesRegion"/>
         </Border>
 

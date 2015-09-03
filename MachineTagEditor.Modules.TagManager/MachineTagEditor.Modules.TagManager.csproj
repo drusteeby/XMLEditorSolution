@@ -110,6 +110,7 @@
     <Compile Include="DataTagsView\ViewModel.cs" />
     <Compile Include="DataTagsView\ViewModelCommands.cs" />
     <Compile Include="DataTagsView\ViewModelProperties.cs" />
+    <Compile Include="XmlContainer.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <DependentUpon>Settings.settings</DependentUpon>
       <AutoGen>True</AutoGen>

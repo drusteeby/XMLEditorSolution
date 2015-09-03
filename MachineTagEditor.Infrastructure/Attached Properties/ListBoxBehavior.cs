@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Ribbon;
 
 namespace MachineTagEditor.Infrastructure.Attached_Properties
 {
@@ -114,4 +115,11 @@ namespace MachineTagEditor.Infrastructure.Attached_Properties
             }
         }
     }
+
+
+    
+                
+   
+
+
 }

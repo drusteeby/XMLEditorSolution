@@ -19,6 +19,7 @@ namespace MachineTagEditor.Modules.Toolbar
         public void Initialize()
         {
             regionMananger.RegisterViewWithRegion(RegionNames.ToolbarRegion, typeof(Menu.View));
+            regionMananger.RegisterViewWithRegion(RegionNames.NavigationRegion, typeof(Ribbon.View));
         }
     }
 }

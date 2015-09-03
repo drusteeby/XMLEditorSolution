@@ -34,17 +34,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GalaSoft.MvvmLight">
-      <HintPath>..\packages\MvvmLightLibs.5.1.1.0\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+    <Reference Include="GalaSoft.MvvmLight, Version=5.2.0.37222, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.2.0.0\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="GalaSoft.MvvmLight.Extras">
-      <HintPath>..\packages\MvvmLightLibs.5.1.1.0\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
+    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.2.0.37222, Culture=neutral, PublicKeyToken=669f0b5e8f868abf, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.2.0.0\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="GalaSoft.MvvmLight.Platform">
-      <HintPath>..\packages\MvvmLightLibs.5.1.1.0\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
-    </Reference>
-    <Reference Include="MahApps.Metro, Version=1.1.2.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
-      <HintPath>..\packages\MahApps.Metro.1.1.2.0\lib\net45\MahApps.Metro.dll</HintPath>
+    <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.2.0.37226, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.2.0.0\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Practices.Prism.Composition">
@@ -87,7 +86,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\MahApps.Metro.1.1.2.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\packages\MvvmLightLibs.5.2.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml" />
@@ -134,9 +133,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="App\Bootstrapper.cs" />
-    <Compile Include="SampleData\SampleNode\SampleNode.xaml.cs">
-      <DependentUpon>SampleNode.xaml</DependentUpon>
-    </Compile>
     <Compile Include="App\Shell\Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
     </Compile>
@@ -145,11 +141,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="ResourceDictionary.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Brushes.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SampleData\SampleNode\SampleNode.xaml">
+    <Page Include="ResourceDictionary.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -176,13 +172,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <None Include="SampleData\SampleNode\SampleNode.xsd" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App\App.config">
@@ -193,7 +189,7 @@
     <Resource Include="Resources\metal-background11.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="SampleData\TabControlDataSource\" />
+    <Resource Include="Resources\undo.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\HMI\MCM\MCM.csproj">
@@ -204,21 +200,9 @@
       <Project>{1dd5af35-b564-426e-a2d1-74168a40700f}</Project>
       <Name>MachineTagEditor.Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MachineTagEditor.Modules.Alarms\MachineTagEditor.Modules.Alarms.csproj">
-      <Project>{d348e636-4db6-4be3-8639-38d2271ee0b2}</Project>
-      <Name>MachineTagEditor.Modules.Alarms</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MachineTagEditor.Modules.MachineConfiguration\MachineTagEditor.Modules.MachineConfig.csproj">
-      <Project>{c46b585a-3f5a-4ff3-9bd7-87da292ce6c0}</Project>
-      <Name>MachineTagEditor.Modules.MachineConfig</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MachineTagEditor.Modules.Messages\MachineTagEditor.Modules.Messages.csproj">
       <Project>{e9f0fc0c-7f20-45d8-94ea-dda9d6315504}</Project>
       <Name>MachineTagEditor.Modules.Messages</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MachineTagEditor.Modules.Navigation\MachineTagEditor.Modules.Navigation.csproj">
-      <Project>{0a0cf57a-c948-422a-88a9-b86d7d12a0f3}</Project>
-      <Name>MachineTagEditor.Modules.Navigation</Name>
     </ProjectReference>
     <ProjectReference Include="..\MachineTagEditor.Modules.TagManager\MachineTagEditor.Modules.TagManager.csproj">
       <Project>{08032bc0-5995-4991-abcd-f42be0530981}</Project>
@@ -227,14 +211,6 @@
     <ProjectReference Include="..\MachineTagEditor.Modules.Toolbar\MachineTagEditor.Modules.Toolbar.csproj">
       <Project>{aa3dd680-c540-4a49-a96e-a676bc62c958}</Project>
       <Name>MachineTagEditor.Modules.Toolbar</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MachineTagEditor.Modules.Units\MachineTagEditor.Modules.Units.csproj">
-      <Project>{b779628b-eb87-4c46-923d-f9c1e6d3491c}</Project>
-      <Name>MachineTagEditor.Modules.Units</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MachineTagEditor.Modules.XMLDocument\MachineTagEditor.Modules.XMLDocument.csproj">
-      <Project>{ecebbc93-dc65-4461-98af-c68beb1f7f48}</Project>
-      <Name>MachineTagEditor.Modules.XMLDocument</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

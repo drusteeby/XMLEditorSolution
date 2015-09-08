@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="MachineTagEditor.Modules.TagManager.View"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ia="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
+             xmlns:local="clr-namespace:MachineTagEditor.Modules.TagManager"
+             xmlns:selectors="clr-namespace:MachineTagEditor.Modules.TagManager.TemplateSelectors"
+             mc:Ignorable="d" 
+             Background="{x:Static SystemColors.WindowBrush}"
+             d:DesignHeight="300" d:DesignWidth="300"
+             >
+    <UserControl.Resources>
+        <Style BasedOn="{StaticResource baseStyle}" TargetType="GroupBox">
+
+            <Setter Property="DockPanel.Dock" Value="Top"/>
+            <Setter Property="Background" Value="{x:Static SystemColors.ControlBrush}"/>
+        </Style>
+    </UserControl.Resources>
+
+    <TabControl ItemsSource="{Binding XmlFileList,UpdateSourceTrigger=PropertyChanged}">
+        <ia:Interaction.Triggers>
+            <ia:EventTrigger EventName="SelectionChanged">
+                <cmd:EventToCommand Command="{Binding SelectionChanged}" PassEventArgsToCommand="True"/>
+            </ia:EventTrigger>
+        </ia:Interaction.Triggers>
+        <!--Header of the tab control-->
+        <TabControl.ItemTemplate>
+            <DataTemplate>
+                <TextBlock Text="{Binding Header,UpdateSourceTrigger=PropertyChanged}"/>
+            </DataTemplate>
+        </TabControl.ItemTemplate>
+
+        <!--Content of the tab control-->
+        <TabControl.ContentTemplate>
+            <DataTemplate>
+                <ListView ItemsSource="{Binding xmlNodes,UpdateSourceTrigger=PropertyChanged}"
+                          
+              ScrollViewer.CanContentScroll="True"
+              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+              ItemTemplateSelector="{StaticResource TagItemSelector}">
+
+                    <!-- HERE IS WHERE THE TEMPLATE SELECTOR WILL GO -->
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel IsItemsHost="True" Orientation="Horizontal"
+                               ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+
+                </ListView>
+            </DataTemplate>
+        </TabControl.ContentTemplate>
+    </TabControl>
+
+    <!--
+    <ContentControl d:Content="{Binding Path=xmlDataProvider.Document}"
+                   
+              ScrollViewer.CanContentScroll="True"
+              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+              ContentTemplateSelector="{StaticResource ViewSelector}"/>
+    -->
+
+</UserControl>

@@ -68,6 +68,7 @@ namespace MachineTagEditor.Modules.TagManager
             try
             {
                 _dataProvider.Document.Load(path);
+                
 
                 /*foreach (XmlNode node in _dataProvider.Document.ChildNodes)
                 {

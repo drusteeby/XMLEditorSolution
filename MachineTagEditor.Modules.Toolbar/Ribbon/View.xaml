@@ -7,33 +7,22 @@
              mc:Ignorable="d" 
              xmlns:a="clr-namespace:MachineTagEditor.Infrastructure.Attached_Properties;assembly=MachineTagEditor.Infrastructure"
              d:DesignHeight="300" d:DesignWidth="1000">
-
-    <Ribbon SelectedIndex="0" a:RibbonBehavior.HideRibbonTabs="true">
-        <!-- Help Pane, located at the right-hand side -->
-        <Ribbon.HelpPaneContent>
-            <RibbonButton  />
-        </Ribbon.HelpPaneContent>
+   
+    <Ribbon SelectedIndex="0" a:RibbonBehavior.HideRibbonTabs="true" >
         <!-- Quick Access Toolbar - located at the upper-left corner -->
-        <Ribbon.QuickAccessToolBar>
-            <RibbonQuickAccessToolBar>
+        <Ribbon.QuickAccessToolBar>            
+            <RibbonQuickAccessToolBar Margin="2,2,0,0">
                 <RibbonButton SmallImageSource="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/save.png" />
-                <RibbonSplitButton SmallImageSource="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/undo.png"  Visibility="Collapsed">
-                    <RibbonSplitMenuItem Header="Undo 1" />
-                    <RibbonSplitMenuItem Header="Undo 2" />
-                    <RibbonSplitMenuItem Header="Undo 3" />
-                </RibbonSplitButton>
-                <RibbonSplitButton x:Name="Redo"  Visibility="Collapsed">
+                <RibbonButton SmallImageSource="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/undo.png"/>
+
+                <RibbonSplitButton x:Name="Redo" SmallImageSource="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/redo.png">
                     <RibbonSplitMenuItem Header="Redo 1" />
                     <RibbonSplitMenuItem Header="Redo 2" />
                 </RibbonSplitButton>
             </RibbonQuickAccessToolBar>
         </Ribbon.QuickAccessToolBar>
         <!-- Application Menu, located at the left-hand side (down arrow) -->
-        <Ribbon.ApplicationMenu >
-            <RibbonApplicationMenu KeyTip="F" Visibility="Collapsed" >
-                <RibbonApplicationMenuItem Header="Exit" ImageSource="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/X-Mark.png" />
-            </RibbonApplicationMenu>
-        </Ribbon.ApplicationMenu>
+
         <!-- Ribbon Tab #1: Home -->
 
         <RibbonTab KeyTip="H">

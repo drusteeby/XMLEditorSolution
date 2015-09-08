@@ -23,7 +23,13 @@ namespace MachineTagEditor.Modules.TagManager
         {
             get
             {
-                return xmlDataProvider.Source.LocalPath.Split('\\').Last() /*+ (unsavedChanges ? "*" : " ")*/;
+                if (xmlDataProvider.Source != null)
+                    return xmlDataProvider.Source.LocalPath.Split('\\').Last() /*+ (unsavedChanges ? "*" : " ")*/;
+
+                else if (xmlDataProvider.Document != null)
+                    return xmlDataProvider.Document.BaseURI.Split('/').Last();
+
+                return "Source and Document Null!";
             }
 
         }

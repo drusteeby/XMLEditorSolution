@@ -50,6 +50,8 @@ namespace MachineTagEditor.Infrastructure.Attached_Properties
             foreach (Line line in _ribbon.GetDescendants<Line>())
                 line.Visibility = Visibility.Collapsed;
 
+            _ribbon.GetDescendants<Border>().FirstOrDefault((x) => x.Name == "groupsBorder").Height += 10;
+
         }
     }
 }

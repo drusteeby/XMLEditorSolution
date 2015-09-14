@@ -13,23 +13,34 @@ using System.Windows;
 using System.Windows.Data;
 using System.Xml;
 
-namespace MachineTagEditor.Modules.TagManager
+namespace MachineTagEditor.Modules.TagManager.DataTags
 {
     public partial class ViewModel : DependencyObject
     {
         [Dependency]
         public IRegionManager regionManager { get; set; }
 
-        TagManagerService _service;
+        [Dependency]
+        public TagManagerService service { get; set; }
 
         void initProperties()
         {
-            _service = new TagManagerService();
+
             XmlFileList = new ObservableCollection<XmlContainer>();
+            XmlFileList.CollectionChanged += XmlFileList_CollectionChanged;
             EventAggregator.GetEvent<LoadXMLFile>().Subscribe(OnLoadXMLFile);
             EventAggregator.GetEvent<SaveXMLFile>().Subscribe(OnSaveXMLFile);
+            
 
 
+        }
+
+
+
+        //auto selecting the tab of the file we just loaded
+        void XmlFileList_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            Dispatcher.BeginInvoke((Action)(() => SelectedIndex = (sender as ObservableCollection<XmlContainer>).Count - 1));
         }
 
         private void OnSaveXMLFile(bool obj)
@@ -66,14 +77,13 @@ namespace MachineTagEditor.Modules.TagManager
 
                 //Creating the container and loading the XML file
                 XmlContainer toAdd = new XmlContainer();
-                toAdd.xmlDataProvider = _service.LoadFromXML(dialog.FileName);
+                toAdd.xmlDataProvider = service.LoadFromXML(dialog.FileName);
 
                 //Adding every node to a node list
                 foreach (XmlNode node in toAdd.xmlDataProvider.Document.GetElementsByTagName("tags")[0].ChildNodes)
-                    toAdd.xmlNodes.Add(node);
+                    toAdd.TagXMLNodes.Add(node);
 
-                ViewSource = new CollectionViewSource();
-                ViewSource.Source = toAdd.xmlNodes;
+                
 
                 //Add the file to the file list
                 XmlFileList.Add(toAdd);
@@ -86,19 +96,6 @@ namespace MachineTagEditor.Modules.TagManager
                 Properties.Settings.Default.Save();
             }
         }
-
-
-
-        public CollectionViewSource ViewSource
-        {
-            get { return (CollectionViewSource)GetValue(ViewSourceProperty); }
-            set { SetValue(ViewSourceProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for View.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ViewSourceProperty =
-            DependencyProperty.Register("ViewSource", typeof(CollectionViewSource), typeof(ViewModel), new UIPropertyMetadata(null));
-
         
 
         public ObservableCollection<XmlContainer> XmlFileList
@@ -124,8 +121,20 @@ namespace MachineTagEditor.Modules.TagManager
         public static readonly DependencyProperty SelectedFileProperty =
             DependencyProperty.Register("SelectedFile", typeof(XmlContainer), typeof(ViewModel), new UIPropertyMetadata(null));
 
-        
 
+
+
+        public int SelectedIndex
+        {
+            get { return (int)GetValue(SelectedIndexProperty); }
+            set { SetValue(SelectedIndexProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for SelectedIndex.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectedIndexProperty =
+            DependencyProperty.Register("SelectedIndex", typeof(int), typeof(ViewModel), new UIPropertyMetadata(null));
+
+        
         
     }
 }

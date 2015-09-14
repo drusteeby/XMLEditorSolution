@@ -6,13 +6,22 @@
              xmlns:r="http://schemas.microsoft.com/winfx/2006/xaml/presentation/ribbon" x:Class="MachineTagEditor.Modules.Toolbar.Ribbon.View" 
              mc:Ignorable="d" 
              xmlns:a="clr-namespace:MachineTagEditor.Infrastructure.Attached_Properties;assembly=MachineTagEditor.Infrastructure"
-             d:DesignHeight="300" d:DesignWidth="1000">
-   
-    <Ribbon SelectedIndex="0" a:RibbonBehavior.HideRibbonTabs="true" >
+           
+            >
+    <UserControl.Resources>
+        <Style TargetType="RibbonGroup">
+            <Setter Property="DocumentViewerBase.Height" Value="1000"/>
+            <Setter Property="Margin" Value="1"/>
+        </Style>
+    </UserControl.Resources>
+
+    <Ribbon SelectedIndex="0"  a:RibbonBehavior.HideRibbonTabs="true"  Height="Auto" >
         <!-- Quick Access Toolbar - located at the upper-left corner -->
-        <Ribbon.QuickAccessToolBar>            
-            <RibbonQuickAccessToolBar Margin="2,2,0,0">
+        <Ribbon.QuickAccessToolBar>
+            <RibbonQuickAccessToolBar Margin="2,2,0,0"  Height="Auto">
                 <RibbonButton SmallImageSource="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/save.png" />
+                <RibbonButton SmallImageSource="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/saveAs.png" />
+                <RibbonButton SmallImageSource="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/saveAll.png" />
                 <RibbonButton SmallImageSource="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/undo.png"/>
 
                 <RibbonSplitButton x:Name="Redo" SmallImageSource="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/redo.png">
@@ -25,44 +34,64 @@
 
         <!-- Ribbon Tab #1: Home -->
 
-        <RibbonTab KeyTip="H">
+        <RibbonTab KeyTip="H" Height="Auto">
             <!-- Home  group-->
-            <RibbonGroup Header="Files" >
-                <RibbonButton Command="{Binding OpenXMLCommand}" 
+            <RibbonGroup Header="Files"  Height="Auto" >
+                <RibbonButton  Command="{Binding OpenXMLCommand}" 
                               Label="Open" 
                               SmallImageSource="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/open.png"
                               />
-                <ListBox Width="Auto" a:ListBoxBehavior.ScrollOnNewItem="True">
-                    <ListBoxItem>Alarms.xml</ListBoxItem>
-                    <ListBoxItem>Locations.xml</ListBoxItem>
-                </ListBox>
             </RibbonGroup>
-            <RibbonGroup Header="Alarms/Warnings" >
-                <UniformGrid Rows="3" Columns="2" HorizontalAlignment="Left">
-                    <UniformGrid.Resources>
+            <RibbonGroup Header="Alarms/Warnings" Height="Auto" >
+
+                <Grid HorizontalAlignment="Left"  Height="Auto">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.Resources>
                         <Style TargetType="RibbonButton">
                             <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                            <Setter Property="Margin" Value="1"/>
                         </Style>
                         <Style TargetType="RibbonToggleButton">
                             <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                            <Setter Property="Margin" Value="1"/>
                         </Style>
-                    </UniformGrid.Resources>
+                    </Grid.Resources>
 
-                    <RibbonButton Label="New Alarm" SmallImageSource="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/plus.png"/>
-                    <RibbonButton Label="New Warning" SmallImageSource="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/plus.png"/>
-                    <RibbonToggleButton IsChecked="True" Label="View Alarms" SmallImageSource="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/funnel.png"/>
-                    <RibbonToggleButton IsChecked="True" Label="View Warnings" SmallImageSource="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/funnel.png"/>
-                    
-                </UniformGrid>
+                    <RibbonButton Command="{Binding RibbonCommand}" CommandParameter="NewAlarm" Grid.Row="0" Grid.Column="0" Label="New Alarm" SmallImageSource="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/plus.png"/>
+                    <RibbonButton Command="{Binding RibbonCommand}" CommandParameter="NewWarning" Grid.Row="0" Grid.Column="1"  Label="New Warning" SmallImageSource="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/plus.png"/>
+                    <RibbonToggleButton Grid.Row="1" Grid.Column="0"  IsChecked="True" Label="View Alarms" SmallImageSource="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/funnel.png"/>
+                    <RibbonToggleButton Grid.Row="1" Grid.Column="1"  IsChecked="True" Label="View Warnings" SmallImageSource="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/funnel.png"/>
+                    <RibbonToggleButton Grid.Row="2" Grid.ColumnSpan="2" IsChecked="True" Label="View Message Presets" SmallImageSource="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/funnel.png"/>
+                </Grid>
             </RibbonGroup>
             <!-- Employee And Payroll group-->
-            <RibbonGroup Header="Employee And Payroll">
-                <RibbonMenuButton  Label="Employee" KeyTip="V">
-                    <RibbonMenuItem  Header="Keep Text Only" KeyTip="T"/>
-                    <RibbonMenuItem  Header="Paste Special..." KeyTip="S"/>
-                </RibbonMenuButton>
-                <RibbonButton  Label="Save" KeyTip="X" />
-                <RibbonButton  Label="Add" KeyTip="C" />
+            <RibbonGroup Header="Data Types" Height="Auto" VerticalContentAlignment="Bottom">
+                <RibbonButton Command="{Binding RibbonCommand}" CommandParameter="NewDataType" Margin="0,25,0,0" Label="New Data Type" SmallImageSource="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/plus.png"/>
+            </RibbonGroup>
+            <RibbonGroup Header="View" Height="Auto" Width="Auto" VerticalContentAlignment="Stretch" >
+                <Grid HorizontalAlignment="Left"  Height="Auto" VerticalAlignment="Stretch" Margin="0,15,0,0">
+                    <Grid.Resources>
+                        <Style TargetType="RibbonButton">
+                            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                            <Setter Property="Margin" Value="1,5,1,1"/>
+                        </Style>
+                    </Grid.Resources>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <RibbonButton Grid.Row="0" Label="&lt;XML&gt;"  />
+                    <RibbonButton Grid.Row="1"  Label="Visual" Width="Auto"/>
+                </Grid>
             </RibbonGroup>
         </RibbonTab>
 

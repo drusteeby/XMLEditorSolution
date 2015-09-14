@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace MachineTagEditor.Modules.TagManager
+namespace MachineTagEditor.Modules.TagManager.DataTags
 {
     public partial class ViewModel : DependencyObject
     {

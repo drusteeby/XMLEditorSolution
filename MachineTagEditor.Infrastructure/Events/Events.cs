@@ -20,4 +20,6 @@ namespace MachineTagEditor.Infrastructure.Events
     public class DisplayMessage : PubSubEvent<string> { };
     public class LoadXMLFile : PubSubEvent<bool> { };
     public class SaveXMLFile : PubSubEvent<bool> { };
+
+    public class RibbonEvent : PubSubEvent<string> { }
 }

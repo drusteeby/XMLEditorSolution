@@ -13,17 +13,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MachineTagEditor.Modules.TagManager
+namespace MachineTagEditor.Modules.TagManager.AddDataType
 {
     /// <summary>
-    /// Interaction logic for View.xaml
+    /// Interaction logic for UserControl1.xaml
     /// </summary>
     public partial class View : UserControl
     {
-        public View(ViewModel vm)
+        public View(ViewModel _vm)
         {
             InitializeComponent();
-            this.DataContext = vm;
+            this.DataContext = _vm;
         }
     }
 }

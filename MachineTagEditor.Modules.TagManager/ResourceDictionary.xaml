@@ -10,6 +10,7 @@
         <HierarchicalDataTemplate.ItemsSource>
             <Binding XPath="child::node()" />
         </HierarchicalDataTemplate.ItemsSource>
+        <!-- TODO Add Something for parent scroll viewer here-->
     </HierarchicalDataTemplate>
 
     <HierarchicalDataTemplate x:Key="TextBoxTagTemplate">

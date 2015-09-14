@@ -29,10 +29,18 @@ namespace MachineTagEditor.Modules.Toolbar.Ribbon
 
         public DelegateCommand OpenXMLCommand { get; set; }
 
+        public DelegateCommand<string> RibbonCommand { get; set; }
+
         public ViewModel()
         {
             OpenXMLCommand = new DelegateCommand(OnOpenXMLCommand);
+            RibbonCommand = new DelegateCommand<string>(OnRibbonCommand);
 
+        }
+
+        private void OnRibbonCommand(string commandParameter)
+        {
+            eventAggregator.GetEvent<RibbonEvent>().Publish(commandParameter);
         }
 
         private void OnOpenXMLCommand()

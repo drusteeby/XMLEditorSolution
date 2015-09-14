@@ -6,11 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace MachineTagEditor.Modules.TagManager
+namespace MachineTagEditor.Modules.TagManager.DataTags
 {
     public partial class ViewModel : DependencyObject
     {
         public IEventAggregator EventAggregator { get; set; }
+        private Model _model = new Model();
+ 
         public ViewModel(IEventAggregator eventAggregator)
         {
             EventAggregator = eventAggregator;

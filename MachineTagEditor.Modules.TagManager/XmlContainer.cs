@@ -16,7 +16,7 @@ namespace MachineTagEditor.Modules.TagManager
 {
     public partial class XmlContainer : DependencyObject
     {
-        public ObservableCollection<XmlNode> xmlNodes { get; set; }
+        public ObservableCollection<XmlNode> TagXMLNodes { get; set; }
         public XmlDataProvider xmlDataProvider { get; set; }
 
         public string Header
@@ -36,7 +36,7 @@ namespace MachineTagEditor.Modules.TagManager
 
         public XmlContainer()
         {
-            xmlNodes = new ObservableCollection<XmlNode>();
+            TagXMLNodes = new ObservableCollection<XmlNode>();
             xmlDataProvider = new XmlDataProvider();
         }
 

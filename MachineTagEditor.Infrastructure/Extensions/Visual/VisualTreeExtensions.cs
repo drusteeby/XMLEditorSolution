@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Media;
 
-namespace System.Windows
+namespace MachineTagEditor.Infrastructure.Extensions.Visual
 {
     public static class VisualTreeExtensions
     {

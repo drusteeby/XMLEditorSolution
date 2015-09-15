@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Markup;
 
-namespace MachineTagEditor.Infrastructure.Extensions
+namespace MachineTagEditor.Infrastructure.Extensions.Visual
 {
     [MarkupExtensionReturnType(typeof(Style))]
     public class MultiStyleExtension : MarkupExtension

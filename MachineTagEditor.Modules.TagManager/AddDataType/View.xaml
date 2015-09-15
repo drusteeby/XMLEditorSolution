@@ -5,14 +5,25 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:inf="clr-namespace:MachineTagEditor.Infrastructure;assembly=MachineTagEditor.Infrastructure"
              xmlns:select="clr-namespace:MachineTagEditor.Infrastructure.TemplateSelectors;assembly=MachineTagEditor.Infrastructure"
-
-
+             xmlns:ia="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
+             xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+             xmlns:conv="clr-namespace:MachineTagEditor.Infrastructure.Converters;assembly=MachineTagEditor.Infrastructure"
              mc:Ignorable="d" 
-             d:DesignHeight="365.217" d:DesignWidth="400">
+            >
     <UserControl.Resources>
+        <CollectionViewSource x:Key="parentCollection" Source="{Binding Path=ParentsList}">
+            <CollectionViewSource.SortDescriptions>
+                <scm:SortDescription Direction="Ascending"/>
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+        
+        <conv:BoolToVisibilityConverter x:Key="VisibleOnNoParent"/> 
+        
         <Style TargetType="Label" BasedOn="{StaticResource baseStyle}">
             <Style.Setters>
                 <Setter Property="HorizontalAlignment" Value="Right"/>
+                <Setter Property="Margin" Value="0"/>
             </Style.Setters>
         </Style>
 
@@ -20,6 +31,7 @@
             <Style.Setters>
                 <Setter Property="Foreground" Value="Blue"/>
                 <Setter Property="FontStyle" Value="Italic"/>
+                
             </Style.Setters>
         </Style>
         <Style x:Key="NullStyle" TargetType="Label" BasedOn="{StaticResource baseStyle}">
@@ -49,7 +61,7 @@
 
     </UserControl.Resources>
     <Grid Margin="5,5,5,50">
-        <Border Margin="0" Name="mask" Background="White" CornerRadius="8,8,8,8"/>
+        <Border Margin="0,5,0,-5" Name="mask" Background="White" CornerRadius="8,8,8,8"/>
 
 
         <Grid Margin="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
@@ -91,71 +103,115 @@
 
                 <Label Grid.Row="0" Grid.Column="0" 
                        Content="Name:"/>
-                <!--
-                <CC:EnhancedTextBox Grid.Row="0" Grid.Column="1"
-                                    NullText="Test"
-                                    NullTextStyle ="{StaticResource NullStyle}"
-                                    />
-                -->
+                
+                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Name}"/>
+                
 
                 <Label Grid.Row="0" Grid.Column="2" 
                        Content="Parent:"/>
-                <ComboBox Grid.Row="0" Grid.Column="3" 
-                          IsEditable="True"/>
+                <ComboBox Grid.Row="0" Grid.Column="3" MinWidth="100" ItemsSource="{Binding Source={StaticResource parentCollection}}"
+                          IsReadOnly="True" SelectedItem="{Binding SelectedParentText, Mode=TwoWay}" Height="22" Margin="5,5,5,0" VerticalAlignment="Top" />
 
-                <Label Grid.Row="1" Grid.Column="0"
-                       Content="Data Type:"/>
 
-                <ComboBox Grid.Row="1" Grid.Column="1" />
-                <StackPanel Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal">
-                    <Button Content="Single" MinWidth="75" Command="{Binding SingleCommand}"/>
-                    <Button Content="U.S./Metric" MinWidth="75" Command="{Binding USMetricCommand}"/>
+
+
+                <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right"
+                       Content="System Type:"/>
+
+                <ComboBox Grid.Row="1" Grid.Column="3" ItemsSource="{Binding BaseTypesList}" SelectedItem="{Binding SelectedSystemType}" IsEnabled="{Binding EnableOnNoParent}"/>
+                <StackPanel Grid.Row="4" Grid.ColumnSpan="4" Orientation="Horizontal" HorizontalAlignment="Left" Visibility="{Binding EnableOnNoParent,Converter={StaticResource VisibleOnNoParent}}">
+                    <Label Content="Is this a US/Metric conversion data type?:"/>
+                    <ToggleButton  Padding="20,0,20,0" HorizontalAlignment="Right" IsChecked="{Binding IsChecked}" IsEnabled="{Binding EnableOnNoParent}">
+                        <ToggleButton.Style>
+                            <Style TargetType="ToggleButton">
+                                <Setter Property="Content"  Value="Yes"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsChecked}" Value="True">
+                                        <Setter Property="Content"  Value="No"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ToggleButton.Style>
+   
+                    </ToggleButton>
+
+
                 </StackPanel>
 
-                <Label Grid.Row="5" Grid.Column="0" 
-                           Content="{Binding firstLabelContent, UpdateSourceTrigger=PropertyChanged}"
-                           Visibility="{Binding USMetricVisibility, UpdateSourceTrigger=PropertyChanged}"/>
+                <Label Grid.Row="5" Grid.Column="0"  HorizontalAlignment="Right">
+                    <Label.Style>
+                        <Style TargetType="Label">
+                            <Setter Property="Content"  Value="Label:"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsChecked}" Value="True">
+                                    <Setter Property="Content"  Value="Metric Label:"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Label.Style>
+                </Label>
 
-                <!--
-                    <CC:EnhancedTextBox 
-                           Grid.Row="5" Grid.Column="1" 
-                           NullText="{Binding firstETBNullText, UpdateSourceTrigger=PropertyChanged}"
-                        NullTextStyle ="{StaticResource NullStyle}"
-                           Text="{Binding firstETBText, UpdateSourceTrigger=PropertyChanged}"
+                <TextBox   Grid.Row="5" Grid.Column="1"                           
+                           Text="{Binding UnitOneText, UpdateSourceTrigger=PropertyChanged}"
                            />
                     <Label Grid.Row="6" Grid.Column="0" 
-                           Content="{Binding secondLabelContent, UpdateSourceTrigger=PropertyChanged}" 
+                           Content="U.S. Label:"
                            Visibility="{Binding USMetricVisibility}"/>
-                    <CC:EnhancedTextBox 
+                    <TextBox 
                            Grid.Row="6" Grid.Column="1"
                            Visibility="{Binding USMetricVisibility, UpdateSourceTrigger=PropertyChanged}"
-                           Text="{Binding secondETBText, UpdateSourceTrigger=PropertyChanged}"
-                            NullText="{Binding secondETBNullText, UpdateSourceTrigger=PropertyChanged}"
-                        NullTextStyle ="{StaticResource NullStyle}"/>
+                           Text="{Binding UnitTwoText, UpdateSourceTrigger=PropertyChanged}"/>
 
-                    <Label Grid.Row="5" Grid.Column="2" Content="Metric To U.S.:"/>
-                    <CC:EnhancedTextBox Grid.Row="5" Grid.Column="3" 
-                                        Text="{Binding thirdETBText, UpdateSourceTrigger=PropertyChanged}" 
-                                        NullText="{Binding thirdETBNullText, UpdateSourceTrigger=PropertyChanged}" 
-                                        NullTextStyle ="{StaticResource NullStyle}"
+                <Label Grid.Row="5" Grid.Column="2" HorizontalAlignment="Right"
+                       Content="Metric To U.S.:"
+                       Visibility="{Binding USMetricVisibility, UpdateSourceTrigger=PropertyChanged}"/>
+
+
+                <TextBox Grid.Row="5" Grid.Column="3" 
+                                        Text="{Binding UnitOneConversion, UpdateSourceTrigger=PropertyChanged}" 
                                         Visibility="{Binding USMetricVisibility, UpdateSourceTrigger=PropertyChanged}"/>
+                
                 <Label Grid.Row="6" Grid.Column="2" Content="U.S. to Metric:" Visibility="{Binding USMetricVisibility, UpdateSourceTrigger=PropertyChanged}"/>
-                    <CC:EnhancedTextBox Grid.Row="6" Grid.Column="3" 
-                                        Text="{Binding fourthETBText, UpdateSourceTrigger=PropertyChanged}" 
-                                        NullText="{Binding fourthETBNullText, UpdateSourceTrigger=PropertyChanged}"
-                                        NullTextStyle ="{StaticResource NullStyle}"
+                    <TextBox Grid.Row="6" Grid.Column="3" 
+                                        Text="{Binding UnitTwoConversion, UpdateSourceTrigger=PropertyChanged}"                                        
                                         Visibility="{Binding USMetricVisibility, UpdateSourceTrigger=PropertyChanged}"/>
 
-                    <Label Grid.Row="9" Grid.Column="0" Content="Rounding:"/>
-                    <CC:EnhancedTextBox Grid.Row="9" Grid.Column="1"/>
-                -->
-            </Grid>
+                <StackPanel Grid.Row="9" Grid.Column="2" Orientation="Horizontal">
+                    <Label>
+                        <Label.Style>
+                            <Style TargetType="Label">
+                                <Setter Property="Content"  Value="Rounding:"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsChecked}" Value="True">
+                                        <Setter Property="Content"  Value="U.S Rounding:"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Label.Style>
+                    </Label>
+                    <TextBox MinWidth="20" Text="{Binding UnitOneRounding}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="9" Grid.Column="3" Orientation="Horizontal"  Visibility="{Binding USMetricVisibility, UpdateSourceTrigger=PropertyChanged}">
+                    <Label  Content="Metric Rounding:" />
+                    <TextBox MinWidth="20" Text="{Binding UnitTwoRounding}"/>
+                </StackPanel>
 
-            <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
-                    Content="Add"
-                    Margin="15,0,15,30"
-                    Command="{Binding AddUnit}"
-                    />
+
+            </Grid>
+            <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" >
+                <!--TODO Snoop the binding for the Header-->
+                <ComboBox ItemsSource="{Binding XmlFileList}" DataContext="{Binding XmlFileList}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Header}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Button Content="Add"
+                        Margin="15,0,15,30"
+                        Command="{Binding AddToFile}"
+                        />
+            </StackPanel>
         </Grid>
     </Grid>
 </UserControl>

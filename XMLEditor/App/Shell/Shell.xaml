@@ -10,7 +10,7 @@
         Height="{Binding MainWindowHeight,Mode=OneWayToSource}"
         Width="{Binding MainWindowWidth,Mode=OneWayToSource}"
         prism:RegionManager.RegionName="WindowRegion"
-        xmlns:ex="clr-namespace:MachineTagEditor.Infrastructure.Extensions;assembly=MachineTagEditor.Infrastructure"
+        xmlns:ex="clr-namespace:MachineTagEditor.Infrastructure.Extensions.Visual;assembly=MachineTagEditor.Infrastructure"
         >
 
 

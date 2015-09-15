@@ -19,12 +19,14 @@ namespace MachineTagEditor.Modules.TagManager
         public Dictionary<string, Dictionary<string,DataTagContainer>> AllTags { get; set; }
         public Dictionary<string, XmlNode> AllTagsXML { get; set; }
         public Dictionary<string, XmlDataProvider> AllXMLFiles { get; set; }
+        public ObservableCollection<XmlContainer> XmlFileList;
 
         public TagManagerService()
         {
             AllTagsXML = new Dictionary<string, XmlNode>();
             AllXMLFiles = new Dictionary<string, XmlDataProvider>();
             AllTags = new Dictionary<string, Dictionary<string, DataTagContainer>>();
+            XmlFileList = new ObservableCollection<XmlContainer>();
         }
 
         public bool AddGroup(string name)
@@ -59,52 +61,29 @@ namespace MachineTagEditor.Modules.TagManager
             return true;
         }
 
-        public XmlDataProvider LoadFromXML(string path)
+        public bool LoadFromXML(string path)
         {
             var _dataProvider = new XmlDataProvider();
             _dataProvider.Document = new XmlDocument();
             _dataProvider.XPath = "tags";
 
-            try
-            {
-                _dataProvider.Document.Load(path);
-                
+            try{ _dataProvider.Document.Load(path); }
+            catch{ return false; }
 
-                /*foreach (XmlNode node in _dataProvider.Document.ChildNodes)
-                {
-                    switch (node.Name.ToLower())
-                    {
-                        case "enum":
-                        case "bits":
-                            ParseEnum(node);
-                            break;
-                        case "virtual":
-                        case "tag":
-                            ParseTag(node);
-                            break;
-                        case "array":
-                            ParseArray(node);
-                            break;
-                        case "copy":
-                            ParseCopy(node);
-                            break;
-                        case "table":
-                            ParseTable(node);
-                            break;
-                        case "mod":
-                            ParseMod(node);
-                            break;
-                        default:
-                            throw new XmlException("Unknown node " + node.Name + ".");
-                    }
-                }*/
-            }
 
-            catch
-            {
-                return null;
-            }
-            return _dataProvider;
+            //Creating the container and loading the XML file
+            XmlContainer toAdd = new XmlContainer();
+
+            toAdd.xmlDataProvider = _dataProvider;
+
+            //Adding every node to a node list
+            foreach (XmlNode node in toAdd.xmlDataProvider.Document.GetElementsByTagName("tags")[0].ChildNodes)
+                toAdd.XMLNodes.Add(node);
+
+            XmlFileList.Add(toAdd);
+
+            return true;
+            
         }
 
         private void ParseMod(XmlNode node)

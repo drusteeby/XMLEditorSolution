@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Ribbon;
 using System.Windows.Shapes;
+using MachineTagEditor.Infrastructure.Extensions.Visual;
 
 namespace MachineTagEditor.Infrastructure.Attached_Properties
 {

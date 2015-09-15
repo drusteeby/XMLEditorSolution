@@ -31,7 +31,7 @@
         <!--Content of the tab control-->
         <TabControl.ContentTemplate>
             <DataTemplate>
-                <ListView  Margin="0" ItemsSource="{Binding TagXMLNodes ,UpdateSourceTrigger=PropertyChanged}"
+                <ListView  Margin="0" ItemsSource="{Binding XMLNodes ,UpdateSourceTrigger=PropertyChanged}"
                           
               ScrollViewer.CanContentScroll="True"
               ScrollViewer.HorizontalScrollBarVisibility="Disabled"

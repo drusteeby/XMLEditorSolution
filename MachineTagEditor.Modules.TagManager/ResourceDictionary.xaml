@@ -3,7 +3,7 @@
                     xmlns:inf="clr-namespace:MachineTagEditor.Infrastructure;assembly=MachineTagEditor.Infrastructure"
                     xmlns:conv="clr-namespace:MachineTagEditor.Infrastructure.Converters;assembly=MachineTagEditor.Infrastructure"
                     xmlns:selectors="clr-namespace:MachineTagEditor.Modules.TagManager.TemplateSelectors"
-                    xmlns:ex="clr-namespace:MachineTagEditor.Infrastructure.Extensions;assembly=MachineTagEditor.Infrastructure">
+                    xmlns:ex="clr-namespace:MachineTagEditor.Infrastructure.Extensions.Visual;assembly=MachineTagEditor.Infrastructure">
     <!--  Tag Element Tempaltes  -->
 
     <HierarchicalDataTemplate x:Key="BaseXMLTagTemplate">

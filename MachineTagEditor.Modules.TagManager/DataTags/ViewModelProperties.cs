@@ -1,4 +1,5 @@
 ﻿using MachineTagEditor.Infrastructure.Events;
+using MachineTagEditor.Infrastructure.Extensions.XML;
 using MCM.Core.Tags;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
@@ -13,6 +14,7 @@ using System.Windows;
 using System.Windows.Data;
 using System.Xml;
 
+
 namespace MachineTagEditor.Modules.TagManager.DataTags
 {
     public partial class ViewModel : DependencyObject
@@ -20,14 +22,13 @@ namespace MachineTagEditor.Modules.TagManager.DataTags
         [Dependency]
         public IRegionManager regionManager { get; set; }
 
-        [Dependency]
-        public TagManagerService service { get; set; }
+        public TagManagerService Service { get; set; }
 
         void initProperties()
         {
 
             XmlFileList = new ObservableCollection<XmlContainer>();
-            XmlFileList.CollectionChanged += XmlFileList_CollectionChanged;
+            Service.XmlFileList.CollectionChanged += XmlFileList_CollectionChanged;
             EventAggregator.GetEvent<LoadXMLFile>().Subscribe(OnLoadXMLFile);
             EventAggregator.GetEvent<SaveXMLFile>().Subscribe(OnSaveXMLFile);
             
@@ -40,7 +41,9 @@ namespace MachineTagEditor.Modules.TagManager.DataTags
         //auto selecting the tab of the file we just loaded
         void XmlFileList_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
+            XmlFileList = Service.XmlFileList;
             Dispatcher.BeginInvoke((Action)(() => SelectedIndex = (sender as ObservableCollection<XmlContainer>).Count - 1));
+            
         }
 
         private void OnSaveXMLFile(bool obj)
@@ -75,20 +78,10 @@ namespace MachineTagEditor.Modules.TagManager.DataTags
             if (dialog.ShowDialog() == true)
             {
 
-                //Creating the container and loading the XML file
-                XmlContainer toAdd = new XmlContainer();
-                toAdd.xmlDataProvider = service.LoadFromXML(dialog.FileName);
-
-                //Adding every node to a node list
-                foreach (XmlNode node in toAdd.xmlDataProvider.Document.GetElementsByTagName("tags")[0].ChildNodes)
-                    toAdd.TagXMLNodes.Add(node);
-
+                var success = Service.LoadFromXML(dialog.FileName);
                 
-
-                //Add the file to the file list
-                XmlFileList.Add(toAdd);
-                
-                EventAggregator.GetEvent<DisplayMessage>().Publish("File: " + dialog.FileName + " Added");
+                if (success)
+                    EventAggregator.GetEvent<DisplayMessage>().Publish("File: " + dialog.FileName + " Added");
 
                 //Set the last directory and save the XML file
                 Properties.Settings.Default.lastDirectory = dialog.FileName.Substring(0, dialog.FileName.LastIndexOf('\\'));

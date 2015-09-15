@@ -24,14 +24,14 @@ namespace MachineTagEditor.Modules.TagManager
         [Dependency]
         public IUnityContainer container { get; set; }
 
-        public TagManagerService _service;
+        public TagManagerService TagService = new TagManagerService(); 
 
         public void Initialize()
         {
-            container.RegisterInstance(typeof(TagManagerService), new ExternallyControlledLifetimeManager());
+            container.RegisterInstance(TagService, new ExternallyControlledLifetimeManager());
 
             regionMananger.RegisterViewWithRegion(RegionNames.DataRegion, typeof(DataTags.View));
-            eventAggregator.GetEvent<RibbonEvent>().Subscribe(OnRibbonCommand);
+            eventAggregator.GetEvent<RibbonEvent>().Subscribe(OnRibbonCommand,true);
         }
 
         private void OnRibbonCommand(string obj)

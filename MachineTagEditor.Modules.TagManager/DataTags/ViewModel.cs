@@ -13,8 +13,9 @@ namespace MachineTagEditor.Modules.TagManager.DataTags
         public IEventAggregator EventAggregator { get; set; }
         private Model _model = new Model();
  
-        public ViewModel(IEventAggregator eventAggregator)
+        public ViewModel(IEventAggregator eventAggregator, TagManagerService _tm)
         {
+            Service = _tm;
             EventAggregator = eventAggregator;
             initProperties();
             initCommands();

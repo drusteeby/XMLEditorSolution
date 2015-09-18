@@ -200,7 +200,7 @@
             </Grid>
             <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" >
                 <!--TODO Snoop the binding for the Header-->
-                <ComboBox ItemsSource="{Binding XmlFileList}" DataContext="{Binding XmlFileList}">
+                <ComboBox ItemsSource="{Binding XmlFileList}" SelectedValue="{Binding SelectedFile}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Header}"/>

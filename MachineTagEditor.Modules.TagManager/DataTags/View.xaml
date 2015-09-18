@@ -15,7 +15,10 @@
 
     </UserControl.Resources>
 
-    <TabControl ItemsSource="{Binding XmlFileList,UpdateSourceTrigger=PropertyChanged}" SelectedIndex="{Binding SelectedIndex, UpdateSourceTrigger=PropertyChanged}" >
+    <TabControl ItemsSource="{Binding XmlFileList,UpdateSourceTrigger=PropertyChanged}" 
+                SelectedIndex="{Binding SelectedIndex, UpdateSourceTrigger=PropertyChanged}" 
+                SelectedItem="{Binding SelectedFile, UpdateSourceTrigger=PropertyChanged}"
+                ContentTemplateSelector="{StaticResource ViewSelector}">
         <ia:Interaction.Triggers>
             <ia:EventTrigger EventName="SelectionChanged">
                 <cmd:EventToCommand Command="{Binding SelectionChanged}" PassEventArgsToCommand="True"/>
@@ -27,31 +30,6 @@
                 <TextBlock Margin="0" Text="{Binding Header,UpdateSourceTrigger=PropertyChanged}"/>
             </DataTemplate>
         </TabControl.ItemTemplate>
-
-        <!--Content of the tab control-->
-        <TabControl.ContentTemplate>
-            <DataTemplate>
-                <ListView  Margin="0" ItemsSource="{Binding XMLNodes ,UpdateSourceTrigger=PropertyChanged}"
-                          
-              ScrollViewer.CanContentScroll="True"
-              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-              ItemTemplateSelector="{StaticResource TagItemSelector}"
-              VirtualizingPanel.IsVirtualizing="True"
-                          
-             >
-
-                    <!-- HERE IS WHERE THE TEMPLATE SELECTOR WILL GO -->
-                    <ListView.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel IsItemsHost="True" Orientation="Horizontal"
-                               ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                               VirtualizingPanel.IsVirtualizing="True"/>
-                        </ItemsPanelTemplate>
-                    </ListView.ItemsPanel>
-
-                </ListView>
-            </DataTemplate>
-        </TabControl.ContentTemplate>
     </TabControl>
 
     <!--

@@ -75,7 +75,7 @@ namespace WRAExample.Utility
             {
                 IRegion region = _regionWeakReference.Target as IRegion;
                 Window window = sender as Window;
-                window.SizeToContent = SizeToContent.Manual;
+                window.SizeToContent = SizeToContent.WidthAndHeight;
                 window.Width = SystemParameters.PrimaryScreenWidth / 3;
                 window.Height = SystemParameters.PrimaryScreenHeight / 3;
                 window.ResizeMode = ResizeMode.NoResize;

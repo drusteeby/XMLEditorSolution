@@ -8,20 +8,13 @@
              xmlns:a="clr-namespace:MachineTagEditor.Infrastructure.Attached_Properties;assembly=MachineTagEditor.Infrastructure"
            
             >
-    <UserControl.Resources>
-        <Style TargetType="RibbonGroup">
-            <Setter Property="DocumentViewerBase.Height" Value="1000"/>
-            <Setter Property="Margin" Value="1"/>
-        </Style>
-    </UserControl.Resources>
-
     <Ribbon SelectedIndex="0"  a:RibbonBehavior.HideRibbonTabs="true"  Height="Auto" >
         <!-- Quick Access Toolbar - located at the upper-left corner -->
         <Ribbon.QuickAccessToolBar>
             <RibbonQuickAccessToolBar Margin="2,2,0,0"  Height="Auto">
-                <RibbonButton SmallImageSource="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/save.png" />
-                <RibbonButton SmallImageSource="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/saveAs.png" />
-                <RibbonButton SmallImageSource="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/saveAll.png" />
+                <RibbonButton SmallImageSource="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/save.png" Command="{Binding RibbonCommand}" CommandParameter="Save"/>
+                <RibbonButton SmallImageSource="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/saveAs.png" Command="{Binding RibbonCommand}" CommandParameter="SaveAs"/>
+                <RibbonButton SmallImageSource="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/saveAll.png" Command="{Binding RibbonCommand}" CommandParameter="SaveAll"/>
                 <RibbonButton SmallImageSource="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/undo.png"/>
 
                 <RibbonSplitButton x:Name="Redo" SmallImageSource="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/redo.png">
@@ -40,6 +33,22 @@
                 <RibbonButton  Command="{Binding OpenXMLCommand}" 
                               Label="Open" 
                               SmallImageSource="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/open.png"
+                              />
+                <RibbonButton  Command="{Binding RibbonCommand}" CommandParameter="Save" 
+                              Label="Save" 
+                              SmallImageSource="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/save.png"
+                              />
+                <RibbonButton  Command="{Binding RibbonCommand}" CommandParameter="SaveAs" 
+                              Label="Save As" 
+                              SmallImageSource="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/saveAs.png"
+                              />
+
+            </RibbonGroup>
+            <RibbonGroup Header="Selection"  Height="Auto">
+                <RibbonButton  Command="{Binding RibbonCommand}" CommandParameter="Delete" 
+                               VerticalAlignment="Center"
+                              Label="Delete" 
+                              LargeImageSource="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/incorrect.png" Margin="0,10,0,0"
                               />
             </RibbonGroup>
             <RibbonGroup Header="Alarms/Warnings" Height="Auto" >
@@ -67,9 +76,9 @@
 
                     <RibbonButton Command="{Binding RibbonCommand}" CommandParameter="NewAlarm" Grid.Row="0" Grid.Column="0" Label="New Alarm" SmallImageSource="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/plus.png"/>
                     <RibbonButton Command="{Binding RibbonCommand}" CommandParameter="NewWarning" Grid.Row="0" Grid.Column="1"  Label="New Warning" SmallImageSource="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/plus.png"/>
-                    <RibbonToggleButton Grid.Row="1" Grid.Column="0"  IsChecked="True" Label="View Alarms" SmallImageSource="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/funnel.png"/>
-                    <RibbonToggleButton Grid.Row="1" Grid.Column="1"  IsChecked="True" Label="View Warnings" SmallImageSource="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/funnel.png"/>
-                    <RibbonToggleButton Grid.Row="2" Grid.ColumnSpan="2" IsChecked="True" Label="View Message Presets" SmallImageSource="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/funnel.png"/>
+                    <RibbonToggleButton Command="{Binding RibbonCommand}" CommandParameter="ViewAlarms" Grid.Row="1" Grid.Column="0"  IsChecked="{Binding ViewAlarmsChecked}" Label="View Alarms" SmallImageSource="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/funnel.png"/>
+                    <RibbonToggleButton Command="{Binding RibbonCommand}" CommandParameter="ViewWarnings"  Grid.Row="1" Grid.Column="1"  IsChecked="{Binding ViewWarningsChecked}" Label="View Warnings" SmallImageSource="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/funnel.png"/>
+                    <RibbonToggleButton Command="{Binding RibbonCommand}" CommandParameter="ViewEnumerations"  Grid.Row="2" Grid.ColumnSpan="2" IsChecked="{Binding ViewEnumerationsChecked}" Label="View Enumerations" SmallImageSource="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/funnel.png"/>
                 </Grid>
             </RibbonGroup>
             <!-- Employee And Payroll group-->
@@ -89,8 +98,8 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <RibbonButton Grid.Row="0" Label="&lt;XML&gt;"  />
-                    <RibbonButton Grid.Row="1"  Label="Visual" Width="Auto"/>
+                    <RibbonButton Grid.Row="0" Label="&lt;XML&gt;" Command="{Binding RibbonCommand}" CommandParameter="ViewXML"  />
+                    <RibbonButton Grid.Row="1"  Label="Visual" Width="Auto" Command="{Binding RibbonCommand}" CommandParameter="ViewVisual"/>
                 </Grid>
             </RibbonGroup>
         </RibbonTab>

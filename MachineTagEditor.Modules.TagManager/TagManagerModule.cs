@@ -31,12 +31,17 @@ namespace MachineTagEditor.Modules.TagManager
             container.RegisterInstance(TagService, new ExternallyControlledLifetimeManager());
 
             regionMananger.RegisterViewWithRegion(RegionNames.DataRegion, typeof(DataTags.View));
-            eventAggregator.GetEvent<RibbonEvent>().Subscribe(OnRibbonCommand,true);
+            regionMananger.RegisterViewWithRegion(RegionNames.HelpRegion, typeof(QuickActions.View));
+            eventAggregator.GetEvent<RibbonEvent>().Subscribe(OnRibbonCommand,ThreadOption.PublisherThread,true,(x) => x.ToLower().Contains("new"));
         }
 
-        private void OnRibbonCommand(string obj)
+        private void OnRibbonCommand(string commandParameter)
         {
-            regionMananger.RegisterViewWithRegion(RegionNames.WindowRegion, typeof(AddDataType.View));
+            if (commandParameter.ToLower().Contains("datatype"))
+                regionMananger.RegisterViewWithRegion(RegionNames.WindowRegion, typeof(AddDataType.View));
+            
+            if (commandParameter.ToLower().Contains("alarm"))
+                regionMananger.RegisterViewWithRegion(RegionNames.WindowRegion, typeof(AddAlarm.View));
         }
     }
 }

@@ -11,6 +11,10 @@ using System.Windows;
 
 namespace MachineTagEditor.Infrastructure.Events
 {
+    public static class EventsClass
+    {
+        public static PubSubEvent<bool> TagsUpdated;
+    }
     public class TagsUpdated: PubSubEvent<bool> {}
     public class SaveSetting : PubSubEvent<SaveSettingContainer> { }
     public class OpenWizard : PubSubEvent<List<NameTypeContainer>> { }

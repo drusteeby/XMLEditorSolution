@@ -10,111 +10,118 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Xml;
+using MachineTagEditor.Infrastructure.Extensions.XML;
 
 namespace MachineTagEditor.Modules.TagManager
 {
     public class TagManagerService
     {
-
-        public Dictionary<string, Dictionary<string,DataTagContainer>> AllTags { get; set; }
-        public Dictionary<string, XmlNode> AllTagsXML { get; set; }
-        public Dictionary<string, XmlDataProvider> AllXMLFiles { get; set; }
         public ObservableCollection<XmlContainer> XmlFileList;
 
         public TagManagerService()
         {
-            AllTagsXML = new Dictionary<string, XmlNode>();
-            AllXMLFiles = new Dictionary<string, XmlDataProvider>();
-            AllTags = new Dictionary<string, Dictionary<string, DataTagContainer>>();
             XmlFileList = new ObservableCollection<XmlContainer>();
         }
 
-        public bool AddGroup(string name)
+        public List<XmlNode> AllTagsXML
         {
-            if(AllTags.ContainsKey(name))
-                return false;
+            get
+            {
+                List<XmlNode> result = new List<XmlNode>();
+                foreach (XmlContainer container in XmlFileList)
+                    result.AddRange(container.XMLNodes);
 
-            AllTags.Add(name, new Dictionary<string, DataTagContainer>());
-
-            var filePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)  +name + ".xml";
-            var provider = new XmlDataProvider();
-
-            if (AllXMLFiles.ContainsKey(filePath))
-                return false;
-
-            provider.Source = new Uri(filePath);
-
-            AllXMLFiles.Add(filePath, provider);
-
-            return true;
+                return result;
+            }            
         }
 
-        public bool AddTagToGroup(string groupName,DataTagContainer tag)
+        public List<XmlNode> AlarmsList
         {
-            if (!AllTags.ContainsKey(groupName))
-                return false;
-            if (AllTags[groupName].ContainsKey(tag.Name))
-                return false;
+            get
+            {
+                List<XmlNode> result = new List<XmlNode>();
+                foreach (XmlContainer container in XmlFileList)
+                    foreach(XmlNode node in container.XMLNodes.Where((x) => x.IsAlarm()))
+                        result.Add(node);
 
-            AllTags[groupName].Add(tag.Name, tag);
-
-            return true;
+                return result;
+            }
         }
+
+        public List<XmlNode> WarningsList
+        {
+            get
+            {
+                List<XmlNode> result = new List<XmlNode>();
+                foreach (XmlContainer container in XmlFileList)
+                    foreach (XmlNode node in container.XMLNodes.Where((x) => x.IsWarning()))
+                        result.Add(node);
+
+                return result;
+            }
+        }
+
+        public List<XmlNode> DataTypesList
+        {
+            get
+            {
+                List<XmlNode> result = new List<XmlNode>();
+                foreach (XmlContainer container in XmlFileList)
+                    foreach (XmlNode node in container.XMLNodes.Where((x) => x.IsDataType()))
+                        result.Add(node);
+
+                return result;
+            }
+        }
+
+        public List<XmlNode> EnumerationsList
+        {
+            get
+            {
+                List<XmlNode> result = new List<XmlNode>();
+                foreach (XmlContainer container in XmlFileList)
+                    foreach (XmlNode node in container.XMLNodes.Where((x) => x.IsEnumeration()))
+                        result.Add(node);
+
+                return result;
+            }
+        }
+
+        public XmlNode GetNodeByNameAttribute(string name)
+        {
+            return AllTagsXML.SingleOrDefault((x) => x.ContainsAttributeWithExactValue("name", name));
+        }
+
+
+        public void AddNodeToFile(string fileName, string name, Dictionary<string,string> attributes = null)
+        {
+            XmlContainer file = FindFile(fileName);
+            file.AddNode(name, attributes);
+        }
+
+        public void RemoveNodeFromFile(string fileName, string nodeName)
+        {
+            XmlContainer file = FindFile(fileName);
+            file.RemoveNode(nodeName);
+        }
+        public void RemoveNodeFromFile(string fileName, XmlNode node)
+        {
+            XmlContainer file = FindFile(fileName);
+            file.RemoveNode(node);
+        }
+
+        private XmlContainer FindFile(string fileName)
+        {
+            XmlContainer file = XmlFileList.Single((x) => x.Header.Contains(fileName));
+            return file;
+        }
+
 
         public bool LoadFromXML(string path)
         {
-            var _dataProvider = new XmlDataProvider();
-            _dataProvider.Document = new XmlDocument();
-            _dataProvider.XPath = "tags";
-
-            try{ _dataProvider.Document.Load(path); }
-            catch{ return false; }
-
-
-            //Creating the container and loading the XML file
-            XmlContainer toAdd = new XmlContainer();
-
-            toAdd.xmlDataProvider = _dataProvider;
-
-            //Adding every node to a node list
-            foreach (XmlNode node in toAdd.xmlDataProvider.Document.GetElementsByTagName("tags")[0].ChildNodes)
-                toAdd.XMLNodes.Add(node);
-
-            XmlFileList.Add(toAdd);
-
-            return true;
-            
-        }
-
-        private void ParseMod(XmlNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void ParseTable(XmlNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void ParseCopy(XmlNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void ParseArray(XmlNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void ParseTag(XmlNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void ParseEnum(XmlNode node)
-        {
-            throw new NotImplementedException();
-        }
+            XmlFileList.Add(new XmlContainer(path));
+            return true;            
+        }       
 
       }
 

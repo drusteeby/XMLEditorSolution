@@ -26,68 +26,7 @@ namespace MachineTagEditor.Modules.TagManager.DataTags
 
         void initProperties()
         {
-
-            XmlFileList = new ObservableCollection<XmlContainer>();
-            Service.XmlFileList.CollectionChanged += XmlFileList_CollectionChanged;
-            EventAggregator.GetEvent<LoadXMLFile>().Subscribe(OnLoadXMLFile);
-            EventAggregator.GetEvent<SaveXMLFile>().Subscribe(OnSaveXMLFile);
-            
-
-
-        }
-
-
-
-        //auto selecting the tab of the file we just loaded
-        void XmlFileList_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            XmlFileList = Service.XmlFileList;
-            Dispatcher.BeginInvoke((Action)(() => SelectedIndex = (sender as ObservableCollection<XmlContainer>).Count - 1));
-            
-        }
-
-        private void OnSaveXMLFile(bool obj)
-        {
-            if (SelectedFile.xmlDataProvider.Document == null)
-            {
-                EventAggregator.GetEvent<DisplayMessage>().Publish("XML Document is null");
-                return;
-            }
-
-            SelectedFile.xmlDataProvider.Document.Save(SelectedFile.xmlDataProvider.Source.LocalPath);
-            EventAggregator.GetEvent<DisplayMessage>().Publish(SelectedFile.xmlDataProvider.Source.LocalPath + "Sucessfully Saved!");
-
-
-            
-
-        }
-
-        private void OnLoadXMLFile(bool obj)
-        {
-            OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "XML files (*.xml)|*.xml";
-
-
-            if (String.IsNullOrEmpty(Properties.Settings.Default.lastDirectory))
-                dialog.InitialDirectory = @"C:\";
-            else
-                dialog.InitialDirectory = Properties.Settings.Default.lastDirectory;
-
-            dialog.Title = "Please select an XML file to load.";
-
-            if (dialog.ShowDialog() == true)
-            {
-
-                var success = Service.LoadFromXML(dialog.FileName);
-                
-                if (success)
-                    EventAggregator.GetEvent<DisplayMessage>().Publish("File: " + dialog.FileName + " Added");
-
-                //Set the last directory and save the XML file
-                Properties.Settings.Default.lastDirectory = dialog.FileName.Substring(0, dialog.FileName.LastIndexOf('\\'));
-                Properties.Settings.Default.loadedFilePath = dialog.FileName;
-                Properties.Settings.Default.Save();
-            }
+            XmlFileList = new ObservableCollection<XmlContainer>();      
         }
         
 
@@ -126,6 +65,12 @@ namespace MachineTagEditor.Modules.TagManager.DataTags
         // Using a DependencyProperty as the backing store for SelectedIndex.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectedIndexProperty =
             DependencyProperty.Register("SelectedIndex", typeof(int), typeof(ViewModel), new UIPropertyMetadata(null));
+
+
+
+
+
+        
 
         
         

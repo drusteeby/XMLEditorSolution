@@ -11,27 +11,17 @@ namespace MachineTagEditor.Modules.TagManager.DataTags
 {
     public partial class ViewModel : DependencyObject
     {
-        public DelegateCommand SelectedTagChanged {get;set;} 
         public DelegateCommand<SelectionChangedEventArgs> SelectedTabChanged {get;set;}
+
         void initCommands()
         {
-            SelectedTagChanged = new DelegateCommand(OnSelectedTagChanged);
-            SelectedTabChanged = new DelegateCommand<SelectionChangedEventArgs> (OnSelectedTabChanged);
-        }
-
-        private void OnSelectedTagChanged()
-        {
-            throw new NotImplementedException();
+           // SelectedTabChanged = new DelegateCommand<SelectionChangedEventArgs> (OnSelectedTabChanged);
         }
 
         private void OnSelectedTabChanged(SelectionChangedEventArgs e)
         {
-            SelectedFile = (XmlContainer)(e.Source as TabControl).SelectedItem;
+            //SelectedFile = (XmlContainer)(e.Source as TabControl).SelectedItem;
         }
-
-
-
-
        
     }
 

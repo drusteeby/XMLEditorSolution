@@ -16,26 +16,63 @@
 
     <Window.Resources>
         <Style TargetType="Border" x:Key="BlueBox" BasedOn="{ex:MultiStyle RoundedEdges LightBlueSemiTransparent}"/>
-    </Window.Resources>       
-            <Grid  MaxHeight="{x:Static SystemParameters.PrimaryScreenHeight}" MaxWidth="{x:Static SystemParameters.PrimaryScreenWidth}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="0"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>                
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-       
-                
+        <Storyboard x:Key="InTransition">
+            <DoubleAnimation Storyboard.TargetName="dataRegion" 
+                             Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)"
+                             From="-2000.00"
+                             To="0"
+                             BeginTime="00:00:00.5"
+                             Duration="0:0:01.5">
+                <DoubleAnimation.EasingFunction>
+                    <QuadraticEase EasingMode="EaseInOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="dataRegion">
+                <EasingDoubleKeyFrame KeyTime="0" Value="-1.208"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource InTransition}"/>
+        </EventTrigger>
+    </Window.Triggers>
+
+    <Grid  MaxHeight="{x:Static SystemParameters.PrimaryScreenHeight}" MaxWidth="{x:Static SystemParameters.PrimaryScreenWidth}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="9*"/>
+        </Grid.ColumnDefinitions>
+
+
         <Border Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <ContentControl prism:RegionManager.RegionName="ToolbarRegion" />
         </Border>
 
-        <Border Grid.Row="1">
+        <Border Grid.Row="1"  Grid.ColumnSpan="2">
             <ContentControl Grid.Row="1" Grid.ColumnSpan="2" prism:RegionManager.RegionName="{x:Static inf:RegionNames.NavigationRegion}"/>
         </Border>
 
-        <Border  Grid.Row="2" Grid.ColumnSpan="2" Style="{StaticResource BlueBox}">
-            <ContentControl Grid.Row="1" Grid.ColumnSpan="2"  prism:RegionManager.RegionName="{x:Static inf:RegionNames.DataRegion}"/>
+        <Border x:Name="dataRegion" RenderTransformOrigin="0.5,0.5"  Grid.Row="2" Grid.Column="0" Style="{StaticResource BlueBox}"
+                Background="White">
+            <Border.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform X="-2000"/>
+                </TransformGroup>
+            </Border.RenderTransform>
+            <ContentControl   prism:RegionManager.RegionName="{x:Static inf:RegionNames.DataRegion}" Background="Transparent"/>
+        </Border>
+        <Border  Grid.Row="2" Grid.Column="1" Style="{StaticResource BlueBox}">
+            <ContentControl  prism:RegionManager.RegionName="{x:Static inf:RegionNames.HelpRegion}" Background="Transparent"/>
         </Border>
 
 
@@ -43,8 +80,8 @@
             <ContentControl prism:RegionManager.RegionName="MessagesRegion"/>
         </Border>
 
-        
-        </Grid> 
+
+    </Grid>
 
 
 

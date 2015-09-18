@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Xml;
+using MachineTagEditor.Infrastructure.Extensions;
 using MachineTagEditor.Infrastructure.Extensions.XML;
 using System.ComponentModel;
 using System.Windows.Data;
@@ -40,7 +41,7 @@ namespace MachineTagEditor.Modules.TagManager.AddDataType
                 BaseTypesList.Add(val.ToString());
 
             //get all the base unit defs
-            foreach (XmlNode val in TagService.AllTagsXML.Values.Where(x => x.ContainsAttributeNonNull("dataType")))
+            foreach (XmlNode val in TagService.AllTagsXML.Where(x => x.ContainsAttributeNonNull("dataType")))
                     ParentsList.Add(val.Attributes["name"].Value);
 
             //get all the derived unit defs
@@ -67,13 +68,61 @@ namespace MachineTagEditor.Modules.TagManager.AddDataType
         }
 
 
+
+
+
+        public XmlContainer SelectedFile
+        {
+            get { return (XmlContainer)GetValue(SelectedFileProperty); }
+            set { SetValue(SelectedFileProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for SelectedFile.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectedFileProperty =
+            DependencyProperty.Register("SelectedFile", typeof(XmlContainer), typeof(ViewModel), new UIPropertyMetadata(null));
+
+        
+
+        
+
+
         private void OnAddToFile()
         {
-            //var toAdd = TagService.
-            if(ParentNode != null)
+            if(!TagService.XmlFileList.Contains(SelectedFile))
             {
-                
+                MessageBox.Show(SelectedFile + " file not found!");
+                return;
             }
+
+            Dictionary<string, string> attrList = new Dictionary<string, string>();
+
+
+            if (ParentNode != null)
+                foreach (XmlAttribute attr in ParentNode.Attributes)
+                    attrList.AddOrUpdate(attr.Name, attr.Value);
+
+
+
+            attrList.AddOrUpdate("name",Name);
+            attrList.AddOrUpdate("parent", ParentNode.Name);
+
+            if (IsChecked)
+            {
+                attrList.AddOrUpdate("unitsMetric", UnitOneText);
+                attrList.AddOrUpdate("roundMetric", UnitOneRounding);
+                attrList.AddOrUpdate("toUs", UnitOneConversion);
+
+                attrList.AddOrUpdate("unitsUs", UnitTwoText);
+                attrList.AddOrUpdate("roundUs", UnitTwoRounding);
+                attrList.AddOrUpdate("toMetric", UnitTwoConversion);
+            }
+            else
+            {
+                attrList.AddOrUpdate("units", UnitOneText);
+                attrList.AddOrUpdate("rounding", UnitOneRounding);
+            }
+
+            TagService.AddNodeToFile(SelectedFile.Header, "virtual", attrList);
         }
 
         public ObservableCollection<XmlContainer> XmlFileList
@@ -152,7 +201,7 @@ namespace MachineTagEditor.Modules.TagManager.AddDataType
             {
                 vm.ClearValue(ParentNodeProperty);
  
-                try{vm.ParentNode = vm.TagService.AllTagsXML.Single((x) => x.Value.ContainsAttributeWithValue("name", newValue)).Value;}
+                try{vm.ParentNode = vm.TagService.GetNodeByNameAttribute(newValue); }
                 catch { MessageBox.Show("Couldn't find parent " + newValue); }
 
                 vm.EnableOnNoParent = false;
@@ -214,7 +263,7 @@ namespace MachineTagEditor.Modules.TagManager.AddDataType
         
 
         
-
+        //TODO, make this an XMLNode List
         public ObservableCollection<string> ParentsList
         {
             get { return (ObservableCollection<string>)GetValue(ParentsListProperty); }

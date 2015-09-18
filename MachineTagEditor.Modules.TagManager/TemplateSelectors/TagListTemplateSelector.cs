@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Xml;
+using MachineTagEditor.Infrastructure.Extensions.XML;
 
 namespace MachineTagEditor.Modules.TagManager.TemplateSelectors
 {
@@ -37,20 +38,13 @@ namespace MachineTagEditor.Modules.TagManager.TemplateSelectors
         {
             if (item == null || item.GetType() != typeof(XmlElement)) return DefaultTagTemplate;
 
-            XmlElement element = (XmlElement)item;
+            XmlNode node = (XmlNode)item;
 
-            if (element.Name.Contains("bit") || element.Name.Contains("enum"))
-                return EnumTemplate;
-            
-            if(element.HasAttribute("group"))
-            {
-                var groupAttr = element.Attributes["group"];
-
-                if (groupAttr.Value.Contains("Alarm"))
-                    return AlarmTagTemplate;
-                else if (groupAttr.Value.Contains("Warning"))
-                    return WarningTagTemplate;
-            }
+            if (node.IsEnumeration()) return EnumTemplate;
+            if (node.IsAlarm()) return AlarmTagTemplate;
+            if (node.IsWarning()) return WarningTagTemplate;
+            if (node.IsDataType()) return DataTypeTagTemplate;
+                
 
             return DefaultTagTemplate;
         }

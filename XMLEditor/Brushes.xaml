@@ -1,8 +1,22 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <SolidColorBrush x:Key="vStopSignRedBrush" Color="#446677"/>
+    <SolidColorBrush x:Key="vStopSignRedBrush" Color="#EE0000"/>
+    <SolidColorBrush x:Key="dStopSignRedBrush" Color="#AA2222"/>
     <SolidColorBrush x:Key="vStopSignGrayBrush" Color="#EE0000"/>
     <SolidColorBrush x:Key="vWarningYellowBrush" Color="#FFBB00"/>
     <SolidColorBrush x:Key="vWarningBrownBrush" Color="#443300"/>
+    <SolidColorBrush x:Key="dWarningDarkGold" Color="#DD9911"/>
+    <SolidColorBrush x:Key="dWarningMustard" Color="#FFDD55"/>
+    <SolidColorBrush x:Key="dPyramidSkyBlue" Color="#1166AA"/>
+    <SolidColorBrush x:Key="dPyramidTopBrown" Color="#997755"/>
+    <SolidColorBrush x:Key="dPyramidSand" Color="#EECCAA"/>
+    <SolidColorBrush x:Key="dPyramidSkylineBlue" Color="#7799CC"/>
+    <SolidColorBrush x:Key="dPyramidWetSand" Color="#DDAA88"/>
+    <SolidColorBrush x:Key="dUSMapGray" Color="#99AA99"/>
+    <SolidColorBrush x:Key="dUSMapOrange" Color="#EEAA77"/>
+    <SolidColorBrush x:Key="dUSMapYellow" Color="#EECC77"/>
+    <SolidColorBrush x:Key="dUSMapBlue" Color="#44BBEE"/>
+    <SolidColorBrush x:Key="backgroundBlue70" Color="#E9F0F8" Opacity="0.70"/>
+    <SolidColorBrush x:Key="backgroundBlue100" Color="#E9F0F8"/>
 </ResourceDictionary>

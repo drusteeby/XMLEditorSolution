@@ -139,6 +139,7 @@
     <Compile Include="Converters\XmlAttributesToLabelConverter.cs" />
     <Compile Include="EnumerationContainer.cs" />
     <Compile Include="Events\Events.cs" />
+    <Compile Include="Extensions\DictionaryHelper.cs" />
     <Compile Include="Extensions\Visual\MultiStyleExtension.cs" />
     <Compile Include="Extensions\Visual\VisualTreeExtensions.cs" />
     <Compile Include="Extensions\GridHelpers.cs" />

@@ -17,8 +17,10 @@ namespace MachineTagEditor.Modules.TagManager.DataTags
         {
             Service = _tm;
             EventAggregator = eventAggregator;
+
             initProperties();
             initCommands();
+            initEvents();
 
             
         }

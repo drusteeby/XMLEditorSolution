@@ -113,6 +113,10 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddAlarm\View.xaml.cs">
+      <DependentUpon>View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddAlarm\ViewModel.cs" />
     <Compile Include="AddDataType\ViewModel.cs" />
     <Compile Include="DataTags\Model.cs" />
     <Compile Include="DataTags\View.xaml.cs">
@@ -120,8 +124,12 @@
     </Compile>
     <Compile Include="DataTags\ViewModel.cs" />
     <Compile Include="DataTags\ViewModelCommands.cs" />
+    <Compile Include="DataTags\ViewModelEvents.cs" />
     <Compile Include="DataTags\ViewModelProperties.cs" />
     <Compile Include="AddDataType\View.xaml.cs">
+      <DependentUpon>View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="QuickActions\View.xaml.cs">
       <DependentUpon>View.xaml</DependentUpon>
     </Compile>
     <Compile Include="XmlContainer.cs" />
@@ -132,7 +140,6 @@
     </Compile>
     <Compile Include="SampleData\DataSet1.cs">
       <DependentUpon>DataSet1.xsd</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="SampleData\DataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -176,11 +183,19 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="AddAlarm\View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DataTags\View.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="AddDataType\View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="QuickActions\View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -191,6 +206,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DataTags\View_old.txt" />
+    <Resource Include="Resources\bell.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

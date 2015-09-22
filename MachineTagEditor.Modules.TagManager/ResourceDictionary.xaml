@@ -3,7 +3,8 @@
                     xmlns:inf="clr-namespace:MachineTagEditor.Infrastructure;assembly=MachineTagEditor.Infrastructure"
                     xmlns:conv="clr-namespace:MachineTagEditor.Infrastructure.Converters;assembly=MachineTagEditor.Infrastructure"
                     xmlns:selectors="clr-namespace:MachineTagEditor.Modules.TagManager.TemplateSelectors"
-                    xmlns:ex="clr-namespace:MachineTagEditor.Infrastructure.Extensions.Visual;assembly=MachineTagEditor.Infrastructure">
+                    xmlns:ex="clr-namespace:MachineTagEditor.Infrastructure.Extensions.Visual;assembly=MachineTagEditor.Infrastructure"
+                    xmlns:ap="clr-namespace:MachineTagEditor.Infrastructure.Attached_Properties;assembly=MachineTagEditor.Infrastructure">
 
     <ImageBrush x:Key="bellBrush" ImageSource="pack://application:,,,/MachineTagEditor.Modules.TagManager;component/Resources/bell.png"/>
     <VisualBrush x:Key="visualBellBrush">
@@ -19,7 +20,18 @@
     <Style x:Key="HeaderName" TargetType="TextBlock" BasedOn="{StaticResource ResourceKey=Header}">
         <Setter Property="FontSize" Value="16"/>
     </Style>
-    
+    <Style TargetType="ListBoxItem">
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+    </Style>
+    <Style TargetType="ListViewItem">
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+    </Style>
+    <Style TargetType="Grid">
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+    </Style>
+
     <!--  Tag Element Tempaltes  -->
 
     <HierarchicalDataTemplate x:Key="BaseXMLTagTemplate">
@@ -59,6 +71,39 @@
 
     </HierarchicalDataTemplate>
 
+    <HierarchicalDataTemplate x:Key="GenericTagTemplate">
+        <Border Style="{ex:MultiStyle RoundedEdges}" 
+                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                BorderThickness="5" 
+                BorderBrush="{StaticResource dUSMapGray}"
+                Background="LightGray"  Opacity="0.9">
+
+
+
+            <StackPanel>
+                <TextBlock Text="Tag" FontSize="24" Foreground="Black" FontFamily="Arial"/>
+                <ListView  ItemsSource="{Binding Attributes}"
+                           ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid IsSharedSizeScope="True">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0"
+                                           Text="{Binding Path=Name}"/>
+
+                                <TextBlock Grid.Column="1" Margin="5,0,0,0" Text="{Binding Path=Value}" 
+                                 HorizontalAlignment="Stretch"  VerticalAlignment="Center"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+        </Border>
+    </HierarchicalDataTemplate>
+
     <conv:BitNumberConverter x:Key="BitNumberConverter"/>
 
     <HierarchicalDataTemplate x:Key="EnumTemplate">
@@ -67,47 +112,44 @@
                 BorderThickness="5" 
                 BorderBrush="{StaticResource dUSMapOrange}"
                 Background="{StaticResource dUSMapYellow}" Opacity="0.9">
-            <Grid>
+            <Grid IsSharedSizeScope="True">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
-
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=Header}" Text="Enumeration" />
                 <TextBlock Grid.Row="1" Grid.Column="0"  Style="{StaticResource ResourceKey=HeaderName}" Text="Name:" />
-
-                <StackPanel Grid.Row="1" Grid.Column="1"  Orientation="Horizontal">
-                    <TextBlock  Style="{StaticResource ResourceKey=HeaderName}" Text="{Binding Attributes.[name].Value}"/>
-                    <Expander>
-                        <ListView  ItemsSource="{Binding}">
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid DataContext="{Binding Attributes}">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition MinWidth="100"/>
-                                            <ColumnDefinition MinWidth="300"/>
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center">
-                                            <TextBlock.Text>
-                                                <MultiBinding StringFormat="{}Text for #{0}:">
-                                                    <Binding Path=".[value].Value" UpdateSourceTrigger="PropertyChanged" />
-                                                </MultiBinding>
-                                            </TextBlock.Text>
-                                        </TextBlock>
-                                        <TextBox Grid.Column="1" Margin="5,0,0,0" Text="{Binding Path=.[text].Value}" 
-                                     HorizontalAlignment="Stretch"  VerticalAlignment="Center" 
-                                     HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom"/>
-                                    </Grid>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-                    </Expander>
-                </StackPanel>
+                <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource ResourceKey=HeaderName}" Text="{Binding Attributes.[name].Value}"/>
+                <Expander Grid.Row="2" Grid.ColumnSpan="2" >
+                    <ListView  ItemsSource="{Binding}"
+                               ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid DataContext="{Binding Attributes}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" >
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}Text for #{0}:">
+                                                <Binding Path=".[value].Value" UpdateSourceTrigger="PropertyChanged" />
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                    <TextBlock Grid.Column="1" Margin="5,0,0,0" Text="{Binding Path=.[text].Value}" 
+                                    HorizontalAlignment="Stretch"  VerticalAlignment="Center"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Expander>
             </Grid>
         </Border>
     </HierarchicalDataTemplate>
@@ -120,43 +162,41 @@
                 Background="{StaticResource vStopSignRedBrush}" Opacity="0.9">
 
 
-            <Grid>
+            <Grid IsSharedSizeScope="True">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
-
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=Header}" Text="Alarm" />
-                <TextBlock Grid.Row="1" Grid.Column="0"  Style="{StaticResource ResourceKey=HeaderName}" Text="Name:" />
+                <TextBlock Grid.Row="1" Grid.Column="0"  Style="{StaticResource ResourceKey=HeaderName}" Text="Name:" />               
+                <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource ResourceKey=HeaderName}" Text="{Binding Attributes.[name].Value}"/>
+                <Expander Grid.Row="2" Grid.ColumnSpan="2">
+                    <ListView  ItemsSource="{Binding Attributes}"
+                               ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid IsSharedSizeScope="True">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0"
+                                        Text="{Binding Path=Name}"/>
 
-                <StackPanel Grid.Row="1" Grid.Column="1"  Orientation="Horizontal">
-                    <TextBlock  Style="{StaticResource ResourceKey=HeaderName}" Text="{Binding Attributes.[name].Value}"/>
-                    <Expander>
-                        <ListView  ItemsSource="{Binding Attributes}">
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition MinWidth="100"/>
-                                            <ColumnDefinition MinWidth="300"/>
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center"
-                                           Text="{Binding Path=Name}"/>
+                                    <TextBlock Grid.Column="1" Margin="5,0,0,0" Text="{Binding Path=Value}" 
+                                HorizontalAlignment="Stretch"  VerticalAlignment="Center"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Expander>
 
-                                        <TextBox Grid.Column="1" Margin="5,0,0,0" Text="{Binding Path=Value}" 
-                                 HorizontalAlignment="Stretch"  VerticalAlignment="Center" 
-                                 HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom"/>
-                                    </Grid>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-                    </Expander>
-                </StackPanel>
             </Grid>
         </Border>
 
@@ -170,15 +210,15 @@
                 Background="{StaticResource dWarningMustard}" Opacity="0.9">
 
 
-            <Grid>
+            <Grid IsSharedSizeScope="True">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
                     
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=Header}" Foreground="Black" Text="Warning" />
@@ -187,20 +227,20 @@
                 <StackPanel Grid.Row="1" Grid.Column="1"  Orientation="Horizontal">
                     <TextBlock  Style="{StaticResource ResourceKey=HeaderName}" Foreground="Black" Text="{Binding Attributes.[name].Value}"/>         
                     <Expander>
-                        <ListView  ItemsSource="{Binding Attributes}">
+                        <ListView  ItemsSource="{Binding Attributes}"
+                                   ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid>
+                                    <Grid IsSharedSizeScope="True">
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition MinWidth="100"/>
-                                            <ColumnDefinition MinWidth="300"/>
+                                            <ColumnDefinition />
+                                            <ColumnDefinition />
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                        <TextBlock Grid.Column="0" 
                                                    Text="{Binding Path=Name}"/>
 
-                                        <TextBox Grid.Column="1" Margin="5,0,0,0" Text="{Binding Path=Value}" 
-                                         HorizontalAlignment="Stretch"  VerticalAlignment="Center" 
-                                         HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom"/>
+                                        <TextBlock Grid.Column="1" Margin="5,0,0,0" Text="{Binding Path=Value}" 
+                                         HorizontalAlignment="Stretch"  VerticalAlignment="Center"/>
                                     </Grid>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
@@ -223,20 +263,20 @@
 
             <StackPanel>
                 <TextBlock Text="Data Type" FontSize="24" Foreground="Black" FontFamily="Arial"/>
-                <ListView  ItemsSource="{Binding Attributes}">
+                <ListView  ItemsSource="{Binding Attributes}"
+                           ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Grid>
+                            <Grid IsSharedSizeScope="True">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition MinWidth="100"/>
-                                    <ColumnDefinition MinWidth="300"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                <TextBlock Grid.Column="0" 
                                            Text="{Binding Path=Name}"/>
 
-                                <TextBox Grid.Column="1" Margin="5,0,0,0" Text="{Binding Path=Value}" 
-                                 HorizontalAlignment="Stretch"  VerticalAlignment="Center" 
-                                 HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom"/>
+                                <TextBlock Grid.Column="1" Margin="5,0,0,0" Text="{Binding Path=Value}" 
+                                 HorizontalAlignment="Stretch"  VerticalAlignment="Center" />
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
@@ -246,7 +286,7 @@
     </HierarchicalDataTemplate>
     <!--  Tag Element Tempalte Selector  -->
     <selectors:TagListTemplateSelector x:Key="TagItemSelector" 
-                                       DefaultTagTemplate="{StaticResource PlainTextTagTemplate}"
+                                       DefaultTagTemplate="{StaticResource GenericTagTemplate}"
                                        EnumTemplate="{StaticResource EnumTemplate}"
                                        AlarmTagTemplate="{StaticResource AlarmTagTemplate}"
                                        WarningTagTemplate="{StaticResource WarningTagTemplate}"
@@ -278,6 +318,9 @@
         <ListBox  ItemsSource="{Binding XMLNodes ,UpdateSourceTrigger=PropertyChanged}"
                   DataContext="{Binding}"
                   SelectedItem="{Binding SelectedNode, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedIndex="{Binding SelectedIndex, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                  ap:ListBoxBehavior.ScrollOnNewItem="True"
+                  Background="{StaticResource backgroundBlue70}"
                   ItemTemplateSelector="{StaticResource TagItemSelector}"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
 

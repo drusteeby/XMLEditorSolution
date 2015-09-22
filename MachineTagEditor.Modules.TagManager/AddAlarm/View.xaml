@@ -57,7 +57,7 @@
                     <GroupBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"  Grid.Row="0" Grid.Column="0"  Header="Name and Text Options">
                         <StackPanel>
                             <Label Content="Name:" ToolTip="Descriptive name for the alarm"/>
-                            <TextBox Text="{Binding AlarmName}"/>
+                            <TextBox Text="{Binding AlarmName, UpdateSourceTrigger=PropertyChanged}"/>
                             <Label Content="Text:" ToolTip="Text that will appear in the alarms tab of the simulator window"/>
                             <TextBox Text="{Binding AlarmText}" ToolTip="Text that will appear in the alarms tab of the simulator window"/>
                             <Label Content="Prefix:" ToolTip="Will be appended to the alarm text. eg: When the prefix is 'Sta 1 -', the alarm 'Air Pressure Low' will become 'Sta 1 - Air Pressure Low'"/>
@@ -67,7 +67,7 @@
                     <GroupBox  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"  Grid.Row="0" Grid.Column="1" Header="Location Settings">
                         <StackPanel>
                             <Label Content="Read From:" ToolTip="Where the tag is located, either a PLC tag or an internal HMI tag"/>
-                            <ComboBox Text="{Binding AlarmReadFrom}" ToolTip="Where the tag is located, either a PLC tag or an internal HMI tag" SelectedIndex="0">
+                            <ComboBox Text="{Binding AlarmReadFrom, UpdateSourceTrigger=PropertyChanged}" ToolTip="Where the tag is located, either a PLC tag or an internal HMI tag" SelectedIndex="0">
                                 <ComboBoxItem Content="PLC"/>
                                 <ComboBoxItem Content="HMI"/>
                             </ComboBox>
@@ -91,10 +91,19 @@
                     </GroupBox>
                 </Grid>
             </ScrollViewer>
-            <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
-                    Content="Add" 
-                    Command="{Binding AddAlarm}"
-                    />
+            <StackPanel  Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" >
+                <ComboBox ItemsSource="{Binding XmlFileList}" SelectedValue="{Binding SelectedFile}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Header}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Button
+                        Content="Add" 
+                        Command="{Binding AddAlarm}"
+                        />
+            </StackPanel>
         </Grid>
     </Grid>
 </UserControl>

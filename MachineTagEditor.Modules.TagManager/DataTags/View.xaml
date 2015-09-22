@@ -5,19 +5,21 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:ia="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
-             xmlns:local="clr-namespace:MachineTagEditor.Modules.TagManager"
+             xmlns:local="clr-namespace:MachineTagEditor.Modules.TagManager.DataTags"
              xmlns:selectors="clr-namespace:MachineTagEditor.Modules.TagManager.TemplateSelectors"
+             xmlns:ap="clr-namespace:MachineTagEditor.Infrastructure.Attached_Properties;assembly=MachineTagEditor.Infrastructure"
              mc:Ignorable="d" 
-             Background="{x:Static SystemColors.WindowBrush}"
              d:DesignHeight="300" d:DesignWidth="300"
              >
     <UserControl.Resources>
-
     </UserControl.Resources>
-
     <TabControl ItemsSource="{Binding XmlFileList,UpdateSourceTrigger=PropertyChanged}" 
                 SelectedIndex="{Binding SelectedIndex, UpdateSourceTrigger=PropertyChanged}" 
                 SelectedItem="{Binding SelectedFile, UpdateSourceTrigger=PropertyChanged}"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                ap:TabControlBehaviors.HeaderPanelMargin="0"
+                
                 ContentTemplateSelector="{StaticResource ViewSelector}">
         <ia:Interaction.Triggers>
             <ia:EventTrigger EventName="SelectionChanged">
@@ -27,17 +29,11 @@
         <!--Header of the tab control-->
         <TabControl.ItemTemplate>
             <DataTemplate >
-                <TextBlock Margin="0" Text="{Binding Header,UpdateSourceTrigger=PropertyChanged}"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="0" Text="{Binding Header,UpdateSourceTrigger=PropertyChanged}"/>
+                    <Button Content="X" Command="{Binding Path=DataContext.RemoveFile, RelativeSource={RelativeSource AncestorType={x:Type local:View}}}"/>
+                </StackPanel>
             </DataTemplate>
         </TabControl.ItemTemplate>
     </TabControl>
-
-    <!--
-    <ContentControl d:Content="{Binding Path=xmlDataProvider.Document}"
-                   
-              ScrollViewer.CanContentScroll="True"
-              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-              ContentTemplateSelector="{StaticResource ViewSelector}"/>
-    -->
-
 </UserControl>

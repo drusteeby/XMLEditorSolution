@@ -208,7 +208,6 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
                 <Button Content="Add"
-                        Margin="15,0,15,30"
                         Command="{Binding AddToFile}"
                         />
             </StackPanel>

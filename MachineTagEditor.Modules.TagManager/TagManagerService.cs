@@ -93,9 +93,8 @@ namespace MachineTagEditor.Modules.TagManager
         }
 
 
-        public void AddNodeToFile(string fileName, string name, Dictionary<string,string> attributes = null)
-        {
-            XmlContainer file = FindFile(fileName);
+        public void AddNodeToFile(XmlContainer file, string name, Dictionary<string,string> attributes = null)
+        {          
             file.AddNode(name, attributes);
         }
 

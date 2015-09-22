@@ -100,7 +100,12 @@
 
                     <RibbonButton Grid.Row="0" Label="&lt;XML&gt;" Command="{Binding RibbonCommand}" CommandParameter="ViewXML"  />
                     <RibbonButton Grid.Row="1"  Label="Visual" Width="Auto" Command="{Binding RibbonCommand}" CommandParameter="ViewVisual"/>
+                    
+                    
                 </Grid>
+            </RibbonGroup>
+            <RibbonGroup Header="Parameters">
+                <RibbonButton Command="{Binding RibbonCommand}" CommandParameter="NewParameter" Grid.Row="0" Grid.Column="1"  Label="New Parameter" SmallImageSource="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/plus.png"/>
             </RibbonGroup>
         </RibbonTab>
 

@@ -28,21 +28,25 @@ namespace MachineTagEditor.Modules.TagManager.DataTags
             Service.XmlFileList.CollectionChanged += XmlFileList_CollectionChanged;
             EventAggregator.GetEvent<LoadXMLFile>().Subscribe(OnLoadXMLFile);
             EventAggregator.GetEvent<SaveXMLFile>().Subscribe(OnSaveXMLFile);
-            EventAggregator.GetEvent<RibbonEvent>().Subscribe(OnRibbonDelete, ThreadOption.UIThread, true);
+            EventAggregator.GetEvent<RibbonEvent>().Subscribe(OnRibbonEvent, ThreadOption.UIThread, true);
         }
 
-        private void OnRibbonDelete(string command)
+        private void OnRibbonEvent(string command)
         {
             if (command.ToLower().Contains("delete"))
             {
-                var result = MessageBox.Show("Are you sure you want to delete this node?", SelectedFile.SelectedNode.Name, MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (SelectedFile == null || SelectedFile.SelectedNode == null) return;
 
-                if (result.Equals(MessageBoxResult.Yes))
+                //var result = MessageBox.Show("Are you sure you want to delete this node?", SelectedFile.SelectedNode.Name, MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                //if (result.Equals(MessageBoxResult.Yes))
                     SelectedFile.RemoveSelected();
             }
 
             else if(command.ToLower().Contains("save"))
             {
+                if (SelectedFile == null) return;
+
                 if (command.ToLower().Contains("as"))
                 {
                     var filePath = _xmlFileDialog(true);

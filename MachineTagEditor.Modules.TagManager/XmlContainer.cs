@@ -55,6 +55,8 @@ namespace MachineTagEditor.Modules.TagManager
             _root.AppendChild(node);
             XMLNodes.Add(node);
 
+            SelectedIndex = XMLNodes.IndexOf(node);
+
             HasUnsavedChanges = true;
         }
 
@@ -175,7 +177,19 @@ namespace MachineTagEditor.Modules.TagManager
             get { return (bool)GetValue(HasUnsavedChangesProperty); }
             protected set { SetValue(HasUnsavedChangesPropertyKey, value); }
         }
-        
+
+
+
+        public int SelectedIndex
+        {
+            get { return (int)GetValue(SelectedIndexProperty); }
+            set { SetValue(SelectedIndexProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for SelectedIndex.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectedIndexProperty =
+            DependencyProperty.Register("SelectedIndex", typeof(int), typeof(XmlContainer), new UIPropertyMetadata(0));
+
 
     }
 }

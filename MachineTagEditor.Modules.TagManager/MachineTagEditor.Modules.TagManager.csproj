@@ -118,6 +118,11 @@
     </Compile>
     <Compile Include="AddAlarm\ViewModel.cs" />
     <Compile Include="AddDataType\ViewModel.cs" />
+    <Compile Include="AddParameter\ViewModel.cs" />
+    <Compile Include="AddParameter\View.xaml.cs">
+      <DependentUpon>View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddTagViewModelBase.cs" />
     <Compile Include="DataTags\Model.cs" />
     <Compile Include="DataTags\View.xaml.cs">
       <DependentUpon>View.xaml</DependentUpon>
@@ -184,6 +189,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="AddAlarm\View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddParameter\View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

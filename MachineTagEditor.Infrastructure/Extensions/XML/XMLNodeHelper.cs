@@ -21,11 +21,11 @@ namespace MachineTagEditor.Infrastructure.Extensions.XML
 
         public static bool ContainsAttributeWithExactValue(this XmlNode baseNode, string Name, string value)
         {
-            return baseNode.ContainsAttribute(Name) && baseNode.Attributes[Name].Value == value;
+            return baseNode.ContainsAttribute(Name) && baseNode.Attributes[Name].Value.ToLower() == value.ToLower();
         }
         public static bool ContainsAttributeContainsValue(this XmlNode baseNode, string attrName, string value)
         {
-            return baseNode.ContainsAttribute(attrName) && baseNode.Attributes[attrName].Value.Contains(value);
+            return baseNode.ContainsAttribute(attrName) && baseNode.Attributes[attrName].Value.ToLower().Contains(value);
         }
 
         public static string AttributeValue(this XmlNode baseNode, string Name)

@@ -106,6 +106,7 @@
   <ItemGroup>
     <Compile Include="Attached Properties\ListBoxBehavior.cs" />
     <Compile Include="Attached Properties\RibbonBehavior.cs" />
+    <Compile Include="Attached Properties\TabControlBehaviors.cs" />
     <Compile Include="Commands\GlobalCommands.cs" />
     <Compile Include="Containers\DataTagContainer.cs" />
     <Compile Include="Containers\DataTagPropertyContainer.cs" />

@@ -98,13 +98,17 @@ namespace MachineTagEditor.Modules.TagManager.AddDataType
 
 
             if (ParentNode != null)
+            {
                 foreach (XmlAttribute attr in ParentNode.Attributes)
                     attrList.AddOrUpdate(attr.Name, attr.Value);
 
+                attrList.AddOrUpdate("parent", ParentNode.AttributeValue("name"));
+            }
 
 
-            attrList.AddOrUpdate("name",Name);
-            attrList.AddOrUpdate("parent", ParentNode.Name);
+
+                attrList.AddOrUpdate("name",Name);
+            
 
             if (IsChecked)
             {
@@ -122,7 +126,7 @@ namespace MachineTagEditor.Modules.TagManager.AddDataType
                 attrList.AddOrUpdate("rounding", UnitOneRounding);
             }
 
-            TagService.AddNodeToFile(SelectedFile.Header, "virtual", attrList);
+            TagService.AddNodeToFile(SelectedFile, "virtual", attrList);
         }
 
         public ObservableCollection<XmlContainer> XmlFileList

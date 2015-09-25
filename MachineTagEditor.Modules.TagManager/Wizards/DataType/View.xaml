@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="MachineTagEditor.Modules.TagManager.Wizards.DataType.View"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MachineTagEditor.Modules.TagManager.Wizards"
+             xmlns:etk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+             mc:Ignorable="d" 
+              Height="200"
+             Width="320"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        
+        
+    </UserControl.Resources>
+    <etk:Wizard Name="Wizard" FinishButtonClosesWindow="True" ItemsSource="{Binding pages}">
+
+        <etk:WizardPage x:Name="IntroPage" 
+                                   Title="Add A Data Type Wizard"
+                                   Description="This Wizard will walk you creating a new data type. For info on data types, select help below." />
+
+        <etk:WizardPage x:Name="parentPage" PageType="Interior"
+                                   Title="Parent"
+                                   Description="Do you want to base this type off an existing custom type or system type?">
+            <etk:WizardPage.Content>
+                <Label Content="Page One"/>
+            </etk:WizardPage.Content>
+        </etk:WizardPage>
+        <etk:WizardPage x:Name="Page2" PageType="Interior"
+                                   Title="Page 2"
+                                   Description="This is the second page in the process">
+            <etk:WizardPage.Content>
+                <Label Content="Page Two"/>
+            </etk:WizardPage.Content>
+        </etk:WizardPage>
+        <etk:WizardPage x:Name="LastPage" PageType="Exterior"
+                                   Title="Last Page"
+                                   Description="This is the last page in the process"
+                                   CanFinish="True">
+            <etk:WizardPage.ExteriorPanelContent>
+                <Label Content="Page Three"/>
+            </etk:WizardPage.ExteriorPanelContent>
+        </etk:WizardPage>
+                                   
+    </etk:Wizard>
+    
+</UserControl>

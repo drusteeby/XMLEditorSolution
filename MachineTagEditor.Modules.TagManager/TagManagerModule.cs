@@ -49,8 +49,9 @@ namespace MachineTagEditor.Modules.TagManager
         private void OnRibbonCommand(string commandParameter)
         {
             if (commandParameter.ToLower().Contains("datatype"))
-                regionMananger.RegisterViewWithRegion(RegionNames.WindowRegion, typeof(AddDataType.View));
-            
+                regionMananger.RegisterViewWithRegion(RegionNames.WindowRegion, typeof(Wizards.DataType.View));
+            //regionMananger.RegisterViewWithRegion(RegionNames.WindowRegion, typeof(AddDataType.View));
+
             if (commandParameter.ToLower().Contains("alarm"))
                 regionMananger.RegisterViewWithRegion(RegionNames.WindowRegion, typeof(AddAlarm.View));
 

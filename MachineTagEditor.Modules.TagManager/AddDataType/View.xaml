@@ -22,7 +22,7 @@
         
         <Style TargetType="Label" BasedOn="{StaticResource baseStyle}">
             <Style.Setters>
-                <Setter Property="HorizontalAlignment" Value="Right"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
                 <Setter Property="Margin" Value="0"/>
             </Style.Setters>
         </Style>
@@ -93,33 +93,36 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition  Height="Auto"/>
                     <RowDefinition  Height="Auto"/>
+                    <RowDefinition  Height="Auto"/>
+                    <RowDefinition  Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition  Height="Auto"/>
+                    <RowDefinition  Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
                 <Label Grid.Row="0" Grid.Column="0" 
                        Content="Name:"/>
                 
-                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Name}"/>
+                <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Name}"/>
                 
 
-                <Label Grid.Row="0" Grid.Column="2" 
+                <Label Grid.Row="0" Grid.Column="1" 
                        Content="Parent:"/>
-                <ComboBox Grid.Row="0" Grid.Column="3" MinWidth="100" ItemsSource="{Binding Source={StaticResource parentCollection}}"
+                <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Source={StaticResource parentCollection}}"
                           IsReadOnly="True" SelectedItem="{Binding SelectedParentText, Mode=TwoWay}" Height="22" Margin="5,5,5,0" VerticalAlignment="Top" />
 
 
 
 
-                <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right"
+                <Label Grid.Row="2" Grid.Column="1"
                        Content="System Type:"/>
 
-                <ComboBox Grid.Row="1" Grid.Column="3" ItemsSource="{Binding BaseTypesList}" SelectedItem="{Binding SelectedSystemType}" IsEnabled="{Binding EnableOnNoParent}"/>
-                <StackPanel Grid.Row="4" Grid.ColumnSpan="4" Orientation="Horizontal" HorizontalAlignment="Left" Visibility="{Binding EnableOnNoParent,Converter={StaticResource VisibleOnNoParent}}">
+                <ComboBox Grid.Row="3" Grid.Column="1" ItemsSource="{Binding BaseTypesList}" SelectedItem="{Binding SelectedSystemType}" IsEnabled="{Binding EnableOnNoParent}"/>
+                <StackPanel Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Left" Visibility="{Binding EnableOnNoParent,Converter={StaticResource VisibleOnNoParent}}">
                     <Label Content="Is this a US/Metric conversion data type?:"/>
                     <ToggleButton  Padding="20,0,20,0" HorizontalAlignment="Right" IsChecked="{Binding IsChecked}" IsEnabled="{Binding EnableOnNoParent}">
                         <ToggleButton.Style>
@@ -138,7 +141,7 @@
 
                 </StackPanel>
 
-                <Label Grid.Row="5" Grid.Column="0"  HorizontalAlignment="Right">
+                <Label Grid.Row="5" Grid.Column="0"  >
                     <Label.Style>
                         <Style TargetType="Label">
                             <Setter Property="Content"  Value="Label:"/>
@@ -151,32 +154,32 @@
                     </Label.Style>
                 </Label>
 
-                <TextBox   Grid.Row="5" Grid.Column="1"                           
+                <TextBox   Grid.Row="6" Grid.Column="0"                           
                            Text="{Binding UnitOneText, UpdateSourceTrigger=PropertyChanged}"
                            />
-                    <Label Grid.Row="6" Grid.Column="0" 
+                    <Label Grid.Row="7" Grid.Column="0" 
                            Content="U.S. Label:"
                            Visibility="{Binding USMetricVisibility}"/>
                     <TextBox 
-                           Grid.Row="6" Grid.Column="1"
+                           Grid.Row="8" Grid.Column="0"
                            Visibility="{Binding USMetricVisibility, UpdateSourceTrigger=PropertyChanged}"
                            Text="{Binding UnitTwoText, UpdateSourceTrigger=PropertyChanged}"/>
 
-                <Label Grid.Row="5" Grid.Column="2" HorizontalAlignment="Right"
+                <Label Grid.Row="5" Grid.Column="3" 
                        Content="Metric To U.S.:"
                        Visibility="{Binding USMetricVisibility, UpdateSourceTrigger=PropertyChanged}"/>
 
 
-                <TextBox Grid.Row="5" Grid.Column="3" 
+                <TextBox Grid.Row="6" Grid.Column="3" 
                                         Text="{Binding UnitOneConversion, UpdateSourceTrigger=PropertyChanged}" 
                                         Visibility="{Binding USMetricVisibility, UpdateSourceTrigger=PropertyChanged}"/>
                 
-                <Label Grid.Row="6" Grid.Column="2" Content="U.S. to Metric:" Visibility="{Binding USMetricVisibility, UpdateSourceTrigger=PropertyChanged}"/>
-                    <TextBox Grid.Row="6" Grid.Column="3" 
-                                        Text="{Binding UnitTwoConversion, UpdateSourceTrigger=PropertyChanged}"                                        
-                                        Visibility="{Binding USMetricVisibility, UpdateSourceTrigger=PropertyChanged}"/>
+                <Label Grid.Row="7" Grid.Column="3" Content="U.S. to Metric:" Visibility="{Binding USMetricVisibility, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Grid.Row="8" Grid.Column="3" 
+                                    Text="{Binding UnitTwoConversion, UpdateSourceTrigger=PropertyChanged}"                                        
+                                    Visibility="{Binding USMetricVisibility, UpdateSourceTrigger=PropertyChanged}"/>
 
-                <StackPanel Grid.Row="9" Grid.Column="2" Orientation="Horizontal">
+                <StackPanel Grid.Row="9" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
                     <Label>
                         <Label.Style>
                             <Style TargetType="Label">
@@ -191,7 +194,7 @@
                     </Label>
                     <TextBox MinWidth="20" Text="{Binding UnitOneRounding}"/>
                 </StackPanel>
-                <StackPanel Grid.Row="9" Grid.Column="3" Orientation="Horizontal"  Visibility="{Binding USMetricVisibility, UpdateSourceTrigger=PropertyChanged}">
+                <StackPanel Grid.Row="10" Grid.Column="1" Orientation="Horizontal"  HorizontalAlignment="Right" Visibility="{Binding USMetricVisibility, UpdateSourceTrigger=PropertyChanged}">
                     <Label  Content="Metric Rounding:" />
                     <TextBox MinWidth="20" Text="{Binding UnitTwoRounding}"/>
                 </StackPanel>

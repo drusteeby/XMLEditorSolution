@@ -6,6 +6,8 @@
              xmlns:prism="http://www.codeplex.com/prism"
              xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              mc:Ignorable="d" 
+             Height="200"
+             Width="320"
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <ObjectDataProvider x:Key="ShowButtons"
@@ -20,21 +22,27 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="28*"/>
+                        <RowDefinition Height="6*"/>
                     </Grid.RowDefinitions>
 
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
                     <Button Grid.Column="0" 
                             Grid.Row="1"
-                            Content="&lt;" 
+                            Content="Back" 
+                            Margin="5"
                             Command="{Binding GoBack}"/>
                     <Button Grid.Column="2" 
                             Grid.Row="1" 
-                            Content="&gt;" 
+                            Content="Next" 
                             Command="{Binding GoForward}"/>
+                    <Button Grid.Column="2" 
+                                    Grid.Row="1" 
+                                    Content="Cancel" 
+                                    Command="{Binding GoForward}"/>
+        </StackPanel>
 
-        <ContentControl DataContext="{Binding Source={StaticResource ShowButtons}}"
-                        Grid.Column="1" 
+        <ContentControl Grid.Column="1" 
                         Grid.Row="1"  
                         prism:RegionManager.RegionName="PageRegion" />
     </Grid>

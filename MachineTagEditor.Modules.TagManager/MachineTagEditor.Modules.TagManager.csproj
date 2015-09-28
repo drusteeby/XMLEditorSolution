@@ -158,6 +158,7 @@
     <Compile Include="AddDataType\View.xaml.cs">
       <DependentUpon>View.xaml</DependentUpon>
     </Compile>
+    <Compile Include="QuickActions\ViewModel.cs" />
     <Compile Include="QuickActions\View.xaml.cs">
       <DependentUpon>View.xaml</DependentUpon>
     </Compile>

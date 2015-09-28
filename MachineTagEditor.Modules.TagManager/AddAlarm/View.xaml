@@ -7,7 +7,9 @@
              xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"             
              mc:Ignorable="d" 
              Height="Auto"
-             Width="Auto" Background="Transparent">
+             Width="Auto" Background="Transparent"
+             MinWidth="500"
+             MinHeight="300">
     <UserControl.Resources>
 
         <Style BasedOn="{StaticResource baseStyle}" TargetType="Label"/>

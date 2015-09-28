@@ -4,24 +4,58 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MachineTagEditor.Modules.TagManager.QuickActions"
+             xmlns:ex="clr-namespace:MachineTagEditor.Infrastructure.Extensions.Visual;assembly=MachineTagEditor.Infrastructure"
              mc:Ignorable="d" 
+             Margin="10"
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="3*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-
+    <UserControl.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Height" Value="100"/>
+            <Setter Property="Width" Value="100"/>
+        </Style>
+    </UserControl.Resources>
+    <StackPanel >
         <TextBlock Grid.Row="0" Grid.ColumnSpan="10" Text="QUICK ACTIONS"  Margin="5" FontSize="48" FontFamily="Trebuchet MS" Foreground="{StaticResource backgroundBlue100}"/>
-        
+        <WrapPanel>
+            <Border Style="{ex:MultiStyle RoundedEdges}">
+                <Button Command="{Binding OpenXMLFileCommand}" >
+                <Button.Content>
 
-        
-    </Grid>
+                        <StackPanel>
+                            <Image Source="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/open.png" Height="50" Width="50"/>
+                            <TextBlock Margin="5" Text="Open XML File"/>
+                        </StackPanel>
+                    </Button.Content>
+            </Button>
+            </Border>
+            <Button Command="{Binding AddAlarmCommand}"  CommandParameter="NewAlarm">
+                <Button.Content>
+                    <StackPanel>
+                        <Image Source="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/bell.png" Height="50" Width="50"/>
+                        <TextBlock Margin="5" Text="Add Alarm"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+            <Button Command="{Binding AddParameterCommand}" CommandParameter="NewParameter">
+                <Button.Content>
+                    <StackPanel>
+                        <Image Source="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/plus.png" Height="50" Width="50"/>
+                        <TextBlock Margin="5" Text="Add Parameter"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>            
+            <Button Command="{Binding AddDataTypeCommand}"  CommandParameter="NewDataType">
+                <Button.Content>
+                    <StackPanel>
+                        <Image Source="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/plus.png" Height="50" Width="50"/>
+                        <TextBlock Margin="5" Text="Add Data Type"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+
+
+        </WrapPanel>
+    </StackPanel>
+   
 </UserControl>

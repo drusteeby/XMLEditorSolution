@@ -20,9 +20,10 @@ namespace MachineTagEditor.Modules.TagManager.QuickActions
     /// </summary>
     public partial class View : UserControl
     {
-        public View()
+        public View(ViewModel vm)
         {
             InitializeComponent();
+            this.DataContext = vm;
         }
     }
 }

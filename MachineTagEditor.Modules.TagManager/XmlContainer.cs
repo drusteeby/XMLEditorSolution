@@ -12,13 +12,14 @@ using System.Windows;
 using System.Windows.Data;
 using System.Xml;
 using MachineTagEditor.Infrastructure.Extensions.XML;
+using MachineTagEditor.Infrastructure.Interfaces;
 
 namespace MachineTagEditor.Modules.TagManager
 {
     public partial class XmlContainer : DependencyObject
     {
         public ObservableCollection<XmlNode> XMLNodes { get; set; }
-        XmlDataProvider xmlDataProvider { get; set; }
+
 
         XmlNode _root;
 
@@ -34,14 +35,30 @@ namespace MachineTagEditor.Modules.TagManager
             xmlDataProvider = new XmlDataProvider();
             xmlDataProvider.Document = new XmlDocument();
             xmlDataProvider.Document.Load(filePath);
-            xmlDataProvider.XPath = XPath;
+            xmlDataProvider.XPath = "tags/child::*";
+            xmlDataProvider.InitialLoad();
+            xmlDataProvider.DataChanged += XmlDataProvider_DataChanged;
 
-            _root = xmlDataProvider.Document.GetElementsByTagName("tags")[0];
+            xmlDataProvider.Document.NodeChanged += Document_NodeModify;
+            xmlDataProvider.Document.NodeChanging += Document_NodeModify;
+            xmlDataProvider.Document.NodeInserted += Document_NodeModify;
+            xmlDataProvider.Document.NodeInserting += Document_NodeModify;
+            xmlDataProvider.Document.NodeRemoved += Document_NodeModify;
+            xmlDataProvider.Document.NodeRemoving += Document_NodeModify;
 
-            foreach (XmlNode node in _root.ChildNodes)
-                XMLNodes.Add(node);
+            //xmlDocument = xmlDataProvider.Document;            
 
             HasUnsavedChanges = false;
+        }
+
+        private void XmlDataProvider_DataChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Document_NodeModify(object sender, XmlNodeChangedEventArgs e)
+        {
+            HasUnsavedChanges = true;
         }
 
         public void AddNode(string name, Dictionary<string, string> attributes = null)
@@ -56,8 +73,6 @@ namespace MachineTagEditor.Modules.TagManager
             XMLNodes.Add(node);
 
             SelectedIndex = XMLNodes.IndexOf(node);
-
-            HasUnsavedChanges = true;
         }
 
         public void RemoveNode(string name)
@@ -69,16 +84,12 @@ namespace MachineTagEditor.Modules.TagManager
 
             XMLNodes.Remove(toRemove);
             _root.RemoveChild(toRemove);
-
-            HasUnsavedChanges = true;
         } 
 
         public void RemoveNode(XmlNode node)
         {
             XMLNodes.Remove(node);
             _root.RemoveChild(node);
-
-            HasUnsavedChanges = true;
         }
 
         public void RemoveSelected()
@@ -88,7 +99,6 @@ namespace MachineTagEditor.Modules.TagManager
                 _root.RemoveChild(SelectedNode);
                 XMLNodes.Remove(SelectedNode);
             }
-            HasUnsavedChanges = true;
         }
 
         public bool SaveAs(string fullPath)
@@ -115,6 +125,33 @@ namespace MachineTagEditor.Modules.TagManager
         {
             return SaveAs(new Uri(xmlDataProvider.Document.BaseURI).LocalPath);
         }
+
+
+
+
+        public XmlDocument xmlDocument
+        {
+            get { return (XmlDocument)GetValue(xmlDocumentProperty); }
+            set { SetValue(xmlDocumentProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for xmlDocument.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty xmlDocumentProperty =
+            DependencyProperty.Register("xmlDocument", typeof(XmlDocument), typeof(XmlContainer), new UIPropertyMetadata(null));
+
+
+
+
+        public XmlDataProvider xmlDataProvider
+        {
+            get { return (XmlDataProvider)GetValue(xmlDataProviderProperty); }
+            set { SetValue(xmlDataProviderProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for xmlDataProvider.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty xmlDataProviderProperty =
+            DependencyProperty.Register("xmlDataProvider", typeof(XmlDataProvider), typeof(XmlContainer), new UIPropertyMetadata(null));
+
 
 
 

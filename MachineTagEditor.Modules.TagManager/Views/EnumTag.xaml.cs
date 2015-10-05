@@ -13,19 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MachineTagEditor.Modules.TagManager.AddParameter
+namespace MachineTagEditor.Modules.TagManager.Views
 {
     /// <summary>
-    /// Interaction logic for View.xaml
+    /// Interaction logic for EnumTag.xaml
     /// </summary>
-    public partial class View : UserControl
+    public partial class EnumTag : UserControl
     {
-        public View(ViewModel vm)
+        public EnumTag()
         {
             InitializeComponent();
-            this.DataContext = vm;
         }
-
-
     }
 }

@@ -4,6 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MachineTagEditor.Modules.TagManager.AddParameter"
+             xmlns:ia="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:cmd="http://www.galasoft.ch/mvvmlight"
              mc:Ignorable="d" 
              MinWidth="500"
             >
@@ -56,8 +58,14 @@
                     </Grid.RowDefinitions>
 
                     <Label Grid.Row="0" Grid.Column="0" Content="Name:" />
-                    <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
-                    <Label Grid.Row="2" Grid.Column="0" Content="Text:" />
+                <TextBox  Grid.Row="1" Grid.Column="0" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}">
+                    <ia:Interaction.Triggers>
+                        <ia:EventTrigger EventName="PreviewDrop">
+                            <cmd:EventToCommand Command="{Binding dropCommand}" PassEventArgsToCommand="True"/>
+                        </ia:EventTrigger>
+                    </ia:Interaction.Triggers>
+                </TextBox>
+                <Label Grid.Row="2" Grid.Column="0" Content="Text:" />
                     <TextBox Grid.Row="3" Grid.Column="0" Text="{Binding Text}" />
                     <Label Grid.Row="4" Grid.Column="0" Content="Group:"/>
                     <TextBox Grid.Row="5" Grid.Column="0" Text="{Binding Group}"/>

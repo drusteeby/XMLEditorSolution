@@ -4,7 +4,10 @@
                     xmlns:conv="clr-namespace:MachineTagEditor.Infrastructure.Converters;assembly=MachineTagEditor.Infrastructure"
                     xmlns:selectors="clr-namespace:MachineTagEditor.Modules.TagManager.TemplateSelectors"
                     xmlns:ex="clr-namespace:MachineTagEditor.Infrastructure.Extensions.Visual;assembly=MachineTagEditor.Infrastructure"
-                    xmlns:ap="clr-namespace:MachineTagEditor.Infrastructure.Attached_Properties;assembly=MachineTagEditor.Infrastructure">
+                    xmlns:ap="clr-namespace:MachineTagEditor.Infrastructure.Attached_Properties;assembly=MachineTagEditor.Infrastructure"
+                    xmlns:ia="http://schemas.microsoft.com/expression/2010/interactivity"
+                    xmlns:b="clr-namespace:MachineTagEditor.Infrastructure.Behaviors;assembly=MachineTagEditor.Infrastructure"
+                    xmlns:views="clr-namespace:MachineTagEditor.Modules.TagManager.Views">
 
     <Style x:Key="Header" TargetType="TextBlock">
         <Setter Property="FontFamily" Value="Arial"/>
@@ -44,23 +47,6 @@
         <!-- TODO Add Something for parent scroll viewer here-->
     </HierarchicalDataTemplate>
 
-    <HierarchicalDataTemplate x:Key="TextBoxTagTemplate">
-        <ListView  ItemsSource="{Binding Attributes}">
-            <ListView.ItemTemplate>
-                <HierarchicalDataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Margin="5,0,0,0"  Foreground="Red" Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBox Margin="5,0,0,0"  Foreground="Red" Text="{Binding Value,UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBox Margin="5,0,0,0"  Foreground="Blue" Text="{Binding Value,UpdateSourceTrigger=PropertyChanged}"/>
-                    </StackPanel>
-                </HierarchicalDataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-
-        <HierarchicalDataTemplate.ItemsSource>
-            <Binding XPath="child::node()" />
-        </HierarchicalDataTemplate.ItemsSource>
-    </HierarchicalDataTemplate>
 
     <HierarchicalDataTemplate x:Key="PlainTextTagTemplate">
         <StackPanel Orientation="Horizontal">
@@ -75,213 +61,27 @@
     </HierarchicalDataTemplate>
 
     <HierarchicalDataTemplate x:Key="GenericTagTemplate">
-        <Border Style="{ex:MultiStyle RoundedEdges}" 
-                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
-                BorderThickness="5" 
-                BorderBrush="{StaticResource dUSMapGray}"
-                Background="LightGray"  Opacity="0.9">
-
-
-
-            <StackPanel>
-                <TextBlock Style="{StaticResource ResourceKey=HeaderName}" Margin="5,0,0,0"  Text="Tag" Foreground="Black"/>
-                <ListView  ItemsSource="{Binding Attributes}"
-                           ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid IsSharedSizeScope="True">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0"
-                                           Text="{Binding Path=Name}"/>
-
-                                <TextBlock Grid.Column="1" Margin="5,0,0,0" Text="{Binding Path=Value}" 
-                                 HorizontalAlignment="Stretch"  VerticalAlignment="Center"/>
-                            </Grid>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </StackPanel>
-        </Border>
+        <views:DefaultTag/>
     </HierarchicalDataTemplate>
 
     <conv:BitNumberConverter x:Key="BitNumberConverter"/>
 
     <HierarchicalDataTemplate x:Key="EnumTemplate">
-        <Border Style="{ex:MultiStyle RoundedEdges}"
-                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
-                BorderThickness="5" 
-                BorderBrush="{StaticResource dUSMapGray}"
-                Background="{StaticResource dUSMapBlue}" Opacity="0.9">
-            <Grid IsSharedSizeScope="True">
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=Header}" Margin="5,0,0,0" Text="Enumeration" />
-                <TextBlock Grid.Row="1" Grid.Column="0"  Style="{StaticResource ResourceKey=HeaderName}" />
-                <Expander Grid.Row="2" Grid.ColumnSpan="2" >
-                    <ListView  ItemsSource="{Binding}"
-                               ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <Grid DataContext="{Binding Attributes}">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Column="0" >
-                                        <TextBlock.Text>
-                                            <MultiBinding StringFormat="{}Text for #{0}:">
-                                                <Binding Path=".[value].Value" UpdateSourceTrigger="PropertyChanged" />
-                                            </MultiBinding>
-                                        </TextBlock.Text>
-                                    </TextBlock>
-                                    <TextBlock Grid.Column="1" Margin="5,0,0,0" Text="{Binding Path=.[text].Value}" 
-                                    HorizontalAlignment="Stretch"  VerticalAlignment="Center"/>
-                                </Grid>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </Expander>
-            </Grid>
-        </Border>
+        <views:EnumTag/>
     </HierarchicalDataTemplate>
 
     <HierarchicalDataTemplate x:Key="AlarmTagTemplate">
-        <Border Style="{ex:MultiStyle RoundedEdges}" 
-                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
-                BorderThickness="5" 
-                BorderBrush="{StaticResource dStopSignRedBrush}"
-                Background="{StaticResource vStopSignRedBrush}" Opacity="0.9">
-
-
-            <Grid IsSharedSizeScope="True">
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=Header}" Margin="5,0,0,0" Text="Alarm" />
-                <TextBlock Grid.Row="1" Grid.Column="0"  Style="{StaticResource ResourceKey=HeaderName}"/>
-                <Expander Grid.Row="2" Grid.ColumnSpan="2">
-                    <ListView  ItemsSource="{Binding Attributes}"
-                               ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <Grid IsSharedSizeScope="True">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition />
-                                        <ColumnDefinition />
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Column="0"
-                                        Text="{Binding Path=Name}"/>
-
-                                    <TextBlock Grid.Column="1" Margin="5,0,0,0" Text="{Binding Path=Value}" 
-                                HorizontalAlignment="Stretch"  VerticalAlignment="Center"/>
-                                </Grid>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </Expander>
-
-            </Grid>
-        </Border>
-
+        <views:AlarmTag/>
     </HierarchicalDataTemplate>
 
     <HierarchicalDataTemplate x:Key="WarningTagTemplate">
-        <Border Style="{ex:MultiStyle RoundedEdges}" 
-                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
-                BorderThickness="5" 
-                BorderBrush="{StaticResource dWarningDarkGold}"
-                Background="{StaticResource dWarningMustard}" Opacity="0.9">
-
-
-            <Grid IsSharedSizeScope="True">
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=Header}" Margin="5,0,0,0" Foreground="Black" Text="Warning" />
-                <TextBlock Grid.Row="1" Grid.Column="0"  Style="{StaticResource ResourceKey=HeaderName}" Foreground="Black"/>                
-                <Expander Grid.Row="2" Grid.ColumnSpan="2">
-                    <ListView  ItemsSource="{Binding Attributes}"
-                                ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <Grid IsSharedSizeScope="True">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition />
-                                        <ColumnDefinition />
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Column="0" 
-                                                Text="{Binding Path=Name}"/>
-
-                                    <TextBlock Grid.Column="1" Margin="5,0,0,0" Text="{Binding Path=Value}" 
-                                        HorizontalAlignment="Stretch"  VerticalAlignment="Center"/>
-                                </Grid>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </Expander>
-
-            </Grid>
-        </Border>
-
+        <views:WarningTag/>
     </HierarchicalDataTemplate>
     
     <HierarchicalDataTemplate x:Key="DataTypeTemplate">
-        <Border Style="{ex:MultiStyle RoundedEdges}" 
-                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
-                BorderThickness="5" 
-                BorderBrush="{StaticResource dPyramidSkyBlue}"
-                Background="{StaticResource dPyramidSkylineBlue}" Opacity="0.9">
-
-
-
-            <StackPanel>
-                <TextBlock Style="{StaticResource ResourceKey=HeaderName}" Margin="5,0,0,0" Text="Data Type" Foreground="Black"/>
-                <ListView  ItemsSource="{Binding Attributes}"
-                           ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid IsSharedSizeScope="True">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" 
-                                           Text="{Binding Path=Name}"/>
-
-                                <TextBlock Grid.Column="1" Margin="5,0,0,0" Text="{Binding Path=Value}" 
-                                 HorizontalAlignment="Stretch"  VerticalAlignment="Center" />
-                            </Grid>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </StackPanel>
-        </Border>
+        <views:DataType/>       
     </HierarchicalDataTemplate>
+    
     <!--  Tag Element Tempalte Selector  -->
     <selectors:TagListTemplateSelector x:Key="TagItemSelector" 
                                        DefaultTagTemplate="{StaticResource GenericTagTemplate}"
@@ -312,15 +112,19 @@
 
         </ListView>
     </HierarchicalDataTemplate>
+    
     <HierarchicalDataTemplate x:Key="ListBoxTemplate">
-        <ListBox  ItemsSource="{Binding XMLNodes ,UpdateSourceTrigger=PropertyChanged}"
-                  DataContext="{Binding}"
+        <ListBox  
+                  DataContext="{Binding xmlDataProvider}"
+                  ItemsSource="{Binding}"
                   SelectedItem="{Binding SelectedNode, UpdateSourceTrigger=PropertyChanged}"
                   SelectedIndex="{Binding SelectedIndex, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                  IsSynchronizedWithCurrentItem="True"
                   ap:ListBoxBehavior.ScrollOnNewItem="True"
                   Background="{StaticResource backgroundBlue70}"
-                  ItemTemplateSelector="{StaticResource TagItemSelector}"
-                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  ItemTemplateSelector="{StaticResource TagItemSelector}"/>
+
 
 
     </HierarchicalDataTemplate>

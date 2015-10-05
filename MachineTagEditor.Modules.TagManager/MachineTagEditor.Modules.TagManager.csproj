@@ -162,6 +162,21 @@
     <Compile Include="QuickActions\View.xaml.cs">
       <DependentUpon>View.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\AlarmTag.xaml.cs">
+      <DependentUpon>AlarmTag.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DataType.xaml.cs">
+      <DependentUpon>DataType.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DefaultTag.xaml.cs">
+      <DependentUpon>DefaultTag.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EnumTag.xaml.cs">
+      <DependentUpon>EnumTag.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WarningTag.xaml.cs">
+      <DependentUpon>WarningTag.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Wizards\DataType\View.xaml.cs">
       <DependentUpon>View.xaml</DependentUpon>
     </Compile>
@@ -239,6 +254,26 @@
     <Page Include="ResourceDictionary.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\AlarmTag.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DataType.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DefaultTag.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EnumTag.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WarningTag.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Wizards\DataType\View.xaml">
       <SubType>Designer</SubType>

@@ -35,7 +35,7 @@ namespace MachineTagEditor.Modules.TagManager.Wizards.DataType
 
         private void Wizard_Next(object sender, Xceed.Wpf.Toolkit.Core.CancelRoutedEventArgs e)
         {
-
+            
         }
     }
 }

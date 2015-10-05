@@ -107,6 +107,9 @@
     <Compile Include="Attached Properties\ListBoxBehavior.cs" />
     <Compile Include="Attached Properties\RibbonBehavior.cs" />
     <Compile Include="Attached Properties\TabControlBehaviors.cs" />
+    <Compile Include="Behaviors\FrameworkElementAdorner.cs" />
+    <Compile Include="Behaviors\FrameworkElementDragBehavior.cs" />
+    <Compile Include="Behaviors\FrameworkElementDropBehavior.cs" />
     <Compile Include="Commands\GlobalCommands.cs" />
     <Compile Include="Containers\DataTagContainer.cs" />
     <Compile Include="Containers\DataTagPropertyContainer.cs" />
@@ -145,7 +148,9 @@
     <Compile Include="Extensions\Visual\VisualTreeExtensions.cs" />
     <Compile Include="Extensions\GridHelpers.cs" />
     <Compile Include="Extensions\XML\XMLNodeHelper.cs" />
+    <Compile Include="Interfaces\IDropable.cs" />
     <Compile Include="Interfaces\INamedView.cs" />
+    <Compile Include="Interfaces\IDragable.cs" />
     <Compile Include="Interfaces\IXMLService.cs" />
     <Compile Include="RegionAdapters\WindowRegionAdapter.cs" />
     <Compile Include="RegionNames.cs" />
@@ -201,6 +206,7 @@
       <Name>MCM</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

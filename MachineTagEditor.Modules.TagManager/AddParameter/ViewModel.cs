@@ -13,8 +13,15 @@ namespace MachineTagEditor.Modules.TagManager.AddParameter
 {
     public class ViewModel: AddTagViewModelBase
     {
+
+        public DelegateCommand<DragEventArgs> dropCommand { get; set; }
+
+
+
         public ViewModel(TagManagerService _tm):base(_tm)
         {
+            dropCommand = new DelegateCommand<DragEventArgs>(OnDropCommand);
+
             foreach (XmlNode node in base.TagService.DataTypesList)
                 base.ParentsList.Add(node.Attributes["name"].Value);
 
@@ -23,6 +30,14 @@ namespace MachineTagEditor.Modules.TagManager.AddParameter
             Group = "partEdit";
             Page = "Auto Part";
             Name = "Part.";
+
+
+        }
+
+
+        private void OnDropCommand(DragEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void OnAddParameter()

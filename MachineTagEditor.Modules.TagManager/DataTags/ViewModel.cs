@@ -20,9 +20,7 @@ namespace MachineTagEditor.Modules.TagManager.DataTags
 
             initProperties();
             initCommands();
-            initEvents();
-
-            
+            initEvents();            
         }
         
     }

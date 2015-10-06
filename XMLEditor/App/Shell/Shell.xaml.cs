@@ -30,20 +30,24 @@
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             var window = (sender as Window);
-            var secondaryScreen = (Screen)System.Windows.Forms.Screen.AllScreens.GetValue(1);
-
-            if (secondaryScreen != null)
+            try
             {
-                Rectangle workingArea = secondaryScreen.WorkingArea;
-                window.Left = workingArea.Left;
-                window.Top = workingArea.Top;
-                window.Width = workingArea.Width;
-                window.Height = workingArea.Height;
-                // If window isn't loaded then maxmizing will result in the window displaying on the primary monitor
-                if (window.IsLoaded)
-                    window.WindowState = WindowState.Maximized;
-            }
+                var secondaryScreen = (Screen)System.Windows.Forms.Screen.AllScreens.GetValue(1);
 
+                if (secondaryScreen != null)
+                {
+                    Rectangle workingArea = secondaryScreen.WorkingArea;
+                    window.Left = workingArea.Left;
+                    window.Top = workingArea.Top;
+                    window.Width = workingArea.Width;
+                    window.Height = workingArea.Height;
+                }
+            }
+            catch { }
+
+            // If window isn't loaded then maxmizing will result in the window displaying on the primary monitor
+            if (window.IsLoaded)
+                window.WindowState = WindowState.Maximized;
 
         }
     }

@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:MachineTagEditor.Modules.TagManager.Views"
              xmlns:ex="clr-namespace:MachineTagEditor.Infrastructure.Extensions.Visual;assembly=MachineTagEditor.Infrastructure"
              mc:Ignorable="d" 
+             DataContext="{Binding Node}"
              d:DesignHeight="300" d:DesignWidth="300">
     <Border Style="{ex:MultiStyle RoundedEdges}" 
                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 

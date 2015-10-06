@@ -8,6 +8,7 @@
              xmlns:ia="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:b="clr-namespace:MachineTagEditor.Infrastructure.Behaviors;assembly=MachineTagEditor.Infrastructure"
              mc:Ignorable="d" 
+             DataContext="{Binding}"
              d:DesignHeight="300" d:DesignWidth="300">
     <ia:Interaction.Behaviors>
         <b:FrameworkElementDragBehavior/>
@@ -34,7 +35,7 @@
             <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=Header}" Margin="5,0,0,0" Text="Alarm" />
             <TextBlock Grid.Row="1" Grid.Column="0"  Style="{StaticResource ResourceKey=HeaderName}"/>
             <Expander Grid.Row="2" Grid.ColumnSpan="2">
-                <ListView  ItemsSource="{Binding Attributes}"
+                <ListView  ItemsSource="{Binding Node.Attributes}"
                                ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                     <ListView.ItemTemplate>
                         <DataTemplate>

@@ -29,7 +29,8 @@ namespace MachineTagEditor.Modules.TagManager
             {
                 List<XmlNode> result = new List<XmlNode>();
                 foreach (XmlContainer container in XmlFileList)
-                    result.AddRange(container.XMLNodes);
+                    foreach (XmlNodeContainer nodeContainer in container.XMLNodes)
+                        result.Add(nodeContainer.Node);
 
                 return result;
             }            
@@ -41,8 +42,8 @@ namespace MachineTagEditor.Modules.TagManager
             {
                 List<XmlNode> result = new List<XmlNode>();
                 foreach (XmlContainer container in XmlFileList)
-                    foreach(XmlNode node in container.XMLNodes.Where((x) => x.IsAlarm()))
-                        result.Add(node);
+                    foreach(XmlNodeContainer nodeContainer in container.XMLNodes.Where((x) => x.Node.IsAlarm()))
+                        result.Add(nodeContainer.Node);
 
                 return result;
             }
@@ -54,8 +55,8 @@ namespace MachineTagEditor.Modules.TagManager
             {
                 List<XmlNode> result = new List<XmlNode>();
                 foreach (XmlContainer container in XmlFileList)
-                    foreach (XmlNode node in container.XMLNodes.Where((x) => x.IsWarning()))
-                        result.Add(node);
+                    foreach (XmlNodeContainer nodeContainer in container.XMLNodes.Where((x) => x.Node.IsWarning()))
+                        result.Add(nodeContainer.Node);
 
                 return result;
             }
@@ -67,8 +68,8 @@ namespace MachineTagEditor.Modules.TagManager
             {
                 List<XmlNode> result = new List<XmlNode>();
                 foreach (XmlContainer container in XmlFileList)
-                    foreach (XmlNode node in container.XMLNodes.Where((x) => x.IsDataType()))
-                        result.Add(node);
+                    foreach (XmlNodeContainer nodeContainer in container.XMLNodes.Where((x) => x.Node.IsDataType()))
+                        result.Add(nodeContainer.Node);
 
                 return result;
             }
@@ -80,8 +81,8 @@ namespace MachineTagEditor.Modules.TagManager
             {
                 List<XmlNode> result = new List<XmlNode>();
                 foreach (XmlContainer container in XmlFileList)
-                    foreach (XmlNode node in container.XMLNodes.Where((x) => x.IsEnumeration()))
-                        result.Add(node);
+                    foreach (XmlNodeContainer nodeContainer in container.XMLNodes.Where((x) => x.Node.IsEnumeration()))
+                        result.Add(nodeContainer.Node);
 
                 return result;
             }

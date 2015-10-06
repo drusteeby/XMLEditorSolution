@@ -25,7 +25,7 @@ namespace MachineTagEditor.Infrastructure.Behaviors
 
         private void AssociatedObject_MouseLeave(object sender, MouseEventArgs e)
         {
-            IDragable dragObject = this.AssociatedObject as IDragable;
+            IDragable dragObject = this.AssociatedObject.DataContext as IDragable;
 
             if (dragObject == null)
             {
@@ -42,7 +42,7 @@ namespace MachineTagEditor.Infrastructure.Behaviors
             if (dragObject != null && isMouseClicked)
             {
                 DataObject data = new DataObject();
-                data.SetData(dragObject.DataType, this.AssociatedObject);
+                data.SetData(dragObject.DataType, dragObject);
                 DragDrop.DoDragDrop(this.AssociatedObject, data, DragDropEffects.Move);
                 
             }

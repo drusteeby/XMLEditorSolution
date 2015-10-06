@@ -36,9 +36,9 @@ namespace MachineTagEditor.Modules.TagManager.TemplateSelectors
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            if (item == null || item.GetType() != typeof(XmlElement)) return DefaultTagTemplate;
+            if (item == null || item.GetType() != typeof(XmlNodeContainer)) return DefaultTagTemplate;
 
-            XmlNode node = (XmlNode)item;
+            XmlNode node = (item as XmlNodeContainer).Node;
 
             if (node.IsEnumeration()) return EnumTemplate;
             if (node.IsAlarm()) return AlarmTagTemplate;

@@ -32,7 +32,7 @@ namespace MachineTagEditor.Infrastructure.Behaviors
         {
             if (this.dataType == null && this.AssociatedObject != null)
             {
-                IDropable dropObject = this.AssociatedObject as IDropable;
+                IDropable dropObject = this.AssociatedObject.DataContext as IDropable;
                 if(dropObject != null)
                 {
                     this.dataType = dropObject.DataType;
@@ -62,7 +62,7 @@ namespace MachineTagEditor.Infrastructure.Behaviors
                 if (e.Data.GetDataPresent(dataType))
                 {
                     //drop the data
-                    IDropable target = this.AssociatedObject as IDropable;
+                    IDropable target = this.AssociatedObject.DataContext as IDropable;
                     target.Drop(e.Data.GetData(dataType));
 
                     //remove the data from the source

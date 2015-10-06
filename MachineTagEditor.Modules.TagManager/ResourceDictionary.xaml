@@ -21,7 +21,7 @@
         <Setter Property="Text">
             <Setter.Value>
                 <MultiBinding StringFormat="{} Name: {0}">
-                    <Binding Path="Attributes.[name].Value"/>
+                    <Binding Path="Node.Attributes.[name].Value"/>
                 </MultiBinding>
             </Setter.Value>
         </Setter>
@@ -39,27 +39,6 @@
     </Style>
 
     <!--  Tag Element Tempaltes  -->
-
-    <HierarchicalDataTemplate x:Key="BaseXMLTagTemplate">
-        <HierarchicalDataTemplate.ItemsSource>
-            <Binding XPath="child::node()" />
-        </HierarchicalDataTemplate.ItemsSource>
-        <!-- TODO Add Something for parent scroll viewer here-->
-    </HierarchicalDataTemplate>
-
-
-    <HierarchicalDataTemplate x:Key="PlainTextTagTemplate">
-        <StackPanel Orientation="Horizontal">
-            <TextBlock x:Name="text" Text="{Binding Name}"/>
-            <TextBlock Margin="5,0,0,0"  Foreground="Red" Text="{Binding Attributes, Converter={StaticResource XmlAttributesToLabelConverter},UpdateSourceTrigger=PropertyChanged}"/>
-        </StackPanel>
-
-        <HierarchicalDataTemplate.ItemsSource>
-            <Binding XPath="child::node()" />
-        </HierarchicalDataTemplate.ItemsSource>
-
-    </HierarchicalDataTemplate>
-
     <HierarchicalDataTemplate x:Key="GenericTagTemplate">
         <views:DefaultTag/>
     </HierarchicalDataTemplate>
@@ -114,25 +93,13 @@
     </HierarchicalDataTemplate>
     
     <HierarchicalDataTemplate x:Key="ListBoxTemplate">
-        <ListBox  
-                  DataContext="{Binding xmlDataProvider}"
-                  ItemsSource="{Binding}"
-                  SelectedItem="{Binding SelectedNode, UpdateSourceTrigger=PropertyChanged}"
-                  SelectedIndex="{Binding SelectedIndex, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                  IsSynchronizedWithCurrentItem="True"
-                  ap:ListBoxBehavior.ScrollOnNewItem="True"
-                  Background="{StaticResource backgroundBlue70}"
-                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                  ItemTemplateSelector="{StaticResource TagItemSelector}"/>
-
-
-
+        <views:ListBoxTagViewer/>
     </HierarchicalDataTemplate>
 
 
 
 
     <!--  View Element Selector  -->
-    <selectors:TagViewTemplateSelector x:Key="ViewSelector" DefaultTemplate="{StaticResource ListBoxTemplate}"/>
+
 
 </ResourceDictionary>

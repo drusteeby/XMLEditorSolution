@@ -8,18 +8,25 @@
              xmlns:local="clr-namespace:MachineTagEditor.Modules.TagManager.DataTags"
              xmlns:selectors="clr-namespace:MachineTagEditor.Modules.TagManager.TemplateSelectors"
              xmlns:ap="clr-namespace:MachineTagEditor.Infrastructure.Attached_Properties;assembly=MachineTagEditor.Infrastructure"
+             xmlns:views="clr-namespace:MachineTagEditor.Modules.TagManager.Views"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              >
     <UserControl.Resources>
+        <selectors:TagViewTemplateSelector x:Key="ViewSelector">
+            <selectors:TagViewTemplateSelector.DefaultTemplate>
+                <HierarchicalDataTemplate>
+                    <views:ListBoxTagViewer/>
+                </HierarchicalDataTemplate>                
+            </selectors:TagViewTemplateSelector.DefaultTemplate>    
+        </selectors:TagViewTemplateSelector>
     </UserControl.Resources>
     <TabControl ItemsSource="{Binding XmlFileList,UpdateSourceTrigger=PropertyChanged}" 
                 SelectedIndex="{Binding SelectedIndex, UpdateSourceTrigger=PropertyChanged}" 
                 SelectedItem="{Binding SelectedFile, UpdateSourceTrigger=PropertyChanged}"
                 Background="Transparent"
                 BorderBrush="Transparent"
-                ap:TabControlBehaviors.HeaderPanelMargin="0"
-                
+                ap:TabControlBehaviors.HeaderPanelMargin="0"                
                 ContentTemplateSelector="{StaticResource ViewSelector}">
         <ia:Interaction.Triggers>
             <ia:EventTrigger EventName="SelectionChanged">

@@ -17,21 +17,31 @@ using MachineTagEditor.Infrastructure.Interfaces;
 namespace MachineTagEditor.Modules.TagManager
 {
     public partial class XmlContainer : DependencyObject
-    {
-        public ObservableCollection<XmlNode> XMLNodes { get; set; }
+    {        
+
+        public ObservableCollection<XmlNodeContainer> XMLNodes
+            {
+                get { return (ObservableCollection<XmlNodeContainer>)GetValue(XMLNodesProperty); }
+                set { SetValue(XMLNodesProperty, value); }
+            }
+
+            // Using a DependencyProperty as the backing store for XMLNodes.  This enables animation, styling, binding, etc...
+            public static readonly DependencyProperty XMLNodesProperty =
+                DependencyProperty.Register("XMLNodes", typeof(ObservableCollection<XmlNodeContainer>), typeof(XmlContainer), new UIPropertyMetadata(null));
+
 
 
         XmlNode _root;
 
         public string FullFilePath
         {
-            get { return xmlDataProvider.Source.LocalPath; }
+            get { return xmlDataProvider.Document.BaseURI; }
         }
 
 
         public XmlContainer(string filePath, string XPath = null)
         {
-            XMLNodes = new ObservableCollection<XmlNode>();
+            XMLNodes = new ObservableCollection<XmlNodeContainer>();
             xmlDataProvider = new XmlDataProvider();
             xmlDataProvider.Document = new XmlDocument();
             xmlDataProvider.Document.Load(filePath);
@@ -46,19 +56,35 @@ namespace MachineTagEditor.Modules.TagManager
             xmlDataProvider.Document.NodeRemoved += Document_NodeModify;
             xmlDataProvider.Document.NodeRemoving += Document_NodeModify;
 
-            //xmlDocument = xmlDataProvider.Document;            
+            foreach (XmlNode node in xmlDataProvider.Document.SelectNodes("tags / child::*"))
+                XMLNodes.Add(new XmlNodeContainer(node)); 
 
             HasUnsavedChanges = false;
         }
 
+
+
         private void XmlDataProvider_DataChanged(object sender, EventArgs e)
         {
-
+            XMLNodes.Clear();
+            foreach (XmlNode node in xmlDataProvider.Document.SelectNodes("tags / child::*"))
+                XMLNodes.Add(new XmlNodeContainer(node));
         }
 
         private void Document_NodeModify(object sender, XmlNodeChangedEventArgs e)
         {
             HasUnsavedChanges = true;
+
+            if (e.Action == XmlNodeChangedAction.Remove)
+                XMLNodes.Remove(XMLNodes.Single((x) => x.Node == e.Node));
+            else if (e.Action == XmlNodeChangedAction.Insert)
+                XMLNodes.Add(new XmlNodeContainer(e.Node));
+            else if (e.Action == XmlNodeChangedAction.Change)
+            {
+                
+            }
+
+
         }
 
         public void AddNode(string name, Dictionary<string, string> attributes = null)
@@ -70,9 +96,10 @@ namespace MachineTagEditor.Modules.TagManager
                     node.AddOrAppendAttribute(key, true, attributes[key]);
 
             _root.AppendChild(node);
-            XMLNodes.Add(node);
+            var nodeToAdd = new XmlNodeContainer(node);
+            XMLNodes.Add(nodeToAdd);
 
-            SelectedIndex = XMLNodes.IndexOf(node);
+            SelectedIndex = XMLNodes.IndexOf(nodeToAdd);
         }
 
         public void RemoveNode(string name)
@@ -82,13 +109,13 @@ namespace MachineTagEditor.Modules.TagManager
             IQueryable<XmlNode> queryList = (IQueryable<XmlNode>)nodeList.AsQueryable();
             XmlNode toRemove = queryList.Single((x) => x.Name == name);
 
-            XMLNodes.Remove(toRemove);
+            //XMLNodes.Remove(XMLNodes.Single((x) => x.Node == toRemove));
             _root.RemoveChild(toRemove);
         } 
 
         public void RemoveNode(XmlNode node)
         {
-            XMLNodes.Remove(node);
+            //XMLNodes.Remove(XMLNodes.Single((x) => x.Node == node));
             _root.RemoveChild(node);
         }
 
@@ -97,7 +124,7 @@ namespace MachineTagEditor.Modules.TagManager
             if(SelectedNode != null)
             {
                 _root.RemoveChild(SelectedNode);
-                XMLNodes.Remove(SelectedNode);
+                //XMLNodes.Remove(XMLNodes.Single((x) => x.Node == SelectedNode));
             }
         }
 

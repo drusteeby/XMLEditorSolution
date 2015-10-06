@@ -100,6 +100,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.1.1.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
@@ -162,19 +164,23 @@
     <Compile Include="QuickActions\View.xaml.cs">
       <DependentUpon>View.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\AlarmTag.xaml.cs">
+    <Compile Include="Views\Tag Viewer\ListBoxTagViewer.xaml.cs">
+      <DependentUpon>ListBoxTagViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tags\AlarmTag.xaml.cs">
       <DependentUpon>AlarmTag.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\DataType.xaml.cs">
+    <Compile Include="Views\Tags\DataType.xaml.cs">
       <DependentUpon>DataType.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\DefaultTag.xaml.cs">
+    <Compile Include="Views\Tags\DefaultTag.xaml.cs">
       <DependentUpon>DefaultTag.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\EnumTag.xaml.cs">
+    <Compile Include="Views\Tags\EnumTag.xaml.cs">
       <DependentUpon>EnumTag.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\WarningTag.xaml.cs">
+    <Compile Include="Views\Tags\TagViewModel.cs" />
+    <Compile Include="Views\Tags\WarningTag.xaml.cs">
       <DependentUpon>WarningTag.xaml</DependentUpon>
     </Compile>
     <Compile Include="Wizards\DataType\View.xaml.cs">
@@ -199,6 +205,7 @@
     <Compile Include="TagManagerService.cs" />
     <Compile Include="TemplateSelectors\TagListTemplateSelector.cs" />
     <Compile Include="TemplateSelectors\TagViewTemplateSelector.cs" />
+    <Compile Include="XmlNodeContainer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -255,23 +262,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\AlarmTag.xaml">
+    <Page Include="Views\Tag Viewer\ListBoxTagViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\DataType.xaml">
+    <Page Include="Views\Tags\AlarmTag.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\DefaultTag.xaml">
+    <Page Include="Views\Tags\DataType.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\EnumTag.xaml">
+    <Page Include="Views\Tags\DefaultTag.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\WarningTag.xaml">
+    <Page Include="Views\Tags\EnumTag.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tags\WarningTag.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

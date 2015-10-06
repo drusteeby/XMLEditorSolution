@@ -10,6 +10,15 @@
              mc:Ignorable="d" 
              DataContext="{Binding}"
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.ContextMenu>
+        <ContextMenu>
+            <MenuItem Header="Copy" Command="{Binding CopyCommand}"/>
+            <Line Width="2"/>
+            <MenuItem Header="Paste Before" Command="{Binding PasteCommand}" CommandParameter="Before"/>
+            <MenuItem Header="Paste After" Command="{Binding PasteCommand}" CommandParameter="After"/>
+            <MenuItem Header="Delete" Command="{Binding DeleteCommand}" CommandParameter="After"/>
+        </ContextMenu>
+    </UserControl.ContextMenu>
     <ia:Interaction.Behaviors>
         <b:FrameworkElementDragBehavior/>
         <b:FrameworkElementDropBehavior/>        
@@ -48,9 +57,10 @@
                                         Text="{Binding Path=Name}"/>
 
                                 <ContentControl Grid.Column="1" Margin="5,0,0,0">
+                                    <TextBlock  Text="{Binding Path=Value}" 
+                                                HorizontalAlignment="Stretch"  VerticalAlignment="Center"/>
                                 </ContentControl>
-                                <TextBlock  Text="{Binding Path=Value}" 
-                                HorizontalAlignment="Stretch"  VerticalAlignment="Center"/>
+
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>

@@ -29,7 +29,9 @@ namespace MachineTagEditor.Modules.TagManager
             public static readonly DependencyProperty XMLNodesProperty =
                 DependencyProperty.Register("XMLNodes", typeof(ObservableCollection<XmlNodeContainer>), typeof(XmlContainer), new UIPropertyMetadata(null));
 
-
+        public XmlNodeList xmlNodes {
+            get { return xmlDataProvider.Document.SelectNodes("tags / child::*"); }
+        }
 
         XmlNode _root;
 
@@ -50,11 +52,8 @@ namespace MachineTagEditor.Modules.TagManager
             xmlDataProvider.DataChanged += XmlDataProvider_DataChanged;
 
             xmlDataProvider.Document.NodeChanged += Document_NodeModify;
-            xmlDataProvider.Document.NodeChanging += Document_NodeModify;
             xmlDataProvider.Document.NodeInserted += Document_NodeModify;
-            xmlDataProvider.Document.NodeInserting += Document_NodeModify;
             xmlDataProvider.Document.NodeRemoved += Document_NodeModify;
-            xmlDataProvider.Document.NodeRemoving += Document_NodeModify;
 
             foreach (XmlNode node in xmlDataProvider.Document.SelectNodes("tags / child::*"))
                 XMLNodes.Add(new XmlNodeContainer(node)); 
@@ -63,25 +62,35 @@ namespace MachineTagEditor.Modules.TagManager
         }
 
 
-
         private void XmlDataProvider_DataChanged(object sender, EventArgs e)
         {
-            XMLNodes.Clear();
-            foreach (XmlNode node in xmlDataProvider.Document.SelectNodes("tags / child::*"))
-                XMLNodes.Add(new XmlNodeContainer(node));
+            //XMLNodes.Clear();
+            //foreach (XmlNode node in xmlDataProvider.Document.SelectNodes("tags / child::*"))
+               // XMLNodes.Add(new XmlNodeContainer(node));
         }
 
         private void Document_NodeModify(object sender, XmlNodeChangedEventArgs e)
         {
             HasUnsavedChanges = true;
 
-            if (e.Action == XmlNodeChangedAction.Remove)
+            if (e.Action == XmlNodeChangedAction.Remove && XMLNodes.Any((x) => x.Node == e.Node))
                 XMLNodes.Remove(XMLNodes.Single((x) => x.Node == e.Node));
-            else if (e.Action == XmlNodeChangedAction.Insert)
-                XMLNodes.Add(new XmlNodeContainer(e.Node));
-            else if (e.Action == XmlNodeChangedAction.Change)
+            else if (e.Action == XmlNodeChangedAction.Insert && !XMLNodes.Any((x) => x.Node == e.Node))
             {
-                
+                for (int index = 0; index < xmlNodes.Count; index++)
+                {
+                    if (xmlNodes[index] == e.Node)
+                    {
+                        XMLNodes.Insert(index, new XmlNodeContainer(e.Node));
+                        break;
+                    }
+                }
+            }  
+            //else if (e.Action == XmlNodeChangedAction.Change)
+            {
+            //XMLNodes.Clear();
+            //foreach (XmlNode node in xmlNodes)
+                //XMLNodes.Add(new XmlNodeContainer(node));
             }
 
 

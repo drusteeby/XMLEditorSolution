@@ -5,10 +5,24 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MachineTagEditor.Modules.TagManager.Views"
              xmlns:ex="clr-namespace:MachineTagEditor.Infrastructure.Extensions.Visual;assembly=MachineTagEditor.Infrastructure"
-              DataContext="{Binding Node}"
+                           xmlns:b="clr-namespace:MachineTagEditor.Infrastructure.Behaviors;assembly=MachineTagEditor.Infrastructure"
+                           xmlns:ia="http://schemas.microsoft.com/expression/2010/interactivity"
+              DataContext="{Binding}"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    
+    <UserControl.ContextMenu>
+        <ContextMenu>
+            <MenuItem Header="Copy" Command="{Binding CopyCommand}"/>
+            <Line Width="2"/>
+            <MenuItem Header="Paste Before" Command="{Binding PasteCommand}" CommandParameter="Before"/>
+            <MenuItem Header="Paste After" Command="{Binding PasteCommand}" CommandParameter="After"/>
+            <MenuItem Header="Delete" Command="{Binding DeleteCommand}" CommandParameter="After"/>
+        </ContextMenu>
+    </UserControl.ContextMenu>
+    <ia:Interaction.Behaviors>
+        <b:FrameworkElementDragBehavior/>
+        <b:FrameworkElementDropBehavior/>
+    </ia:Interaction.Behaviors>
     <Border Style="{ex:MultiStyle RoundedEdges}"
                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
                 BorderThickness="5" 
@@ -28,7 +42,7 @@
             <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=Header}" Margin="5,0,0,0" Text="Enumeration" />
             <TextBlock Grid.Row="1" Grid.Column="0"  Style="{StaticResource ResourceKey=HeaderName}" />
             <Expander Grid.Row="2" Grid.ColumnSpan="2" >
-                <ListView  ItemsSource="{Binding}"
+                <ListView  ItemsSource="{Binding Node}"
                                ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                     <ListView.ItemTemplate>
                         <DataTemplate>

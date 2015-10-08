@@ -8,20 +8,12 @@
              xmlns:ia="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:b="clr-namespace:MachineTagEditor.Infrastructure.Behaviors;assembly=MachineTagEditor.Infrastructure"
              mc:Ignorable="d" 
-             DataContext="{Binding}"
+             Style="{StaticResource TagViewBase}"
              d:DesignHeight="300" d:DesignWidth="300">
-    <UserControl.ContextMenu>
-        <ContextMenu>
-            <MenuItem Header="Copy" Command="{Binding CopyCommand}"/>
-            <Line Width="2"/>
-            <MenuItem Header="Paste Before" Command="{Binding PasteCommand}" CommandParameter="Before"/>
-            <MenuItem Header="Paste After" Command="{Binding PasteCommand}" CommandParameter="After"/>
-            <MenuItem Header="Delete" Command="{Binding DeleteCommand}" CommandParameter="After"/>
-        </ContextMenu>
-    </UserControl.ContextMenu>
     <ia:Interaction.Behaviors>
         <b:FrameworkElementDragBehavior/>
-        <b:FrameworkElementDropBehavior/>        
+        <b:FrameworkElementDropBehavior/>
+        <b:UserControlClipboardBehavior/>
     </ia:Interaction.Behaviors>
     <Border Style="{ex:MultiStyle RoundedEdges}" 
                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 

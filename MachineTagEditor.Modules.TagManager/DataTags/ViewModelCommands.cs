@@ -14,6 +14,8 @@ namespace MachineTagEditor.Modules.TagManager.DataTags
         public DelegateCommand<SelectionChangedEventArgs> SelectedTabChanged {get;set;}
         public DelegateCommand RemoveFile { get; set; }
 
+
+
         void initCommands()
         {
             RemoveFile = new DelegateCommand(OnRemoveFile);

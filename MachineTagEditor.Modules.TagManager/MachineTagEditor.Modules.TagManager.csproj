@@ -179,7 +179,6 @@
     <Compile Include="Views\Tags\EnumTag.xaml.cs">
       <DependentUpon>EnumTag.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Tags\TagViewModel.cs" />
     <Compile Include="Views\Tags\WarningTag.xaml.cs">
       <DependentUpon>WarningTag.xaml</DependentUpon>
     </Compile>
@@ -209,6 +208,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\System.Xml.XmlDocument.datasource" />
     <None Include="Properties\Settings.settings">

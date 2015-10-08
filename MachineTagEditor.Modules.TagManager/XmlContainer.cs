@@ -34,6 +34,7 @@ namespace MachineTagEditor.Modules.TagManager
         }
 
         XmlNode _root;
+        XmlNode _toPaste;
 
         public string FullFilePath
         {
@@ -56,11 +57,60 @@ namespace MachineTagEditor.Modules.TagManager
             xmlDataProvider.Document.NodeRemoved += Document_NodeModify;
 
             foreach (XmlNode node in xmlDataProvider.Document.SelectNodes("tags / child::*"))
-                XMLNodes.Add(new XmlNodeContainer(node)); 
+                XMLNodes.Add(new XmlNodeContainer(node));
+
+            foreach (XmlNodeContainer container in XMLNodes)
+            {
+                container.copyCommandClicked += Container_copyCommandClicked;
+                container.deleteCommandClicked += Container_deleteCommandClicked;
+                container.pasteCommandClicked += Container_pasteCommandClicked;
+            }
 
             HasUnsavedChanges = false;
         }
 
+        private void Container_pasteCommandClicked(object sender, string e)
+        {
+            var node = (sender as XmlNodeContainer).Node;
+            if (node == null || _toPaste == null) return;
+
+            if (e.ToLower().Contains("before"))
+                _root.InsertBefore(_toPaste, node);
+            else if (e.ToLower().Contains("after"))
+                _root.InsertAfter(_toPaste, node);
+
+            _toPaste = null;
+            updateCanPaste();
+
+        }
+
+        private void Container_deleteCommandClicked(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Container_copyCommandClicked(object sender, EventArgs e)
+        {
+            var node = (sender as XmlNodeContainer).Node;
+
+            if (_toPaste == null || node == null) return;
+
+            _toPaste = node;
+            updateCanPaste();
+        }
+
+
+        private void updateCanPaste()
+        {
+            var _canPaste = (_toPaste == null) ? false : true;
+
+            foreach (XmlNodeContainer container in XMLNodes)
+            {
+                container.canPaste = _canPaste;
+                container.PasteCommand.RaiseCanExecuteChanged();
+            }
+
+        }
 
         private void XmlDataProvider_DataChanged(object sender, EventArgs e)
         {

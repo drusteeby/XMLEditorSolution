@@ -44,7 +44,7 @@ namespace MachineTagEditor.Infrastructure.Behaviors
                 DataObject data = new DataObject();
                 data.SetData(dragObject.DataType, dragObject);
                 DragDrop.DoDragDrop(this.AssociatedObject, data, DragDropEffects.Move);
-                
+               
             }
 
             isMouseClicked = false;

@@ -38,6 +38,21 @@
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
     </Style>
 
+    <Style x:Key="TagViewBase" TargetType="UserControl">
+        <Setter Property="DataContext" Value="{Binding}"/>
+        <Setter Property="ContextMenu">
+            <Setter.Value>
+                <ContextMenu>
+                    <MenuItem Header="Copy" Command="ApplicationCommands.Copy"/>
+                    <Separator/>
+                    <MenuItem Header="Paste Before" Command="ApplicationCommands.Paste" CommandParameter="Before"/>
+                    <MenuItem Header="Paste After" Command="ApplicationCommands.Paste" CommandParameter="After"/>
+                    <MenuItem Header="Delete" Command="{Binding DeleteCommand}" CommandParameter="After"/>
+                </ContextMenu>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <!--  Tag Element Tempaltes  -->
     <HierarchicalDataTemplate x:Key="GenericTagTemplate">
         <views:DefaultTag/>

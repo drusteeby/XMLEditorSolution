@@ -5,20 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MachineTagEditor.Modules.TagManager.Views"
              xmlns:ex="clr-namespace:MachineTagEditor.Infrastructure.Extensions.Visual;assembly=MachineTagEditor.Infrastructure"
-                          xmlns:ia="http://schemas.microsoft.com/expression/2010/interactivity"
-                          xmlns:b="clr-namespace:MachineTagEditor.Infrastructure.Behaviors;assembly=MachineTagEditor.Infrastructure"
-             DataContext="{Binding Node}"
+             xmlns:ia="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:b="clr-namespace:MachineTagEditor.Infrastructure.Behaviors;assembly=MachineTagEditor.Infrastructure"
+             Style="{StaticResource TagViewBase}"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <UserControl.ContextMenu>
-        <ContextMenu>
-            <MenuItem Header="Copy" Command="{Binding CopyCommand}"/>
-            <Line Width="2"/>
-            <MenuItem Header="Paste Before" Command="{Binding PasteCommand}" CommandParameter="Before"/>
-            <MenuItem Header="Paste After" Command="{Binding PasteCommand}" CommandParameter="After"/>
-            <MenuItem Header="Delete" Command="{Binding DeleteCommand}" CommandParameter="After"/>
-        </ContextMenu>
-    </UserControl.ContextMenu>
+
     <ia:Interaction.Behaviors>
         <b:FrameworkElementDragBehavior/>
         <b:FrameworkElementDropBehavior/>

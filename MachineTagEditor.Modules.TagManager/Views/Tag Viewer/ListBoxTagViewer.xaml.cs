@@ -2,6 +2,7 @@
 using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml;
 
 namespace MachineTagEditor.Modules.TagManager.Views
 {
@@ -28,21 +30,34 @@ namespace MachineTagEditor.Modules.TagManager.Views
         }
 
 
-
-
-
-        public TagListTemplateSelector TagViewSelector
+        private void CopyCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            get { return (TagListTemplateSelector)GetValue(TagViewSelectorProperty); }
-            set { SetValue(TagViewSelectorProperty, value); }
+            ListBox lb = (ListBox)sender;
+            var selected = (lb.SelectedItem as XmlNodeContainer).Node;
+            if (selected != null)
+                Clipboard.SetData("XmlNode", selected.OuterXml);
         }
 
-        // Using a DependencyProperty as the backing store for TagViewSelector.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty TagViewSelectorProperty =
-            DependencyProperty.Register("TagViewSelector", typeof(TagListTemplateSelector), typeof(ListBoxTagViewer), new UIPropertyMetadata(null));
+        private void PasteCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            string xml = (string)Clipboard.GetData("XmlNode");
 
+            XmlContainer allNodes = (this.DataContext as XmlContainer);
+            if (allNodes == null) return;
 
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(xml);
 
+            foreach (XmlNode node in doc.ChildNodes)
+                allNodes.AddNode(node);
 
+            Clipboard.Clear();
+
+        }
+
+        private void PasteCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = Clipboard.ContainsData("XmlNode");
+        }
     }
 }

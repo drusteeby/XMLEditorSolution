@@ -67,6 +67,8 @@ namespace MachineTagEditor.Modules.TagManager
             }
 
             HasUnsavedChanges = false;
+
+            _root = xmlDataProvider.Document.SelectSingleNode("tags");
         }
 
         private void Container_pasteCommandClicked(object sender, string e)
@@ -144,6 +146,16 @@ namespace MachineTagEditor.Modules.TagManager
             }
 
 
+        }
+
+        public void AddNode(XmlNode toAdd)
+        {
+            var attb = new Dictionary<string, string>();
+            foreach (XmlAttribute a in toAdd.Attributes)
+                attb.Add(a.Name, a.Value);
+
+            AddNode(toAdd.Name, attb);
+             
         }
 
         public void AddNode(string name, Dictionary<string, string> attributes = null)

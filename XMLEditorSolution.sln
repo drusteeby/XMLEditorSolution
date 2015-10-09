@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MachineTagEditor.Modules.Me
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MachineTagEditor.Modules.TagManager", "MachineTagEditor.Modules.TagManager\MachineTagEditor.Modules.TagManager.csproj", "{08032BC0-5995-4991-ABCD-F42BE0530981}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCM", "..\MCM\MCM.csproj", "{2B43CA60-B363-44AF-B242-605A7EBD73B2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCM", "..\..\HMI\MCM\MCM.csproj", "{2B43CA60-B363-44AF-B242-605A7EBD73B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

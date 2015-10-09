@@ -119,6 +119,7 @@
     <Compile Include="Behaviors\FrameworkElementAdorner.cs" />
     <Compile Include="Behaviors\FrameworkElementDragBehavior.cs" />
     <Compile Include="Behaviors\FrameworkElementDropBehavior.cs" />
+    <Compile Include="Behaviors\ListBoxItemBehaviors.cs" />
     <Compile Include="Behaviors\UserControlClipboardBehavior.cs" />
     <Compile Include="Commands\GlobalCommands.cs" />
     <Compile Include="Containers\DataTagContainer.cs" />
@@ -211,7 +212,7 @@
     <Content Include="Resources\WindowsIcons-license.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\MCM\MCM.csproj">
+    <ProjectReference Include="..\..\..\HMI\MCM\MCM.csproj">
       <Project>{2b43ca60-b363-44af-b242-605a7ebd73b2}</Project>
       <Name>MCM</Name>
     </ProjectReference>

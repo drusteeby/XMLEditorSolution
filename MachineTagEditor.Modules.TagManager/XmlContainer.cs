@@ -150,12 +150,8 @@ namespace MachineTagEditor.Modules.TagManager
 
         public void AddNode(XmlNode toAdd)
         {
-            var attb = new Dictionary<string, string>();
-            foreach (XmlAttribute a in toAdd.Attributes)
-                attb.Add(a.Name, a.Value);
-
-            AddNode(toAdd.Name, attb);
-             
+            XmlNode newNode = xmlDataProvider.Document.ImportNode(toAdd, true);
+            xmlDataProvider.Document.DocumentElement.AppendChild(newNode);
         }
 
         public void AddNode(string name, Dictionary<string, string> attributes = null)
@@ -168,9 +164,9 @@ namespace MachineTagEditor.Modules.TagManager
 
             _root.AppendChild(node);
             var nodeToAdd = new XmlNodeContainer(node);
-            XMLNodes.Add(nodeToAdd);
+            //XMLNodes.Add(nodeToAdd);
 
-            SelectedIndex = XMLNodes.IndexOf(nodeToAdd);
+            //SelectedIndex = XMLNodes.IndexOf(nodeToAdd);
         }
 
         public void RemoveNode(string name)

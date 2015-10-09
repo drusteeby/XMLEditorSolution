@@ -26,9 +26,10 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style TargetType="ListBoxItem">
+    <Style TargetType="ListBoxItem" >
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="b:ListBoxItemBehaviors.SelectOnDescendantFocus"  Value="True"/>
     </Style>
     <Style TargetType="ListViewItem">
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>

@@ -40,16 +40,28 @@ namespace MachineTagEditor.Modules.TagManager.Views
 
         private void PasteCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            string xml = (string)Clipboard.GetData("XmlNode");
+            string xml = null;
+
+            if (Clipboard.ContainsData("XmlNode"))
+                xml = (string)Clipboard.GetData("XmlNode");
+            else if (Clipboard.ContainsText())
+                xml = (string)Clipboard.GetText();
 
             XmlContainer allNodes = (this.DataContext as XmlContainer);
             if (allNodes == null) return;
 
             XmlDocument doc = new XmlDocument();
-            doc.LoadXml(xml);
+            try {
 
-            foreach (XmlNode node in doc.ChildNodes)
-                allNodes.AddNode(node);
+                doc.LoadXml(xml);
+                foreach (XmlNode node in doc.ChildNodes)
+                    allNodes.AddNode(node);
+
+            }
+
+            catch { MessageBox.Show("Copied text did not translate to XML");}
+
+
 
             Clipboard.Clear();
 
@@ -57,7 +69,12 @@ namespace MachineTagEditor.Modules.TagManager.Views
 
         private void PasteCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = Clipboard.ContainsData("XmlNode");
+            e.CanExecute = Clipboard.ContainsData("XmlNode") || Clipboard.ContainsText();
+        }
+
+        private void OnListBoxItemContainerFocused(object sender, RoutedEventArgs e)
+        {
+            (sender as ListBoxItem).IsSelected = true;
         }
     }
 }

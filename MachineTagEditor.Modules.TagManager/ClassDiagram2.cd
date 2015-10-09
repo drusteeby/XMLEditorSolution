@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MachineTagEditor.Modules.TagManager.AddAlarm.View" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AddAlarm\View.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MachineTagEditor.Modules.TagManager.AddAlarm.ViewModel" Collapsed="true">
+    <Position X="4.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QJIgAEgECAQAAgAAAhgQEAAMAAAACEACAgAQEgQSgEg=</HashCode>
+      <FileName>AddAlarm\ViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MachineTagEditor.Modules.TagManager.AddDataType.View" Collapsed="true">
+    <Position X="4.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AddDataType\View.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MachineTagEditor.Modules.TagManager.AddDataType.ViewModel" Collapsed="true">
+    <Position X="3" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABIAAgEQCCAYjYAAAAAEQZsAgAAAACAqAGBAgNSgAg=</HashCode>
+      <FileName>AddDataType\ViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MachineTagEditor.Modules.TagManager.AddParameter.View" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="3" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AddParameter\View.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MachineTagEditor.Modules.TagManager.AddParameter.ViewModel" Collapsed="true">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAACAAACABAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AddParameter\ViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MachineTagEditor.Modules.TagManager.AddTagViewModelBase">
+    <Position X="0.5" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>UAIAAEgEABAUAgAoEAgAEAQEAAAAAAAAEAAECggSAAg=</HashCode>
+      <FileName>AddTagViewModelBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MachineTagEditor.Modules.TagManager.TagManagerModule" BaseTypeListCollapsed="true">
+    <Position X="9" Y="6" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAQAAAAAAAAAAQAAAAAAAAYAAAgAAAAg=</HashCode>
+      <FileName>TagManagerModule.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MachineTagEditor.Modules.TagManager.TagManagerService">
+    <Position X="3" Y="7.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AgQAAAAAIAAAAAIAADAAAAAMEQAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>TagManagerService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MachineTagEditor.Modules.TagManager.XmlContainer" Collapsed="true">
+    <Position X="8.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAFAIgBAAQQAAEABEAQAgBABAAgAIIBYJAAAAAMABg=</HashCode>
+      <FileName>XmlContainer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MachineTagEditor.Modules.TagManager.XmlNodeContainer" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAJAAAANAAAEAIAIIBAAAAAIAAAAAAAAAABECAEA=</HashCode>
+      <FileName>XmlNodeContainer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MachineTagEditor.Modules.TagManager.DataTags.Model" Collapsed="true">
+    <Position X="4.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DataTags\Model.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MachineTagEditor.Modules.TagManager.DataTags.View" Collapsed="true">
+    <Position X="10" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DataTags\View.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MachineTagEditor.Modules.TagManager.DataTags.ViewModel" Collapsed="true">
+    <Position X="10" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABBBABAgBAABAgAAEiAAEAAEEAAAQQAAAIAAACkAAAg=</HashCode>
+      <FileName>DataTags\ViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MachineTagEditor.Modules.TagManager.Properties.Settings" Collapsed="true">
+    <Position X="6.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAEAABAEAAAAAAAABAAQA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MachineTagEditor.Modules.TagManager.QuickActions.View" Collapsed="true">
+    <Position X="6.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>QuickActions\View.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MachineTagEditor.Modules.TagManager.QuickActions.ViewModel" Collapsed="true">
+    <Position X="8.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAABAAAAgAAAAQACAAAAAAAAAAAEBAAA=</HashCode>
+      <FileName>QuickActions\ViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MachineTagEditor.Modules.TagManager.SampleData.DataSet1" Collapsed="true">
+    <Position X="4.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAwAAAAJABAAAQAAAAAgCQBgAAAAAAAEABBA=</HashCode>
+      <FileName>SampleData\DataSet1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MachineTagEditor.Modules.TagManager.TemplateSelectors.TagListTemplateSelector" Collapsed="true">
+    <Position X="8.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAwIAAABQAAAAQAAAAAAQAAAARAAABAgAAA=</HashCode>
+      <FileName>TemplateSelectors\TagListTemplateSelector.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MachineTagEditor.Modules.TagManager.TemplateSelectors.TagViewTemplateSelector" Collapsed="true">
+    <Position X="4.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAACAAAAAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TemplateSelectors\TagViewTemplateSelector.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MachineTagEditor.Modules.TagManager.Views.ListBoxTagViewer" Collapsed="true">
+    <Position X="3" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\Tag Viewer\ListBoxTagViewer.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MachineTagEditor.Modules.TagManager.Views.AlarmTag" Collapsed="true">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\Tags\AlarmTag.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MachineTagEditor.Modules.TagManager.Views.DataType" Collapsed="true">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\Tags\DataType.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MachineTagEditor.Modules.TagManager.Views.DefaultTag" Collapsed="true">
+    <Position X="8.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\Tags\DefaultTag.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MachineTagEditor.Modules.TagManager.Views.EnumTag" Collapsed="true">
+    <Position X="10" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\Tags\EnumTag.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MachineTagEditor.Modules.TagManager.Views.WarningTag" Collapsed="true">
+    <Position X="6.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\Tags\WarningTag.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MachineTagEditor.Modules.TagManager.Wizards.DataType.View" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Wizards\DataType\View.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

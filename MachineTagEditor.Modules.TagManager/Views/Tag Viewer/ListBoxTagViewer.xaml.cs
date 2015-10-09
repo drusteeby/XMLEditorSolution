@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MachineTagEditor.Modules.TagManager.TemplateSelectors;
+using Microsoft.Practices.Unity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,5 +26,23 @@ namespace MachineTagEditor.Modules.TagManager.Views
         {
             InitializeComponent();
         }
+
+
+
+
+
+        public TagListTemplateSelector TagViewSelector
+        {
+            get { return (TagListTemplateSelector)GetValue(TagViewSelectorProperty); }
+            set { SetValue(TagViewSelectorProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for TagViewSelector.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TagViewSelectorProperty =
+            DependencyProperty.Register("TagViewSelector", typeof(TagListTemplateSelector), typeof(ListBoxTagViewer), new UIPropertyMetadata(null));
+
+
+
+
     }
 }

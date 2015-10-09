@@ -186,6 +186,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="copy.bat" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -206,10 +207,6 @@
     <Resource Include="Resources\undo.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\HMI\MCM\MCM.csproj">
-      <Project>{2b43ca60-b363-44af-b242-605a7ebd73b2}</Project>
-      <Name>MCM</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MachineTagEditor.Infrastructure\MachineTagEditor.Infrastructure.csproj">
       <Project>{1dd5af35-b564-426e-a2d1-74168a40700f}</Project>
       <Name>MachineTagEditor.Infrastructure</Name>

@@ -7,13 +7,13 @@
              xmlns:ex="clr-namespace:MachineTagEditor.Infrastructure.Extensions.Visual;assembly=MachineTagEditor.Infrastructure"
              xmlns:ia="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:b="clr-namespace:MachineTagEditor.Infrastructure.Behaviors;assembly=MachineTagEditor.Infrastructure"
+                          Style="{StaticResource TagViewBase}"
+             Loaded="UserControl_Loaded"
              mc:Ignorable="d" 
-             Style="{StaticResource TagViewBase}"
              d:DesignHeight="300" d:DesignWidth="300">
     <ia:Interaction.Behaviors>
         <b:FrameworkElementDragBehavior/>
         <b:FrameworkElementDropBehavior/>
-        <b:UserControlClipboardBehavior/>
     </ia:Interaction.Behaviors>
     <Border Style="{ex:MultiStyle RoundedEdges}" 
                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 

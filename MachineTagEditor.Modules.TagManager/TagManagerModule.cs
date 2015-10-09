@@ -31,11 +31,15 @@ namespace MachineTagEditor.Modules.TagManager
         {
             container.RegisterInstance(TagService, new ExternallyControlledLifetimeManager());
 
+
             TagService.XmlFileList.CollectionChanged += XmlFileList_CollectionChanged;
 
             regionMananger.RegisterViewWithRegion(RegionNames.DataRegion, typeof(DataTags.View));
             regionMananger.RegisterViewWithRegion(RegionNames.HelpRegion, typeof(QuickActions.View));
             eventAggregator.GetEvent<RibbonEvent>().Subscribe(OnRibbonCommand,ThreadOption.PublisherThread,true,(x) => x.ToLower().Contains("new"));
+
+            regionMananger.RegisterViewWithRegion(RegionNames.DataRegion, typeof(Views.AlarmTag));
+            regionMananger.RegisterViewWithRegion(RegionNames.DataRegion, typeof(Views.ListBoxTagViewer));
         }
 
         private void XmlFileList_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)

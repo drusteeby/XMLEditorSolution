@@ -1,4 +1,5 @@
 ﻿using MachineTagEditor.Infrastructure.Interfaces;
+using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,9 @@ namespace MachineTagEditor.Modules.TagManager.Views
             
         }
 
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
 
+        }
     }
 }

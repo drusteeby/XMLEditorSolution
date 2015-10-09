@@ -179,6 +179,7 @@
     <Compile Include="Views\Tags\EnumTag.xaml.cs">
       <DependentUpon>EnumTag.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Tags\ViewModel.cs" />
     <Compile Include="Views\Tags\WarningTag.xaml.cs">
       <DependentUpon>WarningTag.xaml</DependentUpon>
     </Compile>
@@ -209,6 +210,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\System.Xml.XmlDocument.datasource" />
     <None Include="Properties\Settings.settings">
@@ -228,7 +230,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\HMI\MCM\MCM.csproj">
+    <ProjectReference Include="..\..\MCM\MCM.csproj">
       <Project>{2b43ca60-b363-44af-b242-605a7ebd73b2}</Project>
       <Name>MCM</Name>
     </ProjectReference>

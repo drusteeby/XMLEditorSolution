@@ -1,7 +1,4 @@
-﻿using MachineTagEditor.Infrastructure.Controls;
-using MachineTagEditor.Infrastructure.Interfaces;
-using Microsoft.Practices.Unity;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,26 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Xml;
 
 namespace MachineTagEditor.Modules.TagManager.Views
 {
     /// <summary>
-    /// Interaction logic for AlarmTag.xaml
+    /// Interaction logic for AddAttributeGrid.xaml
     /// </summary>
-    /// 
-    public partial class AlarmTag : UserControl
+    public partial class AddAttributeGrid : UserControl
     {
-
-        public AlarmTag()
+        public AddAttributeGrid()
         {
             InitializeComponent();
         }
-
-        private void AddAttr_Click(object sender, RoutedEventArgs e)
-        {
-            var result = InputMessageBox.ShowMyDialogBox();
-        }
-
     }
 }

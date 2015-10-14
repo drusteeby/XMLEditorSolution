@@ -24,5 +24,10 @@ namespace MachineTagEditor.Modules.TagManager.Views
         {
             InitializeComponent();
         }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

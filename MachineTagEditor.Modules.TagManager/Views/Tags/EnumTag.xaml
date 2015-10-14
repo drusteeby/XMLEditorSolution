@@ -7,9 +7,17 @@
              xmlns:ex="clr-namespace:MachineTagEditor.Infrastructure.Extensions.Visual;assembly=MachineTagEditor.Infrastructure"
              xmlns:b="clr-namespace:MachineTagEditor.Infrastructure.Behaviors;assembly=MachineTagEditor.Infrastructure"
              xmlns:ia="http://schemas.microsoft.com/expression/2010/interactivity"
-             Style="{StaticResource TagViewBase}"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0:0.5" />
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </UserControl.Triggers>
     <ia:Interaction.Behaviors>
         <b:FrameworkElementDragBehavior/>
         <b:FrameworkElementDropBehavior/>
@@ -24,6 +32,7 @@
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -56,6 +65,10 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </Expander>
+            <StackPanel Grid.Row="4" Grid.ColumnSpan="2">
+                <Button Content="Add Attribute" HorizontalAlignment="Right" Margin="5" Command="{Binding AddAttributeCommand}"/>
+                <local:AddAttributeGrid/>
+            </StackPanel>
         </Grid>
     </Border>
 </UserControl>

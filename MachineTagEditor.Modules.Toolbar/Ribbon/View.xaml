@@ -107,6 +107,9 @@
             <RibbonGroup Header="Parameters">
                 <RibbonButton Command="{Binding RibbonCommand}" CommandParameter="NewParameter" Grid.Row="0" Grid.Column="1"  Label="New Parameter" SmallImageSource="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/plus.png"/>
             </RibbonGroup>
+            <RibbonGroup Header="Core">
+                <RibbonButton Command="{Binding RibbonCommand}" CommandParameter="LoadTags" Grid.Row="0" Grid.Column="1"  Label="Load Tags" LargeImageSource="pack://application:,,,/MachineTagEditor.Modules.Toolbar;component/Resources/mcm_logo_3D_u.png"/>
+            </RibbonGroup>
         </RibbonTab>
 
     </Ribbon>

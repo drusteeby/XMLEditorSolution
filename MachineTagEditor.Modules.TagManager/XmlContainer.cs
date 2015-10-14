@@ -38,7 +38,7 @@ namespace MachineTagEditor.Modules.TagManager
 
         public string FullFilePath
         {
-            get { return xmlDataProvider.Document.BaseURI; }
+            get { return new Uri(xmlDataProvider.Document.BaseURI).LocalPath; }
         }
 
 
@@ -50,7 +50,6 @@ namespace MachineTagEditor.Modules.TagManager
             xmlDataProvider.Document.Load(filePath);
             xmlDataProvider.XPath = "tags/child::*";
             xmlDataProvider.InitialLoad();
-            xmlDataProvider.DataChanged += XmlDataProvider_DataChanged;
 
             xmlDataProvider.Document.NodeChanged += Document_NodeModify;
             xmlDataProvider.Document.NodeInserted += Document_NodeModify;
@@ -59,67 +58,12 @@ namespace MachineTagEditor.Modules.TagManager
             foreach (XmlNode node in xmlDataProvider.Document.SelectNodes("tags / child::*"))
                 XMLNodes.Add(new XmlNodeContainer(node));
 
-            foreach (XmlNodeContainer container in XMLNodes)
-            {
-                container.copyCommandClicked += Container_copyCommandClicked;
-                container.deleteCommandClicked += Container_deleteCommandClicked;
-                container.pasteCommandClicked += Container_pasteCommandClicked;
-            }
-
             HasUnsavedChanges = false;
 
             _root = xmlDataProvider.Document.SelectSingleNode("tags");
         }
 
-        private void Container_pasteCommandClicked(object sender, string e)
-        {
-            var node = (sender as XmlNodeContainer).Node;
-            if (node == null || _toPaste == null) return;
 
-            if (e.ToLower().Contains("before"))
-                _root.InsertBefore(_toPaste, node);
-            else if (e.ToLower().Contains("after"))
-                _root.InsertAfter(_toPaste, node);
-
-            _toPaste = null;
-            updateCanPaste();
-
-        }
-
-        private void Container_deleteCommandClicked(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void Container_copyCommandClicked(object sender, EventArgs e)
-        {
-            var node = (sender as XmlNodeContainer).Node;
-
-            if (_toPaste == null || node == null) return;
-
-            _toPaste = node;
-            updateCanPaste();
-        }
-
-
-        private void updateCanPaste()
-        {
-            var _canPaste = (_toPaste == null) ? false : true;
-
-            foreach (XmlNodeContainer container in XMLNodes)
-            {
-                container.canPaste = _canPaste;
-                container.PasteCommand.RaiseCanExecuteChanged();
-            }
-
-        }
-
-        private void XmlDataProvider_DataChanged(object sender, EventArgs e)
-        {
-            //XMLNodes.Clear();
-            //foreach (XmlNode node in xmlDataProvider.Document.SelectNodes("tags / child::*"))
-               // XMLNodes.Add(new XmlNodeContainer(node));
-        }
 
         private void Document_NodeModify(object sender, XmlNodeChangedEventArgs e)
         {
@@ -138,14 +82,6 @@ namespace MachineTagEditor.Modules.TagManager
                     }
                 }
             }  
-            //else if (e.Action == XmlNodeChangedAction.Change)
-            {
-            //XMLNodes.Clear();
-            //foreach (XmlNode node in xmlNodes)
-                //XMLNodes.Add(new XmlNodeContainer(node));
-            }
-
-
         }
 
         public void AddNode(XmlNode toAdd)
@@ -164,9 +100,6 @@ namespace MachineTagEditor.Modules.TagManager
 
             _root.AppendChild(node);
             var nodeToAdd = new XmlNodeContainer(node);
-            //XMLNodes.Add(nodeToAdd);
-
-            //SelectedIndex = XMLNodes.IndexOf(nodeToAdd);
         }
 
         public void RemoveNode(string name)
@@ -175,14 +108,11 @@ namespace MachineTagEditor.Modules.TagManager
 
             IQueryable<XmlNode> queryList = (IQueryable<XmlNode>)nodeList.AsQueryable();
             XmlNode toRemove = queryList.Single((x) => x.Name == name);
-
-            //XMLNodes.Remove(XMLNodes.Single((x) => x.Node == toRemove));
             _root.RemoveChild(toRemove);
         } 
 
         public void RemoveNode(XmlNode node)
         {
-            //XMLNodes.Remove(XMLNodes.Single((x) => x.Node == node));
             _root.RemoveChild(node);
         }
 
@@ -190,8 +120,7 @@ namespace MachineTagEditor.Modules.TagManager
         {
             if(SelectedNode != null)
             {
-                _root.RemoveChild(SelectedNode);
-                //XMLNodes.Remove(XMLNodes.Single((x) => x.Node == SelectedNode));
+                _root.RemoveChild(SelectedNode.Node);
             }
         }
 
@@ -249,15 +178,15 @@ namespace MachineTagEditor.Modules.TagManager
 
 
 
-        public XmlNode SelectedNode
+        public XmlNodeContainer SelectedNode
         {
-            get { return (XmlNode)GetValue(SelectedNodeProperty); }
+            get { return (XmlNodeContainer)GetValue(SelectedNodeProperty); }
             set { SetValue(SelectedNodeProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for SelectedNode.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectedNodeProperty =
-            DependencyProperty.Register("SelectedNode", typeof(XmlNode), typeof(XmlContainer), new UIPropertyMetadata(null));
+            DependencyProperty.Register("SelectedNode", typeof(XmlNodeContainer), typeof(XmlContainer), new UIPropertyMetadata(null));
 
 
 

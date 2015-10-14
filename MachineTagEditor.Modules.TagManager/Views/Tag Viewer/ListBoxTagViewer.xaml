@@ -8,18 +8,26 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <ListBox  
-                  DataContext="{Binding XMLNodes}"
-                  ItemsSource="{Binding}"
+                  ItemsSource="{Binding XMLNodes}"                
                   SelectedItem="{Binding SelectedNode, UpdateSourceTrigger=PropertyChanged}"
                   SelectedIndex="{Binding SelectedIndex, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                   IsSynchronizedWithCurrentItem="True"
                   ap:ListBoxBehavior.ScrollOnNewItem="True"
                   Background="{StaticResource backgroundBlue70}"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  VirtualizingPanel.IsVirtualizing="False"
+                  VirtualizingPanel.ScrollUnit="Pixel"
                   ItemTemplateSelector="{StaticResource TagItemSelector}">
+        <ListBox.ContextMenu>
+            <ContextMenu>
+                <MenuItem Command="ApplicationCommands.Copy"/>
+                <MenuItem Command="ApplicationCommands.Paste"/>
+            </ContextMenu>
+        </ListBox.ContextMenu>
         <ListBox.CommandBindings>
             <CommandBinding Command="ApplicationCommands.Copy" Executed="CopyCommand_Executed"/>
             <CommandBinding Command="ApplicationCommands.Paste" Executed="PasteCommand_Executed" CanExecute="PasteCommand_CanExecute"/>
         </ListBox.CommandBindings>
+
     </ListBox>
 </UserControl>

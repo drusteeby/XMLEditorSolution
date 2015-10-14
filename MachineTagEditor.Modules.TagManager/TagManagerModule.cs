@@ -1,5 +1,6 @@
 ﻿using MachineTagEditor.Infrastructure;
 using MachineTagEditor.Infrastructure.Events;
+using MCM.Core.Tags;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.Regions;
@@ -36,7 +37,7 @@ namespace MachineTagEditor.Modules.TagManager
 
             regionMananger.RegisterViewWithRegion(RegionNames.DataRegion, typeof(DataTags.View));
             regionMananger.RegisterViewWithRegion(RegionNames.HelpRegion, typeof(QuickActions.View));
-            eventAggregator.GetEvent<RibbonEvent>().Subscribe(OnRibbonCommand,ThreadOption.PublisherThread,true,(x) => x.ToLower().Contains("new"));
+            eventAggregator.GetEvent<RibbonEvent>().Subscribe(OnRibbonCommand,ThreadOption.PublisherThread,true);
 
             regionMananger.RegisterViewWithRegion(RegionNames.DataRegion, typeof(Views.AlarmTag));
             regionMananger.RegisterViewWithRegion(RegionNames.DataRegion, typeof(Views.ListBoxTagViewer));
@@ -61,6 +62,20 @@ namespace MachineTagEditor.Modules.TagManager
 
             if (commandParameter.ToLower().Contains("parameter"))
                 regionMananger.RegisterViewWithRegion(RegionNames.WindowRegion, typeof(AddParameter.View));
+
+            if (commandParameter.ToLower().Contains("loadtags"))
+            {
+                foreach (var file in TagService.XmlFileList)
+                {
+                    try
+                    {
+                        TagCollection.LoadTags(file.FullFilePath);
+                    }
+                    catch(Exception ex) { eventAggregator.GetEvent<DisplayMessage>().Publish(ex.Message); }
+                }
+
+                TagCollection.ClearTags();
+            }
         }
     }
 }

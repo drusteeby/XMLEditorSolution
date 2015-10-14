@@ -3,13 +3,28 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:module="clr-namespace:MachineTagEditor.Modules.TagManager"
              xmlns:local="clr-namespace:MachineTagEditor.Modules.TagManager.Views"
              xmlns:ex="clr-namespace:MachineTagEditor.Infrastructure.Extensions.Visual;assembly=MachineTagEditor.Infrastructure"
              xmlns:b="clr-namespace:MachineTagEditor.Infrastructure.Behaviors;assembly=MachineTagEditor.Infrastructure"
              xmlns:ia="http://schemas.microsoft.com/expression/2010/interactivity"
-             mc:Ignorable="d" 
-             Style="{StaticResource TagViewBase}"
+             mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0:0.5" />
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </UserControl.Triggers>
+    <UserControl.ContextMenu>
+        <ContextMenu>
+            <MenuItem Command="ApplicationCommands.Copy"/>
+            <MenuItem Command="ApplicationCommands.Paste"/>
+        </ContextMenu>
+    </UserControl.ContextMenu>
     <ia:Interaction.Behaviors>
         <b:FrameworkElementDragBehavior/>
         <b:FrameworkElementDropBehavior/>
@@ -24,11 +39,18 @@
 
         <StackPanel>
             <TextBlock Style="{StaticResource ResourceKey=HeaderName}" Margin="5,0,0,0" Text="Data Type" Foreground="Black"/>
-            <ListView  ItemsSource="{Binding Attributes}"
+            <ListView ItemsSource="{Binding XmlAttributes, UpdateSourceTrigger=PropertyChanged}"
                            ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid IsSharedSizeScope="True">
+                            <Grid.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Add Attribute" Click="MenuItem_Click">
+                                        
+                                    </MenuItem>
+                                </ContextMenu>
+                            </Grid.ContextMenu>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
@@ -36,12 +58,14 @@
                             <TextBlock Grid.Column="0" 
                                            Text="{Binding Path=Name}"/>
 
-                            <TextBlock Grid.Column="1" Margin="5,0,0,0" Text="{Binding Path=Value}" 
+                            <TextBox Grid.Column="1" Margin="5,0,0,0" Text="{Binding Path=Value}" 
                                  HorizontalAlignment="Stretch"  VerticalAlignment="Center" />
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <Button Content="Add Attribute" HorizontalAlignment="Right" Margin="5" Command="{Binding AddAttributeCommand}"/>
+            <local:AddAttributeGrid/>
         </StackPanel>
     </Border>
 </UserControl>

@@ -26,7 +26,11 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+
+
     <Style TargetType="ListBoxItem" >
+        <Setter Property="DataContext" Value="{Binding RelativeSource={RelativeSource Self},UpdateSourceTrigger=PropertyChanged}"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="b:ListBoxItemBehaviors.SelectOnDescendantFocus"  Value="True"/>
@@ -37,21 +41,6 @@
     </Style>
     <Style TargetType="Grid">
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
-    </Style>
-
-    <Style x:Key="TagViewBase" TargetType="UserControl">
-        <Setter Property="DataContext" Value="{Binding}"/>
-        <Setter Property="ContextMenu">
-            <Setter.Value>
-                <ContextMenu>
-                    <MenuItem Header="Copy" Command="ApplicationCommands.Copy"/>
-                    <Separator/>
-                    <MenuItem Header="Paste Before" Command="ApplicationCommands.Paste" CommandParameter="Before"/>
-                    <MenuItem Header="Paste After" Command="ApplicationCommands.Paste" CommandParameter="After"/>
-                    <MenuItem Header="Delete" Command="{Binding DeleteCommand}" CommandParameter="After"/>
-                </ContextMenu>
-            </Setter.Value>
-        </Setter>
     </Style>
 
     <!--  Tag Element Tempaltes  -->

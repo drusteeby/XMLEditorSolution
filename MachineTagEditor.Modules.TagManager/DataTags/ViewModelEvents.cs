@@ -37,9 +37,9 @@ namespace MachineTagEditor.Modules.TagManager.DataTags
             {
                 if (SelectedFile == null || SelectedFile.SelectedNode == null) return;
 
-                //var result = MessageBox.Show("Are you sure you want to delete this node?", SelectedFile.SelectedNode.Name, MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                var result = MessageBox.Show("Are you sure you want to delete this node? \r\n \r\n" + SelectedFile.SelectedNode.Node.AttributeValue("name"),"Delete Node?" , MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
-                //if (result.Equals(MessageBoxResult.Yes))
+                if (result.Equals(MessageBoxResult.Yes))
                     SelectedFile.RemoveSelected();
             }
 

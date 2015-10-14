@@ -30,7 +30,7 @@ namespace MachineTagEditor.Modules.TagManager.Wizards.DataType
 
         private void Wizard_Previous(object sender, Xceed.Wpf.Toolkit.Core.CancelRoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            
         }
 
         private void Wizard_Next(object sender, Xceed.Wpf.Toolkit.Core.CancelRoutedEventArgs e)

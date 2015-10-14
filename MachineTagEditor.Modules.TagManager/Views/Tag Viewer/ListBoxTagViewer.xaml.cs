@@ -33,9 +33,16 @@ namespace MachineTagEditor.Modules.TagManager.Views
         private void CopyCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             ListBox lb = (ListBox)sender;
-            var selected = (lb.SelectedItem as XmlNodeContainer).Node;
-            if (selected != null)
-                Clipboard.SetData("XmlNode", selected.OuterXml);
+            if (lb == null)
+                return;
+
+            var selectedItem = (lb.SelectedItem as XmlNodeContainer);
+            if (selectedItem == null)
+                return;
+            
+            var selectedNode = selectedItem.Node;
+            if (selectedNode != null)
+                Clipboard.SetData("XmlNode", selectedNode.OuterXml);
         }
 
         private void PasteCommand_Executed(object sender, ExecutedRoutedEventArgs e)
